@@ -1,34 +1,29 @@
-
+<!doctype html>
 <html>
-<body> 
+  <head>
+    <title>Hiragana Drill</title>
+    <script src="drill.js" charset="utf-8"></script>
+  </head>
 
-<script src="drill.js" charset="utf-8"></script>
+  <body>
+    <button type="button" onclick="pickHiragana()">Hiragana Mode</button>
+    <button type="button" onclick="pickKatakana()">Katakana Mode</button>
+    <button type="button" onclick="pickHybrid()">Hybrid Mode</button>
 
-<head> <title> Hiragana Drill </title> </head>
+    <!-- <div id='Score'></div> -->
 
-<button type="button" onclick="pickHiragana()"> Hiragana Mode </button>
+    <!-- <button onclick="resetScore()">Reset Score</button> -->
 
-<button type="button" onclick="pickKatakana()"> Katakana Mode </button>
+    <div id='CharacterSpace'></div>
 
-<button type="button" onclick="pickHybrid()"> Hybrid Mode </button>
+    <h1>Select the correct pronunciation of the hiragana/katakana character above.</h1>
 
-<!-- <div id='Score'></div> -->
+    <button type="button" id='OptionSpaceOne'></button>
+    <button type="button" id='OptionSpaceTwo'></button>
+    <button type="button" id='OptionSpaceThree'></button>
 
-<!-- <button onclick="resetScore()"> Reset Score </button> -->
+    <div id='AmIRight'></div>
 
-<div id='CharacterSpace'></div>
-
-<h1> Select the correct pronunciation of the hiragana/katakana character above. </h1>
-
-<button type="button" id='OptionSpaceOne'></button>
-
-<button type="button" id='OptionSpaceTwo'></button>
-
-<button type="button" id='OptionSpaceThree'></button>
-
-<div id='AmIRight'></div>
-
-<!-- <button type="button" id='Next'>Next</button> -->
-
-</body>
+    <!-- <button type="button" id='Next'>Next</button> -->
+  </body>
 </html>
