@@ -21,6 +21,8 @@ function pickHiragana() {
   document.getElementById('CharacterSpace').innerHTML = hiragana[n]; 
   
   displayKana(hiragana[n], 'h');
+
+  document.getElementById('AmIRight').innerHTML = ""
 }
 
 function pickKatakana() {
@@ -29,6 +31,8 @@ function pickKatakana() {
   document.getElementById('CharacterSpace').innerHTML = katakana[n]; 
 
   displayKana(katakana[n], 'k');
+
+  document.getElementById('AmIRight').innerHTML = ""
 }
 
 function pickHybrid() {
@@ -49,14 +53,16 @@ function displayKana(character, kana) {
     characters = katakana;
   }
 
-  var randomCharacter = characters[Math.floor(Math.random() * (Object.keys(dictionary).length))];
+  var dictionaryLength = Object.keys(dictionary).length
 
-  while (character == randomCharacter) randomCharacter = characters[Math.floor(Math.random() * (Object.keys(dictionary).length))];
+  var randomCharacter = characters[Math.floor(Math.random() * dictionaryLength)];
 
-  var randomCharacter2 = characters[Math.floor(Math.random() * (Object.keys(dictionary).length))];
+  while (character == randomCharacter) randomCharacter = characters[Math.floor(Math.random() * dictionaryLength)];
+
+  var randomCharacter2 = characters[Math.floor(Math.random() * dictionaryLength)];
 
   while (randomCharacter2 == character || randomCharacter2 == randomCharacter)
-    randomCharacter2 = characters[Math.floor(Math.random() * (Object.keys(dictionary).length))];
+    randomCharacter2 = characters[Math.floor(Math.random() * dictionaryLength)];
 
   var answers = [character, randomCharacter, randomCharacter2];
 
