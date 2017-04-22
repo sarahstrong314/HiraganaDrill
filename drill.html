@@ -1,30 +1,43 @@
 <!doctype html>
-<html>
+<html lang='en'>
   <head>
     <title>Hiragana Drill</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-    <script src="drill.js" charset="utf-8"></script>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script src='https://code.jquery.com/jquery-1.12.4.js'></script>
+    <script src='https://code.jquery.com/ui/1.12.1/jquery-ui.js'></script>
+    <script src='hiragana.js' charset='utf-8'></script>
+    <link rel='stylesheet' type='text/css' href='drill.css'>
   </head>
 
   <body>
-    <button type="button" onclick="pickHiragana()">Hiragana Mode</button>
-    <button type="button" onclick="pickKatakana()">Katakana Mode</button>
-    <button type="button" onclick="pickHybrid()">Hybrid Mode</button>
+
+    <button type='button' class='modebutton' onclick='setMode(0)' id='HiraganaMode'>Hiragana Mode</button>
+    <button type='button' class='modebutton' onclick='setMode(1)' id='KatakanaMode'>Katakana Mode</button>
+
+    </br>
 
     <!-- <div id='Score'></div> -->
 
-    <!-- <button onclick="resetScore()">Reset Score</button> -->
+    <!-- <button onclick='resetScore()'>Reset Score</button> -->
 
-    <div id='CharacterSpace'></div>
+    <div class='characterspace' id='CharacterSpace'></div>
 
-    <h1>Select the correct pronunciation of the hiragana/katakana character above.</h1>
+    <h1>Select the correct pronunciation of the character above.</h1>
 
-    <button type="button" id='OptionSpaceOne'></button>
-    <button type="button" id='OptionSpaceTwo'></button>
-    <button type="button" id='OptionSpaceThree'></button>
+    <button type='button' class='answerbutton' id='OptionOne'></button>
+    <button type='button' class='answerbutton' id='OptionTwo'></button>
+    <button type='button' class='answerbutton' id='OptionThree'></button>
 
-    <div id='AmIRight'></div>
+    </br>
+    </br>
 
-    <!-- <button type="button" id='Next'>Next</button> -->
+    <button type='button' class='next' onclick='pickCharacter()' id='Next'> Next </button>
+
+    <div class='amiright' id='AmIRight'></div>
+
+    <script>
+      pickCharacter();
+      document.getElementById('HiraganaMode').disabled = true;
+    </script>
   </body>
 </html>

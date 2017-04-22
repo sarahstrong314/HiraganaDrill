@@ -15,37 +15,61 @@ for (character in katakanaDict) {
   katakana.push(character);
 }
 
-function pickHiragana() {
-  var n = Math.floor(Math.random() * Object.keys(hiraganaDict).length);
-  
-  document.getElementById('CharacterSpace').innerHTML = hiragana[n]; 
-  
-  displayKana(hiragana[n], 'h');
+var currentMode = 0;
 
-  document.getElementById('AmIRight').innerHTML = ""
+function setMode(int) {
+  currentMode = int;
+
+  if (int == 0) {
+    document.getElementById('HiraganaMode').disabled = true;
+    document.getElementById('KatakanaMode').disabled = false;
+  } else {
+    document.getElementById('HiraganaMode').disabled = false;
+    document.getElementById('KatakanaMode').disabled = true;
+  }
+
+  document.getElementById('Next').disabled = false;
+  document.getElementById('OptionOne').disabled = true;
+  document.getElementById('OptionTwo').disabled = true;
+  document.getElementById('OptionThree').disabled = true;
+  
+  document.getElementById('AmIRight').innerHTML = ''
+  document.getElementById('CharacterSpace').innerHTML = ''
+  document.getElementById('OptionOne').innerHTML = ''
+  document.getElementById('OptionTwo').innerHTML = ''
+  document.getElementById('OptionThree').innerHTML = ''
+
+  pickCharacter();
+
 }
 
-function pickKatakana() {
-  var n = Math.floor(Math.random() * Object.keys(katakanaDict).length);
+function pickCharacter() {
+  document.getElementById('Next').disabled = true;
+  document.getElementById('OptionOne').disabled = false;
+  document.getElementById('OptionTwo').disabled = false;
+  document.getElementById('OptionThree').disabled = false;
+
+  if (currentMode == 0) {
+    dictionary = hiraganaDict;
+    characters = hiragana;
+  } else {
+    dictionary = katakanaDict;
+    characters = katakana;
+  }
+
+  var n = Math.floor(Math.random() * Object.keys(dictionary).length);
   
-  document.getElementById('CharacterSpace').innerHTML = katakana[n]; 
+  document.getElementById('CharacterSpace').innerHTML = characters[n]; 
+  
+  displayKana(characters[n]);
 
-  displayKana(katakana[n], 'k');
-
-  document.getElementById('AmIRight').innerHTML = ""
+  document.getElementById('AmIRight').innerHTML = ''
 }
 
-function pickHybrid() {
-  var n = Math.floor(Math.random() * 2);
-
-  if (n == 0) pickHiragana();
-  else pickKatakana();
-}
-
-function displayKana(character, kana) {
+function displayKana(character) {
   var characters, dictionary;
 
-  if (kana == 'h') {
+  if (currentMode == 0) {
     dictionary = hiraganaDict;
     characters = hiragana;
   } else {
@@ -54,6 +78,8 @@ function displayKana(character, kana) {
   }
 
   var dictionaryLength = Object.keys(dictionary).length
+
+  // picks two different random indices that don't match character's index
 
   var randomCharacter = characters[Math.floor(Math.random() * dictionaryLength)];
 
@@ -64,19 +90,25 @@ function displayKana(character, kana) {
   while (randomCharacter2 == character || randomCharacter2 == randomCharacter)
     randomCharacter2 = characters[Math.floor(Math.random() * dictionaryLength)];
 
+  // puts the answers in order based on index
+
   var answers = [character, randomCharacter, randomCharacter2];
 
   answers.sort();
 
+  // displays the answers, in order, on the option buttons
+
   var buttons = [
-    document.getElementById('OptionSpaceOne'),
-    document.getElementById('OptionSpaceTwo'),
-    document.getElementById('OptionSpaceThree')
+    document.getElementById('OptionOne'),
+    document.getElementById('OptionTwo'),
+    document.getElementById('OptionThree')
   ];
 
   for (var i = 0; i < buttons.length; i++) {
     buttons[i].innerHTML = dictionary[answers[i]];
   }
+
+  // once an option is clicked, displays whether it is correct or incorrect
 
   buttons[0].onclick = function() { checkAnswer(character, answers[0]) };
   buttons[1].onclick = function() { checkAnswer(character, answers[1]) };
@@ -84,5 +116,11 @@ function displayKana(character, kana) {
 }
 
 function checkAnswer(correct, answer) {
-  document.getElementById('AmIRight').innerHTML = ((correct == answer) ? "Correct!" : "Incorrect.");
+  document.getElementById('AmIRight').innerHTML = ((correct == answer) ? 'Correct!' : 'Incorrect.');
+  if (correct == answer) {
+    document.getElementById('Next').disabled = false;
+    document.getElementById('OptionOne').disabled = true;
+    document.getElementById('OptionTwo').disabled = true;
+    document.getElementById('OptionThree').disabled = true;
+  }
 }

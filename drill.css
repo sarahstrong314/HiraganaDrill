@@ -1,0 +1,75 @@
+body {
+  font-family: Helvetica, Arial, sans-serif;
+  background-color: #fdfdfd;
+  color: black;
+}
+
+#feedback { font-size: 1.4em; }
+#selectable .ui-selecting { background: red; color: white; }
+#selectable .ui-selected { background: orange; color: white; }
+#selectable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
+#selectable li { margin: 3px; padding: 0.4em; font-size: 1.4em; height: 18px; border: 1px solid black; }
+
+button:disabled,
+button[disabled] {
+  background-color: lightgray;
+  color: gray;
+}
+
+.modebutton {
+  background-color: lightgray;
+  border: none;
+  color: grey;
+  height: 50px;
+  width: 200px;
+  text-align: center;
+  display: inline-block;
+  font-size: 20px;
+}
+
+.modebutton:disabled {
+  background-color: gray;
+  border: 3px solid black;
+  color: white;
+}
+
+.answerbutton {
+  background-color: gray;
+  border: none;
+  color: white;
+  height: 50px;
+  width: 100px;
+  text-align: center;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.characterspace {
+  background-color: #fdfdfd;
+  color: black;
+  padding: 15px 32px;
+  text-align: center;
+  display: inline-block;
+  font-size: 100px;
+}
+
+.amiright {
+  background-color: #fdfdfd;
+  border: none;
+  color: black;
+  padding: 15px 32px;
+  text-align: center;
+  display: inline-block;
+  font-size: 20px;
+}
+
+.next {
+  background-color: gray;
+  border: none;
+  color: white;
+  height: 50px;
+  width: 100px;
+  text-align: center;
+  display: inline-block;
+  font-size: 20px;
+}
