@@ -136,6 +136,7 @@ function checkAnswer(correct, answer) {
 
 function resetScore() {
   currentScore = 0;
+  numQuestions = 0;
   document.getElementById('ResetScore').disabled = true;
   document.getElementById('Score').innerHTML = 'Score: 0 out of 0';
 }
