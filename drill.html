@@ -16,10 +16,6 @@
 
     </br>
 
-    <!-- <div id='Score'></div> -->
-
-    <!-- <button onclick='resetScore()'>Reset Score</button> -->
-
     <div class='characterspace' id='CharacterSpace'></div>
 
     <h1>Select the correct pronunciation of the character above.</h1>
@@ -28,16 +24,24 @@
     <button type='button' class='answerbutton' id='OptionTwo'></button>
     <button type='button' class='answerbutton' id='OptionThree'></button>
 
-    </br>
+    </br> 
     </br>
 
     <button type='button' class='next' onclick='pickCharacter()' id='Next'> Next </button>
 
     <div class='amiright' id='AmIRight'></div>
 
+    </br>
+    </br>
+
+    <button type='button' class='resetscore' onclick='resetScore()' id ='ResetScore' >Reset Score</button>
+
+    <div class='score' id='Score'>Score: 0 out of 0</div>
+
     <script>
       pickCharacter();
       document.getElementById('HiraganaMode').disabled = true;
+      document.getElementById('ResetScore').disabled = true;
     </script>
   </body>
 </html>

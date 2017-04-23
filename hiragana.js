@@ -16,6 +16,8 @@ for (character in katakanaDict) {
 }
 
 var currentMode = 0;
+var currentScore = 0;
+var numQuestions = 0;
 
 function setMode(int) {
   currentMode = int;
@@ -32,7 +34,7 @@ function setMode(int) {
   document.getElementById('OptionOne').disabled = true;
   document.getElementById('OptionTwo').disabled = true;
   document.getElementById('OptionThree').disabled = true;
-  
+
   document.getElementById('AmIRight').innerHTML = ''
   document.getElementById('CharacterSpace').innerHTML = ''
   document.getElementById('OptionOne').innerHTML = ''
@@ -115,12 +117,25 @@ function displayKana(character) {
   buttons[2].onclick = function() { checkAnswer(character, answers[2]) };
 }
 
+var stopScore = false;
+
 function checkAnswer(correct, answer) {
   document.getElementById('AmIRight').innerHTML = ((correct == answer) ? 'Correct!' : 'Incorrect.');
   if (correct == answer) {
+    if (stopScore == false) currentScore++;
+    stopScore = false;
+    document.getElementById('ResetScore').disabled = false;
     document.getElementById('Next').disabled = false;
     document.getElementById('OptionOne').disabled = true;
     document.getElementById('OptionTwo').disabled = true;
     document.getElementById('OptionThree').disabled = true;
-  }
+    numQuestions++;
+    document.getElementById('Score').innerHTML = 'Score: ' + currentScore.toString() + ' out of ' + numQuestions.toString();   
+  } else stopScore = true;
+}
+
+function resetScore() {
+  currentScore = 0;
+  document.getElementById('ResetScore').disabled = true;
+  document.getElementById('Score').innerHTML = 'Score: 0 out of 0';
 }
