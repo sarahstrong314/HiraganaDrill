@@ -6,6 +6,8 @@ var katakana = [];
 var solutions = [];
 var character;
 
+// var audio;
+
 for (character in hiraganaDict) {
   hiragana.push(character);
   solutions.push(hiraganaDict[character]);
@@ -50,6 +52,9 @@ function pickCharacter() {
   document.getElementById('OptionOne').disabled = false;
   document.getElementById('OptionTwo').disabled = false;
   document.getElementById('OptionThree').disabled = false;
+  document.getElementById('OptionOne').className = "answerbutton";
+  document.getElementById('OptionTwo').className = "answerbutton";
+  document.getElementById('OptionThree').className = "answerbutton";
 
   if (currentMode == 0) {
     dictionary = hiraganaDict;
@@ -112,26 +117,36 @@ function displayKana(character) {
 
   // once an option is clicked, displays whether it is correct or incorrect
 
-  buttons[0].onclick = function() { checkAnswer(character, answers[0]) };
-  buttons[1].onclick = function() { checkAnswer(character, answers[1]) };
-  buttons[2].onclick = function() { checkAnswer(character, answers[2]) };
+  buttons[0].onclick = function() { checkAnswer(character, answers[0], 'OptionOne') };
+  buttons[1].onclick = function() { checkAnswer(character, answers[1], 'OptionTwo') };
+  buttons[2].onclick = function() { checkAnswer(character, answers[2], 'OptionThree') };
 }
 
 var stopScore = false;
 
-function checkAnswer(correct, answer) {
+function checkAnswer(correct, answer, option) {
   document.getElementById('AmIRight').innerHTML = ((correct == answer) ? 'Correct!' : 'Incorrect.');
   if (correct == answer) {
-    if (stopScore == false) currentScore++;
+    if (stopScore == false) {
+      currentScore++;
+      numQuestions++;
+      document.getElementById('Score').innerHTML = 'Score: ' + currentScore.toString() + ' out of ' + numQuestions.toString();
+    }
     stopScore = false;
     document.getElementById('ResetScore').disabled = false;
     document.getElementById('Next').disabled = false;
     document.getElementById('OptionOne').disabled = true;
     document.getElementById('OptionTwo').disabled = true;
     document.getElementById('OptionThree').disabled = true;
+    document.getElementById(option).className = "correctanswer";
+    // audio = new Audio(correct + '.mp3');
+    // audio.play();
+  } else {
+    stopScore = true;
+    document.getElementById(option).className = "incorrectanswer";
     numQuestions++;
-    document.getElementById('Score').innerHTML = 'Score: ' + currentScore.toString() + ' out of ' + numQuestions.toString();   
-  } else stopScore = true;
+    document.getElementById('Score').innerHTML = 'Score: ' + currentScore.toString() + ' out of ' + numQuestions.toString();
+  }
 }
 
 function resetScore() {
