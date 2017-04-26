@@ -142,9 +142,9 @@ function checkAnswer(correct, answer, option) {
     // audio = new Audio(correct + '.mp3');
     // audio.play();
   } else {
+    if (stopScore == false) numQuestions++;
     stopScore = true;
     document.getElementById(option).className = "incorrectanswer";
-    numQuestions++;
     document.getElementById('Score').innerHTML = 'Score: ' + currentScore.toString() + ' out of ' + numQuestions.toString();
   }
 }
