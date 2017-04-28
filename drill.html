@@ -5,20 +5,34 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <script src='https://code.jquery.com/jquery-1.12.4.js'></script>
     <script src='https://code.jquery.com/ui/1.12.1/jquery-ui.js'></script>
-    <script src='hiragana.js' charset='utf-8'></script>
+    <script src='dictionaries.js' charset='utf-8'></script>
+    <script src='drill.js' charset='utf-8'></script>
     <link rel='stylesheet' type='text/css' href='drill.css'>
   </head>
 
   <body>
 
-    <button type='button' class='modebutton' onclick='setMode(0)' id='HiraganaMode'>Hiragana Mode</button>
-    <button type='button' class='modebutton' onclick='setMode(1)' id='KatakanaMode'>Katakana Mode</button>
+    <!-- <select> -->
+      <!-- <option value='hiragana'>Hiragana</option> -->
+      <!-- <option value='katakana'>Katakana</option> -->
+    <!-- </select> -->
+
+    <button type='button' class='modebutton' onclick='setMode(0)' id='Hiragana'>Hiragana</button>
+    <button type='button' class='modebutton' onclick='setMode(1)' id='Katakana'>Katakana</button>
+    <button type='button' class='modebutton' onclick='setMode(2)' id='LessonOne'>Lesson One</button>
 
     </br>
 
     <div class='characterspace' id='CharacterSpace'></div>
 
-    <h1>Select the correct pronunciation of the character above.</h1>
+    </br> 
+    </br>
+
+    <div class='instructions' id='Instructions'>Select the correct pronunciation of the character above.</div>
+
+    </br> 
+    </br>
+
 
     <button type='button' class='answerbutton' id='OptionOne'></button>
     <button type='button' class='answerbutton' id='OptionTwo'></button>
@@ -40,7 +54,7 @@
 
     <script>
       pickCharacter();
-      document.getElementById('HiraganaMode').disabled = true;
+      document.getElementById('Hiragana').disabled = true;
       document.getElementById('ResetScore').disabled = true;
     </script>
   </body>
