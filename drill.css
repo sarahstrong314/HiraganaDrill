@@ -33,13 +33,24 @@ button[disabled] {
   color: white;
 }
 
+.characterspace {
+  background-color: #fdfdfd;
+  color: black;
+  height: 130px;
+  width: 610px;
+  text-align: center;
+  display: inline-block;
+  font-size: 100px;
+}
+
 .instructions {
   background-color: #fdfdfd;
   color: black;
-  padding: 15px 32px;
+  height: 30px;
+  width: 610px;
   text-align: center;
   display: inline-block;
-  font-size: 30px;
+  font-size: 24px;
 }
 
 .answerbutton {
@@ -75,16 +86,6 @@ button[disabled] {
   font-size: 16px;
 }
 
-.characterspace {
-  background-color: #fdfdfd;
-  color: black;
-  height: 50px;
-  width: 400px;
-  text-align: center;
-  display: inline-block;
-  font-size: 100px;
-}
-
 .amiright {
   background-color: #fdfdfd;
   border: none;
@@ -99,6 +100,17 @@ button[disabled] {
   font-size: 20px;
 }
 
+.next {
+  background-color: gray;
+  border: none;
+  color: white;
+  height: 50px;
+  width: 100px;
+  text-align: center;
+  display: inline-block;
+  font-size: 20px;
+}
+
 .score {
   background-color: #fdfdfd;
   border: none;
@@ -109,17 +121,6 @@ button[disabled] {
   width: 175px;
   text-align: left;
   vertical-align: top;
-  display: inline-block;
-  font-size: 20px;
-}
-
-.next {
-  background-color: gray;
-  border: none;
-  color: white;
-  height: 50px;
-  width: 100px;
-  text-align: center;
   display: inline-block;
   font-size: 20px;
 }
