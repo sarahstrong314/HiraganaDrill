@@ -42,9 +42,13 @@ function setMode(int) {
 
   pickCharacter();
 
-  resetScore();
+  currentScore = 0;
+  numQuestions = 0;
+  document.getElementById('Score').innerHTML = 'Score: 0 out of 0';
 
 }
+
+var lastOne = false;
 
 function pickCharacter() {
   document.getElementById('Next').disabled = true;
@@ -66,16 +70,12 @@ function pickCharacter() {
     characters = lessonOne;
   }
 
-  if (characters.length == 0) {
-    document.getElementById('Instructions').innerHTML = 'Done!'
-    fillArray(dictionary, characters);
-  } else {
-    var n = Math.floor(Math.random() * Object.keys(dictionary).length);  
-    document.getElementById('CharacterSpace').innerHTML = characters[n];
-    displayKana(characters[n]);
-    //characters.splice(n, 1);
-    document.getElementById('AmIRight').innerHTML = ''
-  }
+  if (characters.length == 1) lastOne = true;
+  var n = Math.floor(Math.random() * characters.length);  
+  document.getElementById('CharacterSpace').innerHTML = characters[n];
+  displayKana(characters[n]);
+  characters.splice(n, 1);
+  document.getElementById('AmIRight').innerHTML = ''
 }
 
 function displayKana(character) {
@@ -83,13 +83,13 @@ function displayKana(character) {
 
   if (currentMode == 0) {
     dictionary = hiraganaDict;
-    characters = hiragana;
+    characters = allHiragana;
   } else if (currentMode == 1) {
     dictionary = katakanaDict;
-    characters = katakana;
+    characters = allKatakana;
   } else {
     dictionary = dictOne;
-    characters = lessonOne;
+    characters = allLessonOne;
   }
 
   var dictionaryLength = Object.keys(dictionary).length
@@ -141,7 +141,6 @@ function checkAnswer(correct, answer, option) {
       document.getElementById('Score').innerHTML = 'Score: ' + currentScore.toString() + ' out of ' + numQuestions.toString();
     }
     stopScore = false;
-    document.getElementById('ResetScore').disabled = false;
     document.getElementById('Next').disabled = false;
     document.getElementById('OptionOne').disabled = true;
     document.getElementById('OptionTwo').disabled = true;
@@ -149,6 +148,11 @@ function checkAnswer(correct, answer, option) {
     document.getElementById(option).className = "correctanswer";
     // audio = new Audio(correct + '.mp3');
     // audio.play();
+    if (lastOne == true) {      
+      document.getElementById('Instructions').innerHTML = 'Done!'
+      document.getElementById('Next').disabled = true;
+      lastOne = false;
+    }
   } else {
     if (stopScore == false) numQuestions++;
     stopScore = true;
@@ -157,9 +161,9 @@ function checkAnswer(correct, answer, option) {
   }
 }
 
-function resetScore() {
+function restart() {
   currentScore = 0;
   numQuestions = 0;
-  document.getElementById('ResetScore').disabled = true;
   document.getElementById('Score').innerHTML = 'Score: 0 out of 0';
+  setMode(currentMode);
 }
