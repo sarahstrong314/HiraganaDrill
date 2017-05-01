@@ -4,35 +4,42 @@ var numQuestions = 0;
 
 // var instructions = ['Select the correct pronunciation of the character above.', 'Select the correct translation of the word above.']
 
+
 function setMode(int) {
   currentMode = int;
 
+  var modes = [
+    document.getElementById('Hiragana'),
+    document.getElementById('Katakana'),
+    document.getElementById('LessonOne')
+  ];
+
+  for (var i = 0; i < modes.length; i++) {
+    modes[i].disabled = false;
+  }
+
   if (int == 0) {
     document.getElementById('Hiragana').disabled = true;
-    document.getElementById('Katakana').disabled = false;
-    document.getElementById('LessonOne').disabled = false;
     document.getElementById('Instructions').innerHTML = 'Select the correct pronunciation of the character above.'
-    fillArray(hiraganaDict, hiragana);
+    fillArray(hiraganaDict, questions);
+    fillArray(hiraganaDict, allQuestions);
 
   } else if (int == 1) {
-    document.getElementById('Hiragana').disabled = false;
     document.getElementById('Katakana').disabled = true;
-    document.getElementById('LessonOne').disabled = false;
     document.getElementById('Instructions').innerHTML = 'Select the correct pronunciation of the character above.'
-    fillArray(katakanaDict, katakana);
+    fillArray(katakanaDict, questions);
+    fillArray(katakanaDict, allQuestions);
 
   } else {
-    document.getElementById('Hiragana').disabled = false;
-    document.getElementById('Katakana').disabled = false;
     document.getElementById('LessonOne').disabled = true;
     document.getElementById('Instructions').innerHTML = 'Select the correct translation of the word above.'
-    fillArray(dictOne, lessonOne);
+    fillArray(dictOne, questions);
+    fillArray(dictOne, allQuestions);
   }
 
   document.getElementById('Next').disabled = false;
-  document.getElementById('OptionOne').disabled = true;
-  document.getElementById('OptionTwo').disabled = true;
-  document.getElementById('OptionThree').disabled = true;
+
+  disableOptions(true);
 
   document.getElementById('AmIRight').innerHTML = ''
   document.getElementById('CharacterSpace').innerHTML = ''
@@ -48,26 +55,36 @@ function setMode(int) {
 
 }
 
+function disableOptions(bool) {
+  var options = [
+    document.getElementById('OptionOne'),
+    document.getElementById('OptionTwo'),
+    document.getElementById('OptionThree')
+  ];
+
+  for (var i = 0; i < options.length; i++) {
+    options[i].disabled = bool;
+  }
+}
+
 var lastOne = false;
 
 function pickCharacter() {
   document.getElementById('Next').disabled = true;
-  document.getElementById('OptionOne').disabled = false;
-  document.getElementById('OptionTwo').disabled = false;
-  document.getElementById('OptionThree').disabled = false;
+  disableOptions(false);
   document.getElementById('OptionOne').className = "answerbutton";
   document.getElementById('OptionTwo').className = "answerbutton";
   document.getElementById('OptionThree').className = "answerbutton";
 
+  var dictionary;
+  var characters = questions;
+
   if (currentMode == 0) {
     dictionary = hiraganaDict;
-    characters = hiragana;
   } else if (currentMode == 1) {
     dictionary = katakanaDict;
-    characters = katakana;
   } else {
     dictionary = dictOne;
-    characters = lessonOne;
   }
 
   if (characters.length == 1) lastOne = true;
@@ -79,17 +96,15 @@ function pickCharacter() {
 }
 
 function displayKana(character) {
-  var characters, dictionary;
+  var dictionary;
+  var characters = allQuestions;
 
   if (currentMode == 0) {
     dictionary = hiraganaDict;
-    characters = allHiragana;
   } else if (currentMode == 1) {
     dictionary = katakanaDict;
-    characters = allKatakana;
   } else {
     dictionary = dictOne;
-    characters = allLessonOne;
   }
 
   var dictionaryLength = Object.keys(dictionary).length
@@ -113,21 +128,21 @@ function displayKana(character) {
 
   // displays the answers, in order, on the option buttons
 
-  var buttons = [
+  var options = [
     document.getElementById('OptionOne'),
     document.getElementById('OptionTwo'),
     document.getElementById('OptionThree')
   ];
 
-  for (var i = 0; i < buttons.length; i++) {
-    buttons[i].innerHTML = dictionary[answers[i]];
+  for (var i = 0; i < options.length; i++) {
+    options[i].innerHTML = dictionary[answers[i]];
   }
 
   // once an option is clicked, displays whether it is correct or incorrect
 
-  buttons[0].onclick = function() { checkAnswer(character, answers[0], 'OptionOne') };
-  buttons[1].onclick = function() { checkAnswer(character, answers[1], 'OptionTwo') };
-  buttons[2].onclick = function() { checkAnswer(character, answers[2], 'OptionThree') };
+  options[0].onclick = function() { checkAnswer(character, answers[0], 'OptionOne') };
+  options[1].onclick = function() { checkAnswer(character, answers[1], 'OptionTwo') };
+  options[2].onclick = function() { checkAnswer(character, answers[2], 'OptionThree') };
 }
 
 var stopScore = false;
@@ -142,9 +157,7 @@ function checkAnswer(correct, answer, option) {
     }
     stopScore = false;
     document.getElementById('Next').disabled = false;
-    document.getElementById('OptionOne').disabled = true;
-    document.getElementById('OptionTwo').disabled = true;
-    document.getElementById('OptionThree').disabled = true;
+    disableOptions(true);
     document.getElementById(option).className = "correctanswer";
     // audio = new Audio(correct + '.mp3');
     // audio.play();
