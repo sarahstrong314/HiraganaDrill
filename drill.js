@@ -34,18 +34,21 @@ function setMode(int) {
   }
 
   if (int == 0) {
+    document.getElementById('Romaji').className = 'disabledmodebutton';
     document.getElementById('Hiragana').disabled = true;
     document.getElementById('Instructions').innerHTML = 'Select the correct pronunciation of the character above.'
     fillArray(hiraganaDict, questions);
     fillArray(hiraganaDict, allQuestions);
 
   } else if (int == 1) {
+    document.getElementById('Romaji').className = 'disabledmodebutton';
     document.getElementById('Katakana').disabled = true;
     document.getElementById('Instructions').innerHTML = 'Select the correct pronunciation of the character above.'
     fillArray(katakanaDict, questions);
     fillArray(katakanaDict, allQuestions);
 
   } else {
+    document.getElementById('Romaji').className = 'modebutton';
     document.getElementById('LessonOne').disabled = true;
     document.getElementById('Instructions').innerHTML = 'Select the correct translation of the word above.'
     fillArray(dict1, questions);
