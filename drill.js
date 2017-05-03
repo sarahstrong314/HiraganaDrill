@@ -6,8 +6,8 @@ var numQuestions = 0;
 // var instructions = ['Select the correct pronunciation of the character above.', 'Select the correct translation of the word above.']
 
 function setDisplay(int) {
+  displayMode = int;
   if (currentMode > 1) {
-    displayMode = int;
     if (int == 0) {
       document.getElementById('Kana').disabled = true;
       document.getElementById('Romaji').disabled = false;
@@ -17,6 +17,9 @@ function setDisplay(int) {
       document.getElementById('Romaji').disabled = true;
       document.getElementById('CharacterSpace').innerHTML = toRomaji(document.getElementById('CharacterSpace').innerHTML);
     } 
+  } else {
+    document.getElementById('Kana').disabled = true;
+    document.getElementById('Romaji').disabled = false;
   }
 }
 
@@ -34,6 +37,7 @@ function setMode(int) {
   }
 
   if (int == 0) {
+    setDisplay(0);
     document.getElementById('Romaji').className = 'disabledmodebutton';
     document.getElementById('Hiragana').disabled = true;
     document.getElementById('Instructions').innerHTML = 'Select the correct pronunciation of the character above.'
@@ -41,6 +45,7 @@ function setMode(int) {
     fillArray(hiraganaDict, allQuestions);
 
   } else if (int == 1) {
+    setDisplay(0);
     document.getElementById('Romaji').className = 'disabledmodebutton';
     document.getElementById('Katakana').disabled = true;
     document.getElementById('Instructions').innerHTML = 'Select the correct pronunciation of the character above.'
