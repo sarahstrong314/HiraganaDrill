@@ -1,9 +1,24 @@
 var currentMode = 0;
+var displayMode = 0;
 var currentScore = 0;
 var numQuestions = 0;
 
 // var instructions = ['Select the correct pronunciation of the character above.', 'Select the correct translation of the word above.']
 
+function setDisplay(int) {
+  if (currentMode > 1) {
+    displayMode = int;
+    if (int == 0) {
+      document.getElementById('Kana').disabled = true;
+      document.getElementById('Romaji').disabled = false;
+      document.getElementById('CharacterSpace').innerHTML = toKana(document.getElementById('CharacterSpace').innerHTML);
+    } else {
+      document.getElementById('Kana').disabled = false;
+      document.getElementById('Romaji').disabled = true;
+      document.getElementById('CharacterSpace').innerHTML = toRomaji(document.getElementById('CharacterSpace').innerHTML);
+    } 
+  }
+}
 
 function setMode(int) {
   currentMode = int;
@@ -33,8 +48,8 @@ function setMode(int) {
   } else {
     document.getElementById('LessonOne').disabled = true;
     document.getElementById('Instructions').innerHTML = 'Select the correct translation of the word above.'
-    fillArray(dictOne, questions);
-    fillArray(dictOne, allQuestions);
+    fillArray(dict1, questions);
+    fillArray(dict1, allQuestions);
   }
 
   document.getElementById('Next').disabled = false;
@@ -84,12 +99,14 @@ function pickCharacter() {
   } else if (currentMode == 1) {
     dictionary = katakanaDict;
   } else {
-    dictionary = dictOne;
+    dictionary = dict1;
   }
 
   if (characters.length == 1) lastOne = true;
   var n = Math.floor(Math.random() * characters.length);  
-  document.getElementById('CharacterSpace').innerHTML = characters[n];
+  
+  if (displayMode == 0) document.getElementById('CharacterSpace').innerHTML = characters[n];
+  else document.getElementById('CharacterSpace').innerHTML = toRomaji(characters[n]);
   displayKana(characters[n]);
   characters.splice(n, 1);
   document.getElementById('AmIRight').innerHTML = ''
@@ -104,7 +121,7 @@ function displayKana(character) {
   } else if (currentMode == 1) {
     dictionary = katakanaDict;
   } else {
-    dictionary = dictOne;
+    dictionary = dict1;
   }
 
   var dictionaryLength = Object.keys(dictionary).length
