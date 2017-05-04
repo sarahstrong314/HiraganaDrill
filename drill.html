@@ -53,11 +53,12 @@
 
     <button type='button' class='restart' onclick='restart()' id ='Restart' >Restart</button>
 
-    <div class='score' id='Score'>Score: 0 out of 0</div>
+    <div class='score' id='Score'></div>
 
     <script>
       pickCharacter();
       document.getElementById('Romaji').disabled = true;
+      document.getElementById('Score').innerHTML= 'Score: 0 out of 0 (102 Remaining)';
     </script>
   </body>
 </html>

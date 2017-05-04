@@ -2,6 +2,7 @@ var currentMode = 0;
 var viewMode = 0;
 var currentScore = 0;
 var numQuestions = 0;
+var numLeft = Object.keys(hiraganaDict).length;
 
 // var instructions = ['Select the correct pronunciation of the character above.', 'Select the correct translation of the word above.']
 
@@ -24,6 +25,7 @@ function setMode(int) {
 
   if (int == 0) {
     setView(0);
+    numLeft = Object.keys(hiraganaDict).length;
     document.getElementById('Romaji').disabled = true;
     document.getElementById('Instructions').innerHTML = 'Select the correct pronunciation of the character above.'
     fillArray(hiraganaDict, questions);
@@ -31,6 +33,7 @@ function setMode(int) {
 
   } else if (int == 1) {
     setView(0);
+    numLeft = Object.keys(katakanaDict).length;
     document.getElementById('Romaji').disabled = true;
     document.getElementById('Instructions').innerHTML = 'Select the correct pronunciation of the character above.'
     fillArray(katakanaDict, questions);
@@ -38,12 +41,14 @@ function setMode(int) {
 
   } else if (int == 2) {
     setView(0);
+    numLeft = Object.keys(extraKatakanaDict).length;
     document.getElementById('Romaji').disabled = true;
     document.getElementById('Instructions').innerHTML = 'Select the correct pronunciation of the character above.'
     fillArray(extraKatakanaDict, questions);
     fillArray(extraKatakanaDict, allQuestions);
 
   } else {
+    numLeft = Object.keys(dict1).length;
     document.getElementById('Romaji').disabled = false;
     document.getElementById('Instructions').innerHTML = 'Select the correct translation of the word above.'
     fillArray(dict1, questions);
@@ -64,7 +69,7 @@ function setMode(int) {
 
   currentScore = 0;
   numQuestions = 0;
-  document.getElementById('Score').innerHTML = 'Score: 0 out of 0';
+  document.getElementById('Score').innerHTML = 'Score: 0 out of 0' + ' (' + numLeft.toString() +' Remaining)';
 
 }
 
@@ -169,10 +174,11 @@ var stopScore = false;
 function checkAnswer(correct, answer, option) {
   document.getElementById('AmIRight').innerHTML = ((correct == answer) ? 'Correct!' : 'Incorrect.');
   if (correct == answer) {
+    numLeft--;
     if (stopScore == false) {
       currentScore++;
       numQuestions++;
-      document.getElementById('Score').innerHTML = 'Score: ' + currentScore.toString() + ' out of ' + numQuestions.toString();
+      document.getElementById('Score').innerHTML = 'Score: ' + currentScore.toString() + ' out of ' + numQuestions.toString() + ' (' + numLeft.toString() +' Remaining)';
     }
     stopScore = false;
     document.getElementById('Next').disabled = false;
@@ -189,13 +195,13 @@ function checkAnswer(correct, answer, option) {
     if (stopScore == false) numQuestions++;
     stopScore = true;
     document.getElementById(option).className = "incorrectanswer";
-    document.getElementById('Score').innerHTML = 'Score: ' + currentScore.toString() + ' out of ' + numQuestions.toString();
+    document.getElementById('Score').innerHTML = 'Score: ' + currentScore.toString() + ' out of ' + numQuestions.toString() + ' (' + numLeft.toString() +' Remaining)';
   }
 }
 
 function restart() {
   currentScore = 0;
-  numQuestions = 0;
-  document.getElementById('Score').innerHTML = 'Score: 0 out of 0';
+  numQuestions = 0;  
   setMode(currentMode);
+  document.getElementById('Score').innerHTML = 'Score: 0 out of 0' + ' (' + numLeft.toString() +' Remaining)';
 }
