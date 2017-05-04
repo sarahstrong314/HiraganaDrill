@@ -4,6 +4,18 @@ var extraKatakanaDict = {'イェ':'ye', 'ヴァ':'va', 'ヴィ':'vi', 'ヴ':'vu'
 
 var dict1 = {'ほん': 'book', 'かみ': 'paper', 'えんぴつ': 'pencil', 'これ': 'this one', 'それ': 'that one', 'あれ': 'that one (over there)', 'なん': 'what', 'わたし': 'I', 'あなた': 'you', 'かれ': 'he', 'かのじょ': 'she', 'だれ': 'who', 'なんさい':'how old'}
 var dict2 = {'とけい':'watch or clock', 'めがね':'glasses', 'じしょ':'dictionary', 'いす':'chair', 'いぬ':'dog', 'かさ':'umbrella', 'しんぶん':'newspaper', 'さいふ':'wallet', 'くつ':'shoe', 'かばん':'bag', 'じてんしゃ':'bicycle', 'ぼうし':'hat', 'しゅみ':'hobby', 'ともだち':'friend', 'おとうさん':'father', 'はは':'my mother', 'りょうしん':'parents', 'おにいさん':'big brother', 'あね':'my big sister', 'おとうと':'little brother', 'いもうとさん':'someone\'s little sister', 'ごかぞく':'someone\'s family', 'つま':'my wife', 'ごしゅじん':'someone\'s husband'};
+var dict3 = {'ここ':'here', 'そこ':'there', 'あそこ':'over there', 'どこ':'where', 'あっち':'that way over there', 'どっち':'which way', 'かいだん':'stairs', 'うけつけ':'reception desk', 'ちゅうしゃじょう':'parking lot', 'おてあらい':'bathroom', 'いりぐち':'entrance', 'かいしゃ':'company', 'がっこう':'school', 'くに':'country'};
+var dict4 = {'なんじ':'what time', 'きのう':'yesterday', 'きょう':'today', 'あした':'tomorrow', 'まいにち':'everyday', 'まいあさ':'every morning', 'まいばん':'every evening', 'けさ':'this morning', 'こんばん':'this evening', 'ゆうべ':'last night', 'あしたのあさ':'tomorrow morning', 'ごぜん':'a.m.', 'ごご':'p.m.', 'やすみ':'closed or day off', 'あさごはん':'breakfast', 'たべます':'to eat', 'のみます':'to drink', 'ねます':'to sleep or to go to bed', 'おきます':'to wake up', 'はたらきます':'to work', 'べんきょうします':'to study', 'あそびます':'to play or to hangout', 'みます':'to see', 'よみます':'to read'};
+var dict5 = {'hikouki':'airplane', 'kuruma':'car', 'densha':'train', 'chikatetsu':'subway', 'shinkansen':'bullet train', 'fune':'ship', 'aruite':'by walking', 'ryokou':'trip', 'itsu':'when', 'konshuu':'this week', 'kongetsu':'this month', 'kotoshi':'this year', 'raishuu':'next week', 'raigetsu':'next month', 'rainen':'next year', 'senshuu':'last week', 'sengetsu':'last month', 'kyonen':'last year', 'tsuitachi':'the first', 'futsuka':'the second', 'mikka':'the third', 'yokka':'the fourth', 'shigatsu':'April', 'shichigatsu':'July', 'kugatsu':'September'};
+var dict6 = {'たまご':'egg', 'みず':'water', 'ぎゅうにゅう':'milk', 'てがみ':'letter', 'えいが':'movie', 'おんがく':'music', 'しんぶん':'photography', 'よく':'often', 'ときどき':'sometimes', 'えいがかん':'movie theatre', 'としょかん':'library', 'こうえん':'park', 'えき':'station', 'でんきや':'electrical appliance store', 'それから':'and then', 'テニスをします':'to play tennis', 'ききます':'to listen', 'やすみます':'to take a rest', 'かります':'to borrow', 'のります':'to ride', 'おります':'to get off', 'あいます':'to meet', 'かいます':'to buy'};
+var dict7 = {'えいご':'English language', 'にほんご':'Japanese language', 'はし':'chopstick', 'たんじょうび':'birthday', 'けっこんしき':'wedding', 'あかちゃん':'baby', 'はなします':'to speak', 'かきます':'to write', 'しゅうりします':'to fix', 'おしえます':'to teach', 'ならいます':'to learn', 'あげます':'to give', 'もらいます':'to receive', 'かします':'to lend', 'かります':'to borrow'};
+var dict8 = {'あつい':'hot', 'さむい':'cold (weather)', 'つめたい':'cold (temperature)', 'おおきい':'big', 'ちいさい':'small', 'おおい':'many', 'すくない':'few', 'ながい':'long', 'みじかい':'short', 'たかい':'long or expensive', 'ひくい':'low', 'ひろい':'wide', 'せまい':'narrow', 'おもい':'heavy', 'かるい':'light', 'あたらしい':'new', 'ふるい':'old', 'おそい':'slow', 'はやい':'fast', 'あかるい':'briht', 'くらい':'dark', 'いそがしい':'busy', 'ひま（な）':'not', 'むずかしい':'busy', 'かんたん（な）':'difficult', 'あたたかい':'easy', 'おいしい':'worm', 'まずい':'delicious', 'きれい（な）':'tastes', 'きたない':'awful', 'おもしろい':'beautiful or clean', 'つまらない':'dirty', 'たのしい':'interesting', 'びんぼう（な）':'boring', 'しんせつ（な）':'fun', 'しずか（な）':'poor', 'かわいい':'kind', 'げんき（な）':'quiet', 'かっこいい':'cute', 'にぎやか（な）':'cheerful', 'からがに':'cool', 'いい':'bustling', 'あたまが':'healthy', 'いい':'smart', 'あか':'red', 'あお':'blue', 'しろ':'white', 'くろ':'black', 'ちゃいろ':'brown', 'はいいろ':'gray', 'きいろ':'yellow'};
+var dict9 = {'すき':'like', 'きらい':'dislike', 'とても':'very', 'じょうず':'skillful', 'へた':'not skillful', 'わかります':'to understand', 'ねつ':'fever', 'かぜ':'cold (disease)', 'おなか':'stomach', 'やくそく':'promiise or appointment', 'ようじ':'something to do', 'じゅぎょう':'class'};
+var dict10 = {'あります':'to have or to exist (things)', 'います':'to have or to exist (living creatures)', 'うえ':'above', 'した':'under', 'みぎ':'right', 'ひだり':'left', 'まえ':'in front of', 'うしろ':'behind', 'なか':'inside', 'そと':'outside', 'あいだ':'between', 'となり':'next to', 'ちかく':'close', 'いろいろ（な）':'various'};
+var dict11 = {'さら':'dish', 'おとこのひと':'man', 'おんなのひと':'woman', 'ふうとう':'envelope', 'おとな':'adult', 'こども':'child', 'おとこのこ':'boy', 'おんなのこ':'girl', 'だけ':'only', 'いちにち':'one day', 'ふつか':'two days', 'みっか':'three days', 'いちじかん':'one hour', 'なんじかん':'how many  hours', 'いっかげつ':'one month', 'なんかげつ':'how many months', 'いちねん':'one year', 'なんねん':'how many years', 'なんぷん':'how many minutes'};
+var dict12 = {'いい てんき':'good weather', 'あめ':'rain', 'くもり':'cloudy day', 'ゆき':'snow', 'ゆうめいじん':'celebrity', 'きせつ':'season', 'たべもの':'food', 'のみもの':'rain', 'どうぶつ':'cloudy', 'いちばん':'No. 1'};
+var dict13 = {'ほしい':'want', 'れんしゅう':'practice', 'たべにいきます':'to go to eat', 'のど':'throat', 'おなかが　すきます':'to become hungry', 'のどが　かわきます':'to become thirsty', 'つかれます':'to become tired', 'いたい':'hurt', 'びじゅつかん':'art museum', 'かわ':'river', 'およぎます':'to swim', 'しょくじ':'meal'};
+
 
 var allQuestions = [];
 
@@ -51,7 +63,7 @@ function toRomaji(kana) {
  return translation;
 }
 
-var dicts = [dict1, dict2];
+var dicts = [dict1, dict2, dict3, dict4, dict5, dict6, dict7, dict8, dict9, dict10, dict11, dict12];
 
 function toKana(romaji) {
   for (var i = 0; i < dicts.length; i++) {

@@ -30,11 +30,11 @@ button[disabled] {
 .characterspace {
   background-color: #fdfdfd;
   color: black;
-  height: 130px;
+  height: 100px;
   width: 610px;
   text-align: center;
   display: inline-block;
-  font-size: 100px;
+  font-size: 80px;
 }
 
 .instructions {
@@ -129,4 +129,4 @@ button[disabled] {
   vertical-align: top;
   display: inline-block;
   font-size: 20px;
-}
+}                                        
