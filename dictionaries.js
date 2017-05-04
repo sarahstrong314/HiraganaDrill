@@ -13,7 +13,7 @@ var dict8 = {'あつい':'hot', 'さむい':'cold (weather)', 'つめたい':'co
 var dict9 = {'すき':'like', 'きらい':'dislike', 'とても':'very', 'じょうず':'skillful', 'へた':'not skillful', 'わかります':'to understand', 'ねつ':'fever', 'かぜ':'cold (disease)', 'おなか':'stomach', 'やくそく':'promiise or appointment', 'ようじ':'something to do', 'じゅぎょう':'class'};
 var dict10 = {'あります':'to have or to exist (things)', 'います':'to have or to exist (living creatures)', 'うえ':'above', 'した':'under', 'みぎ':'right', 'ひだり':'left', 'まえ':'in front of', 'うしろ':'behind', 'なか':'inside', 'そと':'outside', 'あいだ':'between', 'となり':'next to', 'ちかく':'close', 'いろいろ（な）':'various'};
 var dict11 = {'さら':'dish', 'おとこのひと':'man', 'おんなのひと':'woman', 'ふうとう':'envelope', 'おとな':'adult', 'こども':'child', 'おとこのこ':'boy', 'おんなのこ':'girl', 'だけ':'only', 'いちにち':'one day', 'ふつか':'two days', 'みっか':'three days', 'いちじかん':'one hour', 'なんじかん':'how many  hours', 'いっかげつ':'one month', 'なんかげつ':'how many months', 'いちねん':'one year', 'なんねん':'how many years', 'なんぷん':'how many minutes'};
-var dict12 = {'いい てんき':'good weather', 'あめ':'rain', 'くもり':'cloudy day', 'ゆき':'snow', 'ゆうめいじん':'celebrity', 'きせつ':'season', 'たべもの':'food', 'のみもの':'rain', 'どうぶつ':'cloudy', 'いちばん':'No. 1'};
+var dict12 = {'いい てんき':'good weather', 'あめ':'rain', 'くもり':'cloudy day', 'ゆき':'snow', 'ゆうめいじん':'celebrity', 'きせつ':'season', 'たべもの':'food', 'のみもの':'drink', 'どうぶつ':'animal', 'いちばん':'No. 1'};
 var dict13 = {'ほしい':'want', 'れんしゅう':'practice', 'たべにいきます':'to go to eat', 'のど':'throat', 'おなかが　すきます':'to become hungry', 'のどが　かわきます':'to become thirsty', 'つかれます':'to become tired', 'いたい':'hurt', 'びじゅつかん':'art museum', 'かわ':'river', 'およぎます':'to swim', 'しょくじ':'meal'};
 
 
