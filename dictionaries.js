@@ -58,5 +58,6 @@ function toKana(romaji) {
     for (d in allDicts[i]) {
         if (toRomaji(d) == romaji) return d;
     }
-  } return 'error'; 
+  }
+  return romaji; 
 }

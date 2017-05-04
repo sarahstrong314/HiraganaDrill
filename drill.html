@@ -12,20 +12,18 @@
 
   <body>
 
-    <!-- <select> -->
-      <!-- <option value='hiragana'>Hiragana</option> -->
-      <!-- <option value='katakana'>Katakana</option> -->
-    <!-- </select> -->
+    <select onchange='getMode()' id='lessonMenu' class='select'>
+      <option id='Hiragana' value=0>Hiragana</option>
+      <option id='Katakana' value=1>Katakana</option>
+      <option id='LessonOne' value=2>Lesson 1</option>
+    </select>
 
-    <button type='button' class='modebutton' onclick='setDisplay(0)' id='Kana'>View in Kana</button>
-    <button type='button' class='modebutton' onclick='setDisplay(1)' id='Romaji'>View in Romaji</button>
-    
+
     </br>
     </br>
 
-    <button type='button' class='modebutton' onclick='setMode(0)' id='Hiragana'>Hiragana</button>
-    <button type='button' class='modebutton' onclick='setMode(1)' id='Katakana'>Katakana</button>
-    <button type='button' class='modebutton' onclick='setMode(2)' id='LessonOne'>Lesson 1</button>
+    <button type='button' class='modebutton' onclick='setView(0)' id='Kana'>View in Kana</button>
+    <button type='button' class='modebutton' onclick='setView(1)' id='Romaji'>View in Romaji</button>
 
     </br>
 
@@ -60,7 +58,6 @@
 
     <script>
       pickCharacter();
-      document.getElementById('Hiragana').disabled = true;
       document.getElementById('Kana').disabled = true;
       document.getElementById('Romaji').className = 'disabledmodebutton';
     </script>

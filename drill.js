@@ -1,12 +1,12 @@
 var currentMode = 0;
-var displayMode = 0;
+var viewMode = 0;
 var currentScore = 0;
 var numQuestions = 0;
 
 // var instructions = ['Select the correct pronunciation of the character above.', 'Select the correct translation of the word above.']
 
-function setDisplay(int) {
-  displayMode = int;
+function setView(int) {
+  viewMode = int;
   if (currentMode > 1) {
     if (int == 0) {
       document.getElementById('Kana').disabled = true;
@@ -23,38 +23,29 @@ function setDisplay(int) {
   }
 }
 
+function getMode() {
+  setMode(document.getElementById('lessonMenu').value);
+}
+
 function setMode(int) {
   currentMode = int;
 
-  var modes = [
-    document.getElementById('Hiragana'),
-    document.getElementById('Katakana'),
-    document.getElementById('LessonOne')
-  ];
-
-  for (var i = 0; i < modes.length; i++) {
-    modes[i].disabled = false;
-  }
-
   if (int == 0) {
-    setDisplay(0);
+    setView(0);
     document.getElementById('Romaji').className = 'disabledmodebutton';
-    document.getElementById('Hiragana').disabled = true;
     document.getElementById('Instructions').innerHTML = 'Select the correct pronunciation of the character above.'
     fillArray(hiraganaDict, questions);
     fillArray(hiraganaDict, allQuestions);
 
   } else if (int == 1) {
-    setDisplay(0);
+    setView(0);
     document.getElementById('Romaji').className = 'disabledmodebutton';
-    document.getElementById('Katakana').disabled = true;
     document.getElementById('Instructions').innerHTML = 'Select the correct pronunciation of the character above.'
     fillArray(katakanaDict, questions);
     fillArray(katakanaDict, allQuestions);
 
   } else {
     document.getElementById('Romaji').className = 'modebutton';
-    document.getElementById('LessonOne').disabled = true;
     document.getElementById('Instructions').innerHTML = 'Select the correct translation of the word above.'
     fillArray(dict1, questions);
     fillArray(dict1, allQuestions);
@@ -113,7 +104,7 @@ function pickCharacter() {
   if (characters.length == 1) lastOne = true;
   var n = Math.floor(Math.random() * characters.length);  
   
-  if (displayMode == 0) document.getElementById('CharacterSpace').innerHTML = characters[n];
+  if (viewMode == 0) document.getElementById('CharacterSpace').innerHTML = characters[n];
   else document.getElementById('CharacterSpace').innerHTML = toRomaji(characters[n]);
   displayKana(characters[n]);
   characters.splice(n, 1);

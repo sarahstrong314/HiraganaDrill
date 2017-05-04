@@ -16,6 +16,17 @@ button[disabled] {
   color: gray;
 }
 
+.select {
+  background-color: lightgray;
+  border: none;
+  color: grey;
+  height: 50px;
+  width: 200px;
+  text-align: center;
+  display: inline-block;
+  font-size: 20px;
+}
+
 .modebutton {
   background-color: lightgray;
   border: none;
