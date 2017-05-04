@@ -12,18 +12,16 @@
 
   <body>
 
-    <select onchange='getMode()' id='lessonMenu' class='select'>
+    <select onchange='getMode()' id='LessonMenu' class='select'>
       <option id='Hiragana' value=0>Hiragana</option>
       <option id='Katakana' value=1>Katakana</option>
       <option id='LessonOne' value=2>Lesson 1</option>
     </select>
 
-
-    </br>
-    </br>
-
-    <button type='button' class='modebutton' onclick='setView(0)' id='Kana'>View in Kana</button>
-    <button type='button' class='modebutton' onclick='setView(1)' id='Romaji'>View in Romaji</button>
+    <select onchange='getView()' id='ViewMode' class='select'>
+      <option id='Kana' value=0>View in Kana</option>
+      <option id='Romaji' value=1>View in Romaji</option>
+    </select>
 
     </br>
 
@@ -58,8 +56,7 @@
 
     <script>
       pickCharacter();
-      document.getElementById('Kana').disabled = true;
-      document.getElementById('Romaji').className = 'disabledmodebutton';
+      document.getElementById('Romaji').disabled = true;
     </script>
   </body>
 </html>

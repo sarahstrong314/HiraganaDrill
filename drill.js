@@ -5,26 +5,18 @@ var numQuestions = 0;
 
 // var instructions = ['Select the correct pronunciation of the character above.', 'Select the correct translation of the word above.']
 
+
+function getView() {
+  setView(document.getElementById('ViewMode').value);
+}
 function setView(int) {
   viewMode = int;
-  if (currentMode > 1) {
-    if (int == 0) {
-      document.getElementById('Kana').disabled = true;
-      document.getElementById('Romaji').disabled = false;
-      document.getElementById('CharacterSpace').innerHTML = toKana(document.getElementById('CharacterSpace').innerHTML);
-    } else {
-      document.getElementById('Kana').disabled = false;
-      document.getElementById('Romaji').disabled = true;
-      document.getElementById('CharacterSpace').innerHTML = toRomaji(document.getElementById('CharacterSpace').innerHTML);
-    } 
-  } else {
-    document.getElementById('Kana').disabled = true;
-    document.getElementById('Romaji').disabled = false;
-  }
+  if (int == 0) document.getElementById('CharacterSpace').innerHTML = toKana(document.getElementById('CharacterSpace').innerHTML);
+  else document.getElementById('CharacterSpace').innerHTML = toRomaji(document.getElementById('CharacterSpace').innerHTML);
 }
 
 function getMode() {
-  setMode(document.getElementById('lessonMenu').value);
+  setMode(document.getElementById('LessonMenu').value);
 }
 
 function setMode(int) {
@@ -32,20 +24,20 @@ function setMode(int) {
 
   if (int == 0) {
     setView(0);
-    document.getElementById('Romaji').className = 'disabledmodebutton';
+    document.getElementById('Romaji').disabled = true;
     document.getElementById('Instructions').innerHTML = 'Select the correct pronunciation of the character above.'
     fillArray(hiraganaDict, questions);
     fillArray(hiraganaDict, allQuestions);
 
   } else if (int == 1) {
     setView(0);
-    document.getElementById('Romaji').className = 'disabledmodebutton';
+    document.getElementById('Romaji').disabled = true;
     document.getElementById('Instructions').innerHTML = 'Select the correct pronunciation of the character above.'
     fillArray(katakanaDict, questions);
     fillArray(katakanaDict, allQuestions);
 
   } else {
-    document.getElementById('Romaji').className = 'modebutton';
+    document.getElementById('Romaji').disabled = false;
     document.getElementById('Instructions').innerHTML = 'Select the correct translation of the word above.'
     fillArray(dict1, questions);
     fillArray(dict1, allQuestions);
