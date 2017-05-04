@@ -40,8 +40,8 @@ function setMode(int) {
     setView(0);
     document.getElementById('Romaji').disabled = true;
     document.getElementById('Instructions').innerHTML = 'Select the correct pronunciation of the character above.'
-    fillArray(foreignKatakanaDict, questions);
-    fillArray(foreignKatakanaDict, allQuestions);
+    fillArray(extraKatakanaDict, questions);
+    fillArray(extraKatakanaDict, allQuestions);
 
   } else {
     document.getElementById('Romaji').disabled = false;
@@ -97,7 +97,7 @@ function pickCharacter() {
   } else if (currentMode == 1) {
     dictionary = katakanaDict;
   } else if (currentMode == 2) {
-    dictionary = foreignKatakanaDict;
+    dictionary = extraKatakanaDict;
   } else {
     dictionary = dict1;
   }
@@ -121,7 +121,7 @@ function displayKana(character) {
   } else if (currentMode == 1) {
     dictionary = katakanaDict;
   } else if (currentMode == 2) {
-    dictionary = foreignKatakanaDict;
+    dictionary = extraKatakanaDict;
   } else {
     dictionary = dict1;
   }
