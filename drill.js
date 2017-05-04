@@ -8,7 +8,7 @@ var numLeft = Object.keys(hiraganaDict).length;
 
 
 function getView() {
-  setView(document.getElementById('ViewMode').value);
+  setView(document.getElementById('ViewMode').selectedIndex);
 }
 function setView(int) {
   viewMode = int;
@@ -17,53 +17,35 @@ function setView(int) {
 }
 
 function getMode() {
-  setMode(document.getElementById('LessonMenu').value);
+  setMode(document.getElementById('LessonMenu').selectedIndex);
 }
 
 function setMode(int) {
   currentMode = int;
+  var allDicts = [hiraganaDict, katakanaDict, extraKatakanaDict, dict1, dict2];
+  numLeft = Object.keys(allDicts[int]).length;
+  fillArray(allDicts[int], questions);
+  fillArray(allDicts[int], allQuestions);
 
-  if (int == 0) {
+  if (int < 3) {
     setView(0);
-    numLeft = Object.keys(hiraganaDict).length;
+    document.getElementById('ViewMode').selectedIndex = 0;
     document.getElementById('Romaji').disabled = true;
-    document.getElementById('Instructions').innerHTML = 'Select the correct pronunciation of the character above.'
-    fillArray(hiraganaDict, questions);
-    fillArray(hiraganaDict, allQuestions);
-
-  } else if (int == 1) {
-    setView(0);
-    numLeft = Object.keys(katakanaDict).length;
-    document.getElementById('Romaji').disabled = true;
-    document.getElementById('Instructions').innerHTML = 'Select the correct pronunciation of the character above.'
-    fillArray(katakanaDict, questions);
-    fillArray(katakanaDict, allQuestions);
-
-  } else if (int == 2) {
-    setView(0);
-    numLeft = Object.keys(extraKatakanaDict).length;
-    document.getElementById('Romaji').disabled = true;
-    document.getElementById('Instructions').innerHTML = 'Select the correct pronunciation of the character above.'
-    fillArray(extraKatakanaDict, questions);
-    fillArray(extraKatakanaDict, allQuestions);
-
+    document.getElementById('Instructions').innerHTML = 'Select the correct pronunciation of the character above.';
   } else {
-    numLeft = Object.keys(dict1).length;
     document.getElementById('Romaji').disabled = false;
-    document.getElementById('Instructions').innerHTML = 'Select the correct translation of the word above.'
-    fillArray(dict1, questions);
-    fillArray(dict1, allQuestions);
+    document.getElementById('Instructions').innerHTML = 'Select the correct translation of the word above.';
   }
 
   document.getElementById('Next').disabled = false;
 
   disableOptions(true);
 
-  document.getElementById('AmIRight').innerHTML = ''
-  document.getElementById('CharacterSpace').innerHTML = ''
-  document.getElementById('OptionOne').innerHTML = ''
-  document.getElementById('OptionTwo').innerHTML = ''
-  document.getElementById('OptionThree').innerHTML = ''
+  document.getElementById('AmIRight').innerHTML = '';
+  document.getElementById('CharacterSpace').innerHTML = '';
+  document.getElementById('OptionOne').innerHTML = '';
+  document.getElementById('OptionTwo').innerHTML = '';
+  document.getElementById('OptionThree').innerHTML = '';
 
   pickCharacter();
 
@@ -94,18 +76,9 @@ function pickCharacter() {
   document.getElementById('OptionTwo').className = "answerbutton";
   document.getElementById('OptionThree').className = "answerbutton";
 
-  var dictionary;
+  var allDicts = [hiraganaDict, katakanaDict, extraKatakanaDict, dict1, dict2];
+  var dictionary = allDicts[currentMode];
   var characters = questions;
-
-  if (currentMode == 0) {
-    dictionary = hiraganaDict;
-  } else if (currentMode == 1) {
-    dictionary = katakanaDict;
-  } else if (currentMode == 2) {
-    dictionary = extraKatakanaDict;
-  } else {
-    dictionary = dict1;
-  }
 
   if (characters.length == 1) lastOne = true;
   var n = Math.floor(Math.random() * characters.length);  
@@ -114,32 +87,23 @@ function pickCharacter() {
   else document.getElementById('CharacterSpace').innerHTML = toRomaji(characters[n]);
   displayKana(characters[n]);
   characters.splice(n, 1);
-  document.getElementById('AmIRight').innerHTML = ''
+  document.getElementById('AmIRight').innerHTML = '';
 }
 
 function displayKana(character) {
-  var dictionary;
+  var allDicts = [hiraganaDict, katakanaDict, extraKatakanaDict, dict1, dict2];
+  var dictionary = allDicts[currentMode];
   var characters = allQuestions;
 
-  if (currentMode == 0) {
-    dictionary = hiraganaDict;
-  } else if (currentMode == 1) {
-    dictionary = katakanaDict;
-  } else if (currentMode == 2) {
-    dictionary = extraKatakanaDict;
-  } else {
-    dictionary = dict1;
-  }
-
-  var dictionaryLength = Object.keys(dictionary).length
+  var dictionaryLength = Object.keys(dictionary).length;
 
   // picks two different random indices that don't match character's index
 
   var randomCharacter = characters[Math.floor(Math.random() * dictionaryLength)];
-
-  while (character == randomCharacter) randomCharacter = characters[Math.floor(Math.random() * dictionaryLength)];
-
   var randomCharacter2 = characters[Math.floor(Math.random() * dictionaryLength)];
+
+  while (character == randomCharacter)
+    randomCharacter = characters[Math.floor(Math.random() * dictionaryLength)];
 
   while (randomCharacter2 == character || randomCharacter2 == randomCharacter)
     randomCharacter2 = characters[Math.floor(Math.random() * dictionaryLength)];

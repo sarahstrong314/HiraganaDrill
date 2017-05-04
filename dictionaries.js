@@ -3,7 +3,7 @@ var katakanaDict = {'ア':'a', 'イ':'i', 'ウ':'u', 'エ':'e', 'オ':'o', 'カ'
 var extraKatakanaDict = {'イェ':'ye', 'ヴァ':'va', 'ヴィ':'vi', 'ヴ':'vu', 'ヴェ':'ve', 'ヴォ':'vo', 'ヴュ':'vyu', 'クァ':'qua', 'クィ':'qui', 'クェ':'que', 'クォ':'quo', 'シェ':'she', 'ジェ':'je', 'スァ':'swa', 'スィ':'swi', 'スェ':'swe', 'スォ':'swo', 'ツァ':'tsa', 'ツィ':'tsi', 'ツェ':'tse', 'ツォ':'tso', 'チェ':'che', 'ティ':'ti', 'テュ':'tyu', 'ディ':'di', 'デュ':'dyu', 'トゥ':'tu', 'トヮ':'twa', 'ドゥ':'du', 'ファ':'fa', 'フィ':'fi', 'フェ':'fe', 'フォ':'fo', 'モヮ':'mwa', 'ウィ':'wi', 'ウェ':'we', 'ウォ':'wo'};
 
 var dict1 = {'ほん': 'book', 'かみ': 'paper', 'えんぴつ': 'pencil', 'これ': 'this one', 'それ': 'that one', 'あれ': 'that one (over there)', 'なん': 'what', 'わたし': 'I', 'あなた': 'you', 'かれ': 'he', 'かのじょ': 'she', 'だれ': 'who', 'なんさい':'how old'}
-
+var dict2 = {'とけい':'watch or clock', 'めがね':'glasses', 'じしょ':'dictionary', 'いす':'chair', 'いぬ':'dog', 'かさ':'umbrella', 'しんぶん':'newspaper', 'さいふ':'wallet', 'くつ':'shoe', 'かばん':'bag', 'じてんしゃ':'bicycle', 'ぼうし':'hat', 'しゅみ':'hobby', 'ともだち':'friend', 'おとうさん':'father', 'はは':'my mother', 'りょうしん':'parents', 'おにいさん':'big brother', 'あね':'my big sister', 'おとうと':'little brother', 'いもうとさん':'someone\'s little sister', 'ごかぞく':'someone\'s family', 'つま':'my wife', 'ごしゅじん':'someone\'s husband'};
 
 var allQuestions = [];
 
@@ -51,11 +51,11 @@ function toRomaji(kana) {
  return translation;
 }
 
-var allDicts = [dict1];
+var dicts = [dict1, dict2];
 
 function toKana(romaji) {
-  for (var i = 0; i < allDicts.length; i++) {
-    for (d in allDicts[i]) {
+  for (var i = 0; i < dicts.length; i++) {
+    for (d in dicts[i]) {
         if (toRomaji(d) == romaji) return d;
     }
   }
