@@ -8,10 +8,10 @@ function setView() {
 }
 
 var mode = 0;
+var allDicts = [hiraganaDict, katakanaDict, extraKatakanaDict, dict1, dict2, dict3, dict4, dict5, dict6, dict7, dict8, dict9, dict10, dict11, dict12, dict13];
 
 function setMode() {
   mode = document.getElementById('LessonMenu').selectedIndex;
-  var allDicts = [hiraganaDict, katakanaDict, extraKatakanaDict, dict1, dict2, dict3, dict4, dict5, dict6, dict7, dict8, dict9, dict10, dict11, dict12, dict13];
   numLeft = Object.keys(allDicts[mode]).length;
   fillArray(allDicts[mode], questions);
   fillArray(allDicts[mode], allQuestions);
@@ -37,17 +37,12 @@ function setMode() {
   disableOptions(true);
 
   document.getElementById('AmIRight').innerHTML = '';
-  document.getElementById('CharacterSpace').innerHTML = '';
-  document.getElementById('OptionOne').innerHTML = '';
-  document.getElementById('OptionTwo').innerHTML = '';
-  document.getElementById('OptionThree').innerHTML = '';
 
   pickCharacter();
 
   score = 0;
   numQuestions = 0;
   document.getElementById('Score').innerHTML = 'Score: 0 out of 0' + ' (' + numLeft.toString() +' Remaining)';
-
 }
 
 function disableOptions(bool) {
@@ -71,7 +66,6 @@ function pickCharacter() {
   document.getElementById('OptionTwo').className = "answerbutton";
   document.getElementById('OptionThree').className = "answerbutton";
 
-  var allDicts = [hiraganaDict, katakanaDict, extraKatakanaDict, dict1, dict2, dict3, dict4, dict5, dict6, dict7, dict8, dict9, dict10, dict11, dict12, dict13];
   var dictionary = allDicts[mode];
   var characters = questions;
 
@@ -86,7 +80,6 @@ function pickCharacter() {
 }
 
 function displayKana(character) {
-  var allDicts = [hiraganaDict, katakanaDict, extraKatakanaDict, dict1, dict2, dict3, dict4, dict5, dict6, dict7, dict8, dict9, dict10, dict11, dict12, dict13];
   var dictionary = allDicts[mode];
   var characters = allQuestions;
 
