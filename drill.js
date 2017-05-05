@@ -46,12 +46,6 @@ function setLesson() {
 }
 
 function disableOptions(bool) {
-  var options = [
-    document.getElementById('Option1'),
-    document.getElementById('Option2'),
-    document.getElementById('Option3')
-  ];
-
   for (var i = 0; i < options.length; i++) {
     options[i].disabled = bool;
   }
@@ -62,9 +56,10 @@ var lastOne = false;
 function pickQuestion() {
   document.getElementById('Next').disabled = true;
   disableOptions(false);
-  document.getElementById('Option1').className = "answer";
-  document.getElementById('Option2').className = "answer";
-  document.getElementById('Option3').className = "answer";
+
+  for (var i = 0; i < options.length; i++) {
+    options[i].className = 'answer';
+  }
 
   if (questions.length == 1) lastOne = true;
   var n = Math.floor(Math.random() * questions.length);  
@@ -98,12 +93,6 @@ function displayAnswers(answer) {
 
   // displays the answers, in order, on the option buttons
 
-  var options = [
-    document.getElementById('Option1'),
-    document.getElementById('Option2'),
-    document.getElementById('Option3')
-  ];
-
   for (var i = 0; i < options.length; i++) {
     options[i].innerHTML = allDicts[lesson][answers[i]];
   }
@@ -132,7 +121,7 @@ function checkAnswer(correct, answer, option) {
     stopScore = false;
     document.getElementById('Next').disabled = false;
     disableOptions(true);
-    document.getElementById(option).className = "correctanswer";
+    document.getElementById(option).className = 'correctanswer';
       document.getElementById('Score').innerHTML = 'Score: ' + score.toString() + ' out of ' + numQuestions.toString() + ' (' + numLeft.toString() +' Remaining)';
     // audio = new Audio(correct + '.mp3');
     // audio.play();
@@ -144,7 +133,7 @@ function checkAnswer(correct, answer, option) {
   } else {
     if (stopScore == false) numQuestions++;
     stopScore = true;
-    document.getElementById(option).className = "incorrectanswer";
+    document.getElementById(option).className = 'incorrectanswer';
     document.getElementById('Score').innerHTML = 'Score: ' + score.toString() + ' out of ' + numQuestions.toString() + ' (' + numLeft.toString() +' Remaining)';
   }
 }

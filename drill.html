@@ -56,18 +56,23 @@
     </br> 
     </br>
 
-    <button type='button' class='next' onclick='pickQuestion()' id='Next'> Next </button>
+    <button type='button' class='next' onclick='pickQuestion()' id='Next'>Next</button>
 
     <div class='amiright' id='AmIRight'></div>
 
     </br>
     </br>
 
-    <button type='button' class='restart' onclick='restart()' id ='Restart' >Restart</button>
+    <button type='button' class='restart' onclick='restart()' id ='Restart'>Restart</button>
 
     <div class='score' id='Score'></div>
 
     <script>
+      var options = [
+        document.getElementById('Option1'),
+        document.getElementById('Option2'),
+        document.getElementById('Option3')
+      ];
       setLesson();
       setView();
       pickQuestion();
