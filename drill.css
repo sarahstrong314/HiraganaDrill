@@ -13,7 +13,6 @@ body {
 button:disabled,
 button[disabled] {
   background-color: lightgray;
-  color: gray;
 }
 
 .select {
@@ -61,7 +60,7 @@ button[disabled] {
 .correctanswer {
   background-color: gray;
   border: 3px solid black;
-  color: white;
+  color: green;
   height: 50px;
   width: 200px;
   text-align: center;
