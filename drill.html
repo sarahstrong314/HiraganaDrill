@@ -12,7 +12,7 @@
 
   <body>
 
-    <select onchange='setMode()' id='LessonMenu' class='select'>
+    <select onchange='setLesson()' id='LessonMenu' class='select'>
       <option id='Hiragana'>Hiragana</option>
       <option id='Katakana'>Katakana</option>
       <option id='ExtraKatakana'>Extra Katakana</option>
@@ -31,14 +31,14 @@
       <option id='Lesson13'>Lesson 12</option>
     </select>
 
-    <select onchange='setView()' id='ViewMode' class='select'>
+    <select onchange='setView()' id='ViewMenu' class='select'>
       <option id='Kana'>View in Kana</option>
       <option id='Romaji'>View in Romaji</option>
     </select>
 
     </br>
 
-    <div class='characterspace' id='CharacterSpace'></div>
+    <div id='Question' class='question'></div>
 
     </br> 
     </br>
@@ -49,14 +49,14 @@
     </br>
 
 
-    <button type='button' class='answerbutton' id='OptionOne'></button>
-    <button type='button' class='answerbutton' id='OptionTwo'></button>
-    <button type='button' class='answerbutton' id='OptionThree'></button>
+    <button type='button' class='answer' id='Option1'></button>
+    <button type='button' class='answer' id='Option2'></button>
+    <button type='button' class='answer' id='Option3'></button>
 
     </br> 
     </br>
 
-    <button type='button' class='next' onclick='pickCharacter()' id='Next'> Next </button>
+    <button type='button' class='next' onclick='pickQuestion()' id='Next'> Next </button>
 
     <div class='amiright' id='AmIRight'></div>
 
@@ -68,8 +68,9 @@
     <div class='score' id='Score'></div>
 
     <script>
-      pickCharacter();
-      document.getElementById('Romaji').disabled = true;
+      setLesson();
+      setView();
+      pickQuestion();
       document.getElementById('Score').innerHTML= 'Score: 0 out of 0 (102 Remaining)';
     </script>
   </body>
