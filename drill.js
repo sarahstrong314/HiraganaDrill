@@ -22,7 +22,7 @@ function getMode() {
 
 function setMode(int) {
   currentMode = int;
-  var allDicts = [hiraganaDict, katakanaDict, extraKatakanaDict, dict1, dict2, dict3, dict4, dict5, dict6, dict7, dict8, dict9, dict10, dict11, dict12];
+  var allDicts = [hiraganaDict, katakanaDict, extraKatakanaDict, dict1, dict2, dict3, dict4, dict5, dict6, dict7, dict8, dict9, dict10, dict11, dict12, dict13];
   numLeft = Object.keys(allDicts[int]).length;
   fillArray(allDicts[int], questions);
   fillArray(allDicts[int], allQuestions);
@@ -83,7 +83,7 @@ function pickCharacter() {
   document.getElementById('OptionTwo').className = "answerbutton";
   document.getElementById('OptionThree').className = "answerbutton";
 
-  var allDicts = [hiraganaDict, katakanaDict, extraKatakanaDict, dict1, dict2, dict3, dict4, dict5, dict6, dict7, dict8, dict9, dict10, dict11, dict12];
+  var allDicts = [hiraganaDict, katakanaDict, extraKatakanaDict, dict1, dict2, dict3, dict4, dict5, dict6, dict7, dict8, dict9, dict10, dict11, dict12, dict13];
   var dictionary = allDicts[currentMode];
   var characters = questions;
 
@@ -98,7 +98,7 @@ function pickCharacter() {
 }
 
 function displayKana(character) {
-  var allDicts = [hiraganaDict, katakanaDict, extraKatakanaDict, dict1, dict2, dict3, dict4, dict5, dict6, dict7, dict8, dict9, dict10, dict11, dict12];
+  var allDicts = [hiraganaDict, katakanaDict, extraKatakanaDict, dict1, dict2, dict3, dict4, dict5, dict6, dict7, dict8, dict9, dict10, dict11, dict12, dict13];
   var dictionary = allDicts[currentMode];
   var characters = allQuestions;
 
