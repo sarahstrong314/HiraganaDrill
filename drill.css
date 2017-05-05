@@ -29,11 +29,12 @@ button[disabled] {
 .question {
   background-color: #fdfdfd;
   color: black;
-  height: 100px;
+  padding-top: 15px;
+  height: 50px;
   width: 610px;
   text-align: center;
   display: inline-block;
-  font-size: 80px;
+  font-size: 50px;
 }
 
 .instructions {
@@ -43,7 +44,7 @@ button[disabled] {
   width: 610px;
   text-align: center;
   display: inline-block;
-  font-size: 24px;
+  font-size: 22px;
 }
 
 .answer {
@@ -128,4 +129,4 @@ button[disabled] {
   vertical-align: top;
   display: inline-block;
   font-size: 20px;
-}                                        
+} 
