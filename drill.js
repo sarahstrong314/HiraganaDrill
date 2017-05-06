@@ -108,6 +108,7 @@ var score = 0;
 var numQuestions = 0;
 var numLeft = Object.keys(hiraganaDict).length;
 var stopScore = false;
+var audio;
 
 function checkAnswer(correct, answer, option) {
   document.getElementById('AmIRight').innerHTML = ((correct == answer) ? 'Correct!' : 'Incorrect.');
@@ -119,12 +120,14 @@ function checkAnswer(correct, answer, option) {
       document.getElementById('Score').innerHTML = 'Score: ' + score.toString() + ' out of ' + numQuestions.toString() + ' (' + numLeft.toString() +' Remaining)';
     }
     stopScore = false;
-    document.getElementById('Next').disabled = false;
     disableOptions(true);
     document.getElementById(option).className = 'correctanswer';
-      document.getElementById('Score').innerHTML = 'Score: ' + score.toString() + ' out of ' + numQuestions.toString() + ' (' + numLeft.toString() +' Remaining)';
-    // audio = new Audio(correct + '.mp3');
-    // audio.play();
+    document.getElementById('Score').innerHTML = 'Score: ' + score.toString() + ' out of ' + numQuestions.toString() + ' (' + numLeft.toString() +' Remaining)';
+    audio = new Audio('Audio/' + toRomaji(correct) + '.mp3');
+    audio.play()
+    //audio.onended = function() {
+      document.getElementById('Next').disabled = false;
+    //}
     if (lastOne == true) {      
       document.getElementById('Instructions').innerHTML = 'Done!'
       document.getElementById('Next').disabled = true;
