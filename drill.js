@@ -128,9 +128,9 @@ function checkAnswer(correct, answer, option) {
     audio.play()
     audio.onerror = function() {
       audioExists = false;
-      checkAudio();
+      enableNext();
     }
-    checkAudio();
+    enableNext();
     if (lastOne == true) {      
       document.getElementById('Instructions').innerHTML = 'Done!'
       document.getElementById('Next').disabled = true;
@@ -144,7 +144,7 @@ function checkAnswer(correct, answer, option) {
   }
 }
 
-function checkAudio() {
+function enableNext() {
     if (audioExists) {
       audio.onended = function() {
         document.getElementById('Next').disabled = false;
