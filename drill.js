@@ -33,7 +33,7 @@ function setLesson() {
   } else if (lesson == 17 || lesson == 21 || lesson == 23 || lesson == 25) {
     document.getElementById('ViewMenu').style.visibility = 'none';
     document.getElementById('Form').style.display = 'initial';
-    document.getElementById('Translation').style.display = 'initial';
+    document.getElementById('Translation').style.display = 'inline-block';
     document.getElementById('Input').value = '';
     changeBreaks(1);
     hideOptions(true);
@@ -105,8 +105,10 @@ function pickQuestion() {
   
   if (document.getElementById('ViewMenu').selectedIndex == 0) document.getElementById('Question').innerHTML = questions[n];
   else document.getElementById('Question').innerHTML = toRomaji(questions[n]);
-  if (lesson == 17 || lesson == 21 || lesson == 23 || lesson == 25) {
-    document.getElementById('Input').value = '';  
+  if (lesson == 17 || lesson == 21 || lesson == 23 || lesson == 25) {    
+    document.getElementById('Input').disabled = false;
+    document.getElementById('Input').value = '';
+    document.getElementById('Input').style.color = 'black';
     document.getElementById('Translation').innerHTML = allDicts[document.getElementById('LessonMenu').selectedIndex][questions[n]][1];
     answer = allDicts[document.getElementById('LessonMenu').selectedIndex][questions[n]][0];
   } else displayAnswers(questions[n]);
@@ -192,8 +194,10 @@ function checkSoFar() {
   var inputSoFar = document.getElementById('Input').value;
   document.getElementById('Input').value = toHiragana(inputSoFar);
   if (answer == document.getElementById('Input').value) {
+    document.getElementById('Input').style.color = 'green';
+    document.getElementById('Input').disabled = true;
     document.getElementById('AmIRight').innerHTML = 'Correct!'
-    document.getElementById('Translation').style.display = 'initial';
+    document.getElementById('Translation').style.display = 'inline-block';
     if (stopScore == false) {
       numLeft--;
       score++;
