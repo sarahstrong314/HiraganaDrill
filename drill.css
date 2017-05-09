@@ -26,6 +26,16 @@ button[disabled] {
   font-size: 20px;
 }
 
+.instructions {
+  background-color: #fdfdfd;
+  color: black;
+  height: 30px;
+  width: 610px;
+  text-align: left;
+  display: inline-block;
+  font-size: 22px;
+}
+
 .question {
   background-color: #fdfdfd;
   color: black;
@@ -37,14 +47,26 @@ button[disabled] {
   font-size: 50px;
 }
 
-.instructions {
+input[type=text], select {  
+    color: black;
+    height: 60px;
+    width: 610px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 50px;
+}
+
+.translation {
   background-color: #fdfdfd;
   color: black;
-  height: 30px;
+  height: 60px;
   width: 610px;
   text-align: center;
   display: inline-block;
-  font-size: 22px;
+  font-size: 50px;
 }
 
 .answer {
@@ -90,6 +112,17 @@ button[disabled] {
   width: 100px;
   text-align: left;
   vertical-align: top;
+  display: inline-block;
+  font-size: 20px;
+}
+
+.skip {
+  background-color: gray;
+  border: none;
+  color: white;
+  height: 50px;
+  width: 100px;
+  text-align: center;
   display: inline-block;
   font-size: 20px;
 }

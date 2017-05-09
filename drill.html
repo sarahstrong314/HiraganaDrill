@@ -30,11 +30,15 @@
       <option id='Lesson12'>Lesson 12</option>
       <option id='Lesson13'>Lesson 13</option>
       <option id='Lesson14'>Lesson 14</option>
+      <option id='Lesson14Te'>Te Form</option>
       <option id='Lesson15'>Lesson 15</option>
       <option id='Lesson16'>Lesson 16</option>
       <option id='Lesson17'>Lesson 17</option>
+      <option id='Lesson17Nai'>Nai Form</option>
       <option id='Lesson18'>Lesson 18</option>
+      <option id='Lesson18Dict'>Dictionary Form</option>
       <option id='Lesson19'>Lesson 19</option>
+      <option id='Lesson19Ta'>Ta Form</option>
     </select>
 
     <select onchange='setView()' id='ViewMenu' class='select'>
@@ -44,23 +48,30 @@
 
     </br>
 
+    <div class='instructions' id='Instructions'>Select the correct pronunciation of the character below.</div>
+
+    </br>
+
     <div id='Question' class='question'></div>
 
-    </br> 
+    <div id='Break1'></br></div>
+
+    <form id="Form" class='form'>
+      <input id='Input' type='text' onkeyup='checkSoFar()'/>
+    </form>
+    
+    <div id='Break2'></br></div>
+    
+    <div id='Translation' class='translation'></div>
+
     </br>
-
-    <div class='instructions' id='Instructions'>Select the correct pronunciation of the character above.</div>
-
-    </br> 
     </br>
-
 
     <button type='button' class='answer' id='Option1'></button>
     <button type='button' class='answer' id='Option2'></button>
     <button type='button' class='answer' id='Option3'></button>
 
-    </br> 
-    </br>
+    <div id='Break3'></br></br></div>
 
     <button type='button' class='next' onclick='pickQuestion()' id='Next'>Next</button>
 

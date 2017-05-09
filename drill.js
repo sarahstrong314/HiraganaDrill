@@ -8,26 +8,43 @@ function setView() {
 }
 
 var lesson = 0;
-var allDicts = [hiraganaDict, katakanaDict, extraKatakanaDict, dict1, dict2, dict3, dict4, dict5, dict6, dict7, dict8, dict9, dict10, dict11, dict12, dict13, dict14, dict15, dict16, dict17, dict18, dict19];
+var allDicts = [hiraganaDict, katakanaDict, extraKatakanaDict, dict1, dict2, dict3, dict4, dict5, dict6, dict7, dict8, dict9, dict10, dict11, dict12, dict13, dict14, dict14_te, dict15, dict16, dict17, dict17_nai, dict18, dict18_dict, dict19, dict19_ta];
 
 function setLesson() {
   lesson = document.getElementById('LessonMenu').selectedIndex;
   numLeft = Object.keys(allDicts[lesson]).length;
   fillArray(allDicts[lesson], questions);
   fillArray(allDicts[lesson], allQuestions);
-
+ 
+  document.getElementById('ViewMenu').style.visibility = 'initial';
+  document.getElementById('Form').style.display = 'none';
+  document.getElementById('Translation').style.display = 'none';
+  changeBreaks(0);
+  hideOptions(false);
+  
   if (lesson < 3) {
     document.getElementById('ViewMenu').selectedIndex = 0;
     document.getElementById('Romaji').disabled = true;
-    document.getElementById('Instructions').innerHTML = 'Select the correct pronunciation of the character above.';
+    document.getElementById('Instructions').innerHTML = 'Select the correct pronunciation of the character below.';
   } else if (lesson < 8) {
     document.getElementById('ViewMenu').selectedIndex = 1;
     document.getElementById('Romaji').disabled = false;
-    document.getElementById('Instructions').innerHTML = 'Select the correct translation of the word above.';
+    document.getElementById('Instructions').innerHTML = 'Select the correct translation of the word below.';
+  } else if (lesson == 17 || lesson == 21 || lesson == 23 || lesson == 25) {
+    document.getElementById('ViewMenu').style.visibility = 'none';
+    document.getElementById('Form').style.display = 'initial';
+    document.getElementById('Translation').style.display = 'initial';
+    document.getElementById('Input').value = '';
+    changeBreaks(1);
+    hideOptions(true);
+    if (lesson == 17) document.getElementById('Instructions').innerHTML = 'Type the correct te form of the verb below.';
+    else if (lesson == 21) document.getElementById('Instructions').innerHTML = 'Type the correct nai form of the verb below.';
+    else if (lesson == 23) document.getElementById('Instructions').innerHTML = 'Type the correct dictionary form of the verb below.';
+    else document.getElementById('Instructions').innerHTML = 'Type the correct ta form of the verb below.';
   } else {
     document.getElementById('ViewMenu').selectedIndex = 0;
     document.getElementById('Romaji').disabled = false;
-    document.getElementById('Instructions').innerHTML = 'Select the correct translation of the word above.';
+    document.getElementById('Instructions').innerHTML = 'Select the correct translation of the word below.';
   }
 
   setView();
@@ -51,9 +68,31 @@ function disableOptions(bool) {
   }
 }
 
+function hideOptions(bool) {
+  for (var i = 0; i < options.length; i++) {
+    if (bool) options[i].style.display = 'none';
+    else options[i].style.display = 'initial';
+  }
+}
+
+function changeBreaks(mode) {
+  if (mode == 0) {
+    document.getElementById('Break1').style.display = 'none';
+    document.getElementById('Break2').style.display = 'none';
+    document.getElementById('Break3').style.display = 'initial';
+  } else {
+    document.getElementById('Break1').style.display = 'initial';
+    document.getElementById('Break2').style.display = 'initial';
+    document.getElementById('Break3').style.display = 'none';
+  }
+}
+
 var lastOne = false;
+var answer;
 
 function pickQuestion() {
+  stopScore = false;
+  lastOne = false;
   document.getElementById('Next').disabled = true;
   disableOptions(false);
 
@@ -62,11 +101,15 @@ function pickQuestion() {
   }
 
   if (questions.length == 1) lastOne = true;
-  var n = Math.floor(Math.random() * questions.length);  
+  var n = Math.floor(Math.random() * questions.length);
   
   if (document.getElementById('ViewMenu').selectedIndex == 0) document.getElementById('Question').innerHTML = questions[n];
   else document.getElementById('Question').innerHTML = toRomaji(questions[n]);
-  displayAnswers(questions[n]);
+  if (lesson == 17 || lesson == 21 || lesson == 23 || lesson == 25) {
+    document.getElementById('Input').value = '';  
+    document.getElementById('Translation').innerHTML = allDicts[document.getElementById('LessonMenu').selectedIndex][questions[n]][1];
+    answer = allDicts[document.getElementById('LessonMenu').selectedIndex][questions[n]][0];
+  } else displayAnswers(questions[n]);
   questions.splice(n, 1);
   document.getElementById('AmIRight').innerHTML = '';
 }
@@ -142,6 +185,28 @@ function checkAnswer(correct, answer, option) {
     document.getElementById(option).className = 'incorrectanswer';
     document.getElementById('Score').innerHTML = 'Score: ' + score.toString() + ' out of ' + numQuestions.toString() + ' (' + numLeft.toString() +' Remaining)';
   }
+}
+
+
+function checkSoFar() {
+  var inputSoFar = document.getElementById('Input').value;
+  document.getElementById('Input').value = toHiragana(inputSoFar);
+  if (answer == document.getElementById('Input').value) {
+    document.getElementById('AmIRight').innerHTML = 'Correct!'
+    document.getElementById('Translation').style.display = 'initial';
+    if (stopScore == false) {
+      numLeft--;
+      score++;
+      numQuestions++;
+      stopScore = true;
+    }
+    document.getElementById('Score').innerHTML = 'Score: ' + score.toString() + ' out of ' + numQuestions.toString() + ' (' + numLeft.toString() +' Remaining)';
+    if (!lastOne) document.getElementById('Next').disabled = false;
+    if (lastOne) {      
+      document.getElementById('Instructions').innerHTML = 'Done!'
+      document.getElementById('Next').disabled = true;
+    }
+  } 
 }
 
 function enableNext() {
