@@ -52,6 +52,7 @@ input[type=text], select {
     height: 60px;
     width: 610px;
     margin: 8px 0;
+    text-align: center;
     display: inline-block;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -109,31 +110,21 @@ input[type=text], select {
   padding-top: 15px;
   padding-left: 15px;
   height: 35px;
-  width: 100px;
+  width: 600px;
   text-align: left;
   vertical-align: top;
   display: inline-block;
   font-size: 20px;
 }
 
-.skip {
+.minibutton {
   background-color: gray;
   border: none;
   color: white;
   height: 50px;
   width: 100px;
   text-align: center;
-  display: inline-block;
-  font-size: 20px;
-}
-
-.next {
-  background-color: gray;
-  border: none;
-  color: white;
-  height: 50px;
-  width: 100px;
-  text-align: center;
+  vertical-align: top;
   display: inline-block;
   font-size: 20px;
 }

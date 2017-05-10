@@ -16,9 +16,10 @@ function setLesson() {
   fillArray(allDicts[lesson], questions);
   fillArray(allDicts[lesson], allQuestions);
  
-  document.getElementById('ViewMenu').style.visibility = 'initial';
+  document.getElementById('ViewMenu').style.display = 'inline-block';
   document.getElementById('Form').style.display = 'none';
   document.getElementById('Translation').style.display = 'none';
+  document.getElementById('GiveUp').style.display = 'none';
   changeBreaks(0);
   hideOptions(false);
   
@@ -31,9 +32,10 @@ function setLesson() {
     document.getElementById('Romaji').disabled = false;
     document.getElementById('Instructions').innerHTML = 'Select the correct translation of the word below.';
   } else if (lesson == 17 || lesson == 21 || lesson == 23 || lesson == 25) {
-    document.getElementById('ViewMenu').style.visibility = 'none';
+    document.getElementById('ViewMenu').style.display = 'none';
     document.getElementById('Form').style.display = 'initial';
     document.getElementById('Translation').style.display = 'inline-block';
+    document.getElementById('GiveUp').style.display = 'initial';
     document.getElementById('Input').value = '';
     changeBreaks(1);
     hideOptions(true);
@@ -80,10 +82,12 @@ function changeBreaks(mode) {
     document.getElementById('Break1').style.display = 'none';
     document.getElementById('Break2').style.display = 'none';
     document.getElementById('Break3').style.display = 'initial';
+    document.getElementById('Break4').style.display = 'none';
   } else {
     document.getElementById('Break1').style.display = 'initial';
     document.getElementById('Break2').style.display = 'initial';
     document.getElementById('Break3').style.display = 'none';
+    document.getElementById('Break4').style.display = 'initial';
   }
 }
 
@@ -93,6 +97,7 @@ var answer;
 function pickQuestion() {
   stopScore = false;
   lastOne = false;
+  updateNext = true;
   document.getElementById('Next').disabled = true;
   disableOptions(false);
 
@@ -105,7 +110,8 @@ function pickQuestion() {
   
   if (document.getElementById('ViewMenu').selectedIndex == 0) document.getElementById('Question').innerHTML = questions[n];
   else document.getElementById('Question').innerHTML = toRomaji(questions[n]);
-  if (lesson == 17 || lesson == 21 || lesson == 23 || lesson == 25) {    
+  if (lesson == 17 || lesson == 21 || lesson == 23 || lesson == 25) {
+    document.getElementById('GiveUp').disabled = false;
     document.getElementById('Input').disabled = false;
     document.getElementById('Input').value = '';
     document.getElementById('Input').style.color = 'black';
@@ -155,6 +161,7 @@ var numLeft = Object.keys(hiraganaDict).length;
 var stopScore = false;
 var audio;
 var audioExists = true;
+var updateNext = true;
 
 function checkAnswer(correct, answer, option) {
   document.getElementById('AmIRight').innerHTML = ((correct == answer) ? 'Correct!' : 'Incorrect.');
@@ -173,12 +180,16 @@ function checkAnswer(correct, answer, option) {
     audio.play()
     audio.onerror = function() {
       audioExists = false;
+      if (updateNext) enableNext();
+      audioExists = true;
+    }
+    if (updateNext) {
       enableNext();
     }
-    enableNext();
-    if (lastOne == true) {      
-      document.getElementById('Instructions').innerHTML = 'Done!'
+    if (lastOne) {
+      document.getElementById('AmIRight').innerHTML = 'Correct! Lesson finished.'
       document.getElementById('Next').disabled = true;
+      updateNext = false;
       lastOne = false;
     }
   } else {
@@ -196,8 +207,8 @@ function checkSoFar() {
   if (answer == document.getElementById('Input').value) {
     document.getElementById('Input').style.color = 'green';
     document.getElementById('Input').disabled = true;
-    document.getElementById('AmIRight').innerHTML = 'Correct!'
-    document.getElementById('Translation').style.display = 'inline-block';
+    document.getElementById('AmIRight').innerHTML = 'Correct!';
+    document.getElementById('GiveUp').disabled = true;
     if (stopScore == false) {
       numLeft--;
       score++;
@@ -206,25 +217,41 @@ function checkSoFar() {
     }
     document.getElementById('Score').innerHTML = 'Score: ' + score.toString() + ' out of ' + numQuestions.toString() + ' (' + numLeft.toString() +' Remaining)';
     if (!lastOne) document.getElementById('Next').disabled = false;
-    if (lastOne) {      
-      document.getElementById('Instructions').innerHTML = 'Done!'
+    if (lastOne) {
+      document.getElementById('AmIRight').innerHTML = 'Correct! Lesson finished.'
       document.getElementById('Next').disabled = true;
     }
   } 
 }
 
+function stopQuestion() {
+  document.getElementById('Input').style.color = 'blue';
+  document.getElementById('Input').value = answer;
+  document.getElementById('Input').disabled = true;
+  document.getElementById('AmIRight').innerHTML = 'You gave up on this one.';
+  numLeft--;
+  numQuestions++;
+  document.getElementById('Score').innerHTML = 'Score: ' + score.toString() + ' out of ' + numQuestions.toString() + ' (' + numLeft.toString() +' Remaining)';
+  document.getElementById('GiveUp').disabled = true;
+  if (!lastOne) document.getElementById('Next').disabled = false;
+  if (lastOne) {
+    document.getElementById('AmIRight').innerHTML = 'Correct! Lesson finished.'
+    document.getElementById('Next').disabled = true;
+  }
+}
+
 function enableNext() {
-    if (audioExists) {
-      audio.onended = function() {
-        document.getElementById('Next').disabled = false;
-      }
-    } else document.getElementById('Next').disabled = false;
-    audioExists = true;
+  if (audioExists) {
+    audio.onended = function() {
+      document.getElementById('Next').disabled = false;
+    }
+  } else document.getElementById('Next').disabled = false;
+  audioExists = true;
 }
 
 function restart() {
   score = 0;
-  numQuestions = 0;  
+  numQuestions = 0;
   setLesson(lesson);
   document.getElementById('Score').innerHTML = 'Score: 0 out of 0' + ' (' + numLeft.toString() +' Remaining)';
 }
