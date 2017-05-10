@@ -109,7 +109,9 @@ function pickQuestion() {
   var n = Math.floor(Math.random() * questions.length);
   
   if (document.getElementById('ViewMenu').selectedIndex == 0) document.getElementById('Question').innerHTML = questions[n];
+  else if (lesson == 17 || lesson == 21 || lesson == 23 || lesson == 25) document.getElementById('Question').innerHTML = questions[n];
   else document.getElementById('Question').innerHTML = toRomaji(questions[n]);
+  
   if (lesson == 17 || lesson == 21 || lesson == 23 || lesson == 25) {
     document.getElementById('GiveUp').disabled = false;
     document.getElementById('Input').disabled = false;
