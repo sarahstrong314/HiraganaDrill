@@ -56,17 +56,18 @@ var kana4 = {'ん':'n', 'っ':'', 'ン':'n', 'ッ':''};
 
 function toRomaji (kana) {
  var translation = kana;
+ var word;
  for (word in kana1) {
-  translation = translation.replace (word, kana1[word])
+  while (translation.indexOf(word) != -1) translation = translation.replace (word, kana1[word]);
  }
  for (word in kana2) {
-  translation = translation.replace (word, kana2[word])
+  while (translation.indexOf(word) != -1) translation = translation.replace (word, kana2[word]);
  }
  for (word in kana3) {
-  translation = translation.replace (word, kana3[word])
+  while (translation.indexOf(word) != -1) translation = translation.replace (word, kana3[word]);
  }
  for (word in kana4) {
-  translation = translation.replace (word, kana4[word])
+  while (translation.indexOf(word) != -1) translation = translation.replace (word, kana4[word]);
  }
  return translation;
 }
