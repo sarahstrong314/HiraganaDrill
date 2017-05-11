@@ -97,7 +97,7 @@ function pickQuestion() {
   disableOptions(false);
 
   for (var i = 0; i < options.length; i++) {
-    options[i].style.color = 'white';
+    options[i].style.backgroundColor = 'gray';
   }
 
   if (questions.length == 1) lastOne = true;
@@ -171,7 +171,7 @@ function checkAnswer(correct, answer, option) {
     }
     stopScore = false;
     disableOptions(true);
-    document.getElementById(option).style.color = 'green';
+    document.getElementById(option).style.backgroundColor = 'green';
     document.getElementById('Score').innerHTML = 'Score: ' + score.toString() + ' out of ' + numQuestions.toString() + ' (' + numLeft.toString() +' Remaining)';
     audio = new Audio('Audio/' + toRomaji(correct) + '.mp3');
     audio.play()
@@ -192,7 +192,7 @@ function checkAnswer(correct, answer, option) {
   } else {
     if (stopScore == false) numQuestions++;
     stopScore = true;
-    document.getElementById(option).style.color = 'red';
+    document.getElementById(option).style.backgroundColor = 'red';
     document.getElementById('Score').innerHTML = 'Score: ' + score.toString() + ' out of ' + numQuestions.toString() + ' (' + numLeft.toString() +' Remaining)';
   }
 }
