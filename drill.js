@@ -20,7 +20,7 @@ function setLesson() {
   document.getElementById('Form').style.display = 'none';
   document.getElementById('Translation').style.display = 'none';
   document.getElementById('GiveUp').style.display = 'none';
-  changeBreaks(0);
+  //changeBreaks(0);
   hideOptions(false);
   
   if (lesson < 3) {
@@ -37,7 +37,7 @@ function setLesson() {
     document.getElementById('Translation').style.display = 'inline-block';
     document.getElementById('GiveUp').style.display = 'initial';
     document.getElementById('Input').value = '';
-    changeBreaks(1);
+    //changeBreaks(1);
     hideOptions(true);
     if (lesson == 17) document.getElementById('Instructions').innerHTML = 'Type the correct te form of the verb below.';
     else if (lesson == 21) document.getElementById('Instructions').innerHTML = 'Type the correct nai form of the verb below.';
@@ -77,19 +77,14 @@ function hideOptions(bool) {
   }
 }
 
-function changeBreaks(mode) {
+/* function changeBreaks(mode) {
   if (mode == 0) {
-    document.getElementById('Break1').style.display = 'none';
-    document.getElementById('Break2').style.display = 'none';
-    document.getElementById('Break3').style.display = 'initial';
-    document.getElementById('Break4').style.display = 'none';
+    //
   } else {
-    document.getElementById('Break1').style.display = 'initial';
-    document.getElementById('Break2').style.display = 'initial';
-    document.getElementById('Break3').style.display = 'none';
-    document.getElementById('Break4').style.display = 'initial';
+    //
   }
-}
+}*/
+
 
 var lastOne = false;
 var answer;
@@ -102,7 +97,7 @@ function pickQuestion() {
   disableOptions(false);
 
   for (var i = 0; i < options.length; i++) {
-    options[i].className = 'answer';
+    options[i].style.color = 'white';
   }
 
   if (questions.length == 1) lastOne = true;
@@ -176,7 +171,7 @@ function checkAnswer(correct, answer, option) {
     }
     stopScore = false;
     disableOptions(true);
-    document.getElementById(option).className = 'correctanswer';
+    document.getElementById(option).style.color = 'green';
     document.getElementById('Score').innerHTML = 'Score: ' + score.toString() + ' out of ' + numQuestions.toString() + ' (' + numLeft.toString() +' Remaining)';
     audio = new Audio('Audio/' + toRomaji(correct) + '.mp3');
     audio.play()
@@ -197,7 +192,7 @@ function checkAnswer(correct, answer, option) {
   } else {
     if (stopScore == false) numQuestions++;
     stopScore = true;
-    document.getElementById(option).className = 'incorrectanswer';
+    document.getElementById(option).style.color = 'red';
     document.getElementById('Score').innerHTML = 'Score: ' + score.toString() + ' out of ' + numQuestions.toString() + ' (' + numLeft.toString() +' Remaining)';
   }
 }

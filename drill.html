@@ -11,40 +11,42 @@
   </head>
 
   <body>
+ 
+    <div class = 'select'>
+      <select onchange='setLesson()' id='LessonMenu'>
+        <option id='Hiragana'>Hiragana</option>
+        <option id='Katakana'>Katakana</option>
+        <option id='ExtraKatakana'>Extra Katakana</option>
+        <option id='Lesson1'>Lesson 1</option>
+        <option id='Lesson2'>Lesson 2</option>
+        <option id='Lesson3'>Lesson 3</option>
+        <option id='Lesson4'>Lesson 4</option>
+        <option id='Lesson5'>Lesson 5</option>
+        <option id='Lesson6'>Lesson 6</option>
+        <option id='Lesson7'>Lesson 7</option>
+        <option id='Lesson8'>Lesson 8</option>
+        <option id='Lesson9'>Lesson 9</option>
+        <option id='Lesson10'>Lesson 10</option>
+        <option id='Lesson11'>Lesson 11</option>
+        <option id='Lesson12'>Lesson 12</option>
+        <option id='Lesson13'>Lesson 13</option>
+        <option id='Lesson14'>Lesson 14</option>
+        <option id='Lesson14Te'>Te Form</option>
+        <option id='Lesson15'>Lesson 15</option>
+        <option id='Lesson16'>Lesson 16</option>
+        <option id='Lesson17'>Lesson 17</option>
+        <option id='Lesson17Nai'>Nai Form</option>
+        <option id='Lesson18'>Lesson 18</option>
+        <option id='Lesson18Dict'>Dictionary Form</option>
+        <option id='Lesson19'>Lesson 19</option>
+        <option id='Lesson19Ta'>Ta Form</option>
+      </select>
 
-    <select onchange='setLesson()' id='LessonMenu' class='select'>
-      <option id='Hiragana'>Hiragana</option>
-      <option id='Katakana'>Katakana</option>
-      <option id='ExtraKatakana'>Extra Katakana</option>
-      <option id='Lesson1'>Lesson 1</option>
-      <option id='Lesson2'>Lesson 2</option>
-      <option id='Lesson3'>Lesson 3</option>
-      <option id='Lesson4'>Lesson 4</option>
-      <option id='Lesson5'>Lesson 5</option>
-      <option id='Lesson6'>Lesson 6</option>
-      <option id='Lesson7'>Lesson 7</option>
-      <option id='Lesson8'>Lesson 8</option>
-      <option id='Lesson9'>Lesson 9</option>
-      <option id='Lesson10'>Lesson 10</option>
-      <option id='Lesson11'>Lesson 11</option>
-      <option id='Lesson12'>Lesson 12</option>
-      <option id='Lesson13'>Lesson 13</option>
-      <option id='Lesson14'>Lesson 14</option>
-      <option id='Lesson14Te'>Te Form</option>
-      <option id='Lesson15'>Lesson 15</option>
-      <option id='Lesson16'>Lesson 16</option>
-      <option id='Lesson17'>Lesson 17</option>
-      <option id='Lesson17Nai'>Nai Form</option>
-      <option id='Lesson18'>Lesson 18</option>
-      <option id='Lesson18Dict'>Dictionary Form</option>
-      <option id='Lesson19'>Lesson 19</option>
-      <option id='Lesson19Ta'>Ta Form</option>
-    </select>
-
-    <select onchange='setView()' id='ViewMenu' class='select'>
-      <option id='Kana'>View in Kana</option>
-      <option id='Romaji'>View in Romaji</option>
-    </select>
+      <select onchange='setView()' id='ViewMenu'>
+        <option id='Kana'>View in Kana</option>
+        <option id='Romaji'>View in Romaji</option>
+      </select>
+    </div>
 
     </br>
 
@@ -54,39 +56,38 @@
 
     <div id='Question' class='question'></div>
 
-    <div id='Break1'></br></div>
+    </br></br>
 
     <form id='Form' class='form' onsubmit='return false'>
       <input id='Input' type='text' oninput='checkSoFar()'/>
     </form>
     
-    <div id='Break2'></br></div>
-    
     <div id='Translation' class='translation'></div>
 
-    </br>
-    </br>
 
-    <button type='button' class='answer' id='Option1'></button>
-    <button type='button' class='answer' id='Option2'></button>
-    <button type='button' class='answer' id='Option3'></button>
-
-    <div id='Break3'></br></br></div>
-
-    <button type='button' class='minibutton' onclick='stopQuestion()' id='GiveUp'>Give Up</button>
-
-    <div id='Break4'></br></br></div>
-
-    <button type='button' class='minibutton' onclick='pickQuestion()' id='Next'>Next</button>
-
-    <div class='amiright' id='AmIRight'></div>
+    <div class='answer'>
+      <button type='button' id='Option1'></button>
+      <button type='button' id='Option2'></button>
+      <button type='button' id='Option3'></button>
+    </div>
 
     </br>
-    </br>
 
-    <button type='button' class='minibutton' onclick='restart()' id ='Restart'>Restart</button>
+    <div class='minibutton'>
+      <button type='button' onclick='stopQuestion()' id='GiveUp'>Give Up</button>
+      <button type='button' onclick='pickQuestion()' id='Next'>Next</button>
+      <button type='button' onclick='restart()' id ='Restart'>Restart</button>
+    </div>
+    
+    </br>
+    </br>
 
     <div class='score' id='Score'></div>
+    
+    </br>
+    </br>
+
+    <div class='score' id='AmIRight'></div>
 
     </br>
     </br>

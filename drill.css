@@ -2,155 +2,103 @@ body {
   font-family: Helvetica;
   background-color: #fdfdfd;
   color: black;
-}
-
-#feedback { font-size: 1.4em; }
-#selectable .ui-selecting { background: red; color: white; }
-#selectable .ui-selected { background: orange; color: white; }
-#selectable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
-#selectable li { margin: 3px; padding: 0.4em; font-size: 1.4em; height: 18px; border: 1px solid black; }
-
-button:disabled,
-button[disabled] {
-  background-color: lightgray;
+  margin-left: 0;
+  margin-right: 0;
+  padding: 0;
 }
 
 .select {
+  text-align: center;
+  /*font-size: 3vw;*/
+}
+
+.select select {
   background-color: lightgray;
   border: none;
   color: grey;
-  height: 50px;
-  width: 200px;
-  text-align: center;
-  display: inline-block;
-  font-size: 20px;
+  height: 5vh;
+  width: 48vw;
+  font-size: 2vh;
 }
 
 .instructions {
-  background-color: #fdfdfd;
-  color: black;
-  height: 30px;
-  width: 610px;
-  text-align: left;
+  height: 5vh;
+  width: 100vw;
+  vertical-align: center;
+  text-align: center;
   display: inline-block;
-  font-size: 22px;
+  font-size: 3vw;
 }
 
 .question {
-  background-color: #fdfdfd;
-  color: black;
-  padding-top: 15px;
-  height: 60px;
-  width: 610px;
+  height: 7vh;
+  width: 100vw;
+  vertical-align: center;
   text-align: center;
-  display: inline-block;
-  font-size: 50px;
+  font-size: 5vw;
 }
 
-input[type=text], select {  
-    color: black;
-    height: 60px;
-    width: 610px;
-    margin: 8px 0;
-    text-align: center;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    font-size: 50px;
+.form {
+  padding-left: 10vw;
+  padding-right: 10vw;
+}
+
+input[type=text] {
+  text-align: center;
+  border: 1vh solid #ccc;
+  width: 80vw;
+  border-radius: 1vw;
+  font-size: 5vw;
 }
 
 .translation {
-  background-color: #fdfdfd;
-  color: black;
-  height: 60px;
-  width: 410px;
+  height: 10vh;
+  width: 100vw;
+  vertical-align: center;
   text-align: center;
-  display: inline-block;
-  font-size: 50px;
+  font-size: 5vw;
 }
 
 .answer {
+  text-align: center;
+}
+
+.answer button {
   background-color: gray;
   border: none;
   color: white;
-  height: 50px;
-  width: 200px;
-  text-align: center;
-  display: inline-block;
-  font-size: 16px;
-}
-
-.correctanswer {
-  background-color: gray;
-  border: 3px solid black;
-  color: green;
-  height: 50px;
-  width: 200px;
-  text-align: center;
-  display: inline-block;
-  font-size: 16px;
-}
-
-.incorrectanswer {
-  background-color: gray;
   border: none;
-  color: red;
-  height: 50px;
-  width: 200px;
+  color: grey;
   text-align: center;
-  display: inline-block;
-  font-size: 16px;
-}
-
-.amiright {
-  background-color: #fdfdfd;
-  border: none;
-  color: black;
-  padding-top: 15px;
-  padding-left: 15px;
-  height: 35px;
-  width: 410px;
-  text-align: left;
-  vertical-align: top;
-  display: inline-block;
-  font-size: 20px;
+  height: 6vh;
+  width: 32vw;
+  font-size: 3vw;
 }
 
 .minibutton {
+  text-align: center;
+}
+
+.minibutton button {
   background-color: gray;
   border: none;
   color: white;
-  height: 50px;
-  width: 100px;
+  height: 6vh;
+  width: 12vw;
   text-align: center;
   vertical-align: top;
-  display: inline-block;
-  font-size: 20px;
+  font-size: 2vw;
+}
+
+.minibutton button:disabled {
+  background-color: lightgray;
 }
 
 .score {
-  background-color: #fdfdfd;
-  border: none;
-  color: black;
-  padding-top: 15px;
-  padding-left: 15px;
-  height: 35px;
-  width: 600px;
-  text-align: left;
-  vertical-align: top;
-  display: inline-block;
-  font-size: 20px;
-}
-
-.restart {
-  background-color: gray;
-  border: none;
-  color: white;
-  height: 50px;
-  width: 100px;
+  height: 4vh;
+  width: 100vw;
+  vertical-align: center;
   text-align: center;
-  vertical-align: top;
   display: inline-block;
-  font-size: 20px;
-} 
+  font-size: 3vw;
+}
