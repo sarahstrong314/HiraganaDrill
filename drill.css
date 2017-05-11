@@ -64,7 +64,7 @@ input[type=text], select {
   background-color: #fdfdfd;
   color: black;
   height: 60px;
-  width: 610px;
+  width: 410px;
   text-align: center;
   display: inline-block;
   font-size: 50px;
@@ -110,7 +110,7 @@ input[type=text], select {
   padding-top: 15px;
   padding-left: 15px;
   height: 35px;
-  width: 600px;
+  width: 410px;
   text-align: left;
   vertical-align: top;
   display: inline-block;
