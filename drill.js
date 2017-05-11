@@ -203,9 +203,16 @@ function checkAnswer(correct, answer, option) {
 }
 
 
+var katakanaWord1 = 'アルバイト';
+
 function checkSoFar() {
   var inputSoFar = document.getElementById('Input').value;
   document.getElementById('Input').value = toHiragana(inputSoFar);
+  inputSoFar = document.getElementById('Input').value;
+  if (inputSoFar.includes('あるばいと')) {
+    console.log('yes')
+    document.getElementById('Input').value = inputSoFar.replace('あるばいと','アルバイト');
+  }
   if (answer == document.getElementById('Input').value) {
     document.getElementById('Input').style.color = 'green';
     document.getElementById('Input').disabled = true;
