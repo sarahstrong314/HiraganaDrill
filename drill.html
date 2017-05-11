@@ -53,17 +53,19 @@
     <div class='instructions' id='Instructions'>Select the correct pronunciation of the character below.</div>
 
     </br>
+    </br>
 
     <div id='Question' class='question'></div>
 
-    </br></br>
+    </br>
 
     <form id='Form' class='form' onsubmit='return false'>
       <input id='Input' type='text' oninput='checkSoFar()'/>
+      </br>
+      </br>
     </form>
     
     <div id='Translation' class='translation'></div>
-
 
     <div class='answer'>
       <button type='button' id='Option1'></button>
@@ -71,15 +73,13 @@
       <button type='button' id='Option3'></button>
     </div>
 
-    </br>
-
     <div class='minibutton'>
+      </br>
       <button type='button' onclick='stopQuestion()' id='GiveUp'>Give Up</button>
       <button type='button' onclick='pickQuestion()' id='Next'>Next</button>
       <button type='button' onclick='restart()' id ='Restart'>Restart</button>
     </div>
     
-    </br>
     </br>
 
     <div class='score' id='Score'></div>
@@ -88,11 +88,6 @@
     </br>
 
     <div class='score' id='AmIRight'></div>
-
-    </br>
-    </br>
-
-    <div id='test'></div>
 
     <script>
       var options = [

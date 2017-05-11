@@ -112,8 +112,8 @@ function pickQuestion() {
     document.getElementById('Input').disabled = false;
     document.getElementById('Input').value = '';
     document.getElementById('Input').style.color = 'black';
-    document.getElementById('Translation').innerHTML = allDicts[document.getElementById('LessonMenu').selectedIndex][questions[n]][1];
-    answer = allDicts[document.getElementById('LessonMenu').selectedIndex][questions[n]][0];
+    document.getElementById('Translation').innerHTML = '(' + allDicts[lesson][questions[n]][1] + ')';
+    answer = allDicts[17][questions[n]][0];
   } else displayAnswers(questions[n]);
   questions.splice(n, 1);
   document.getElementById('AmIRight').innerHTML = '';

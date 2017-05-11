@@ -9,33 +9,32 @@ body {
 
 .select {
   text-align: center;
-  /*font-size: 3vw;*/
 }
 
 .select select {
   background-color: lightgray;
   border: none;
   color: grey;
-  height: 5vh;
+  height: 9vh;
   width: 48vw;
-  font-size: 2vh;
+  font-size: 4vh;
 }
 
 .instructions {
   height: 5vh;
   width: 100vw;
-  vertical-align: center;
+  vertical-align: bottom;
   text-align: center;
   display: inline-block;
-  font-size: 3vw;
+  font-size: 5vh;
 }
 
 .question {
-  height: 7vh;
+  height: 10vh;
   width: 100vw;
   vertical-align: center;
   text-align: center;
-  font-size: 5vw;
+  font-size: 7vh;
 }
 
 .form {
@@ -48,7 +47,7 @@ input[type=text] {
   border: 1vh solid #ccc;
   width: 80vw;
   border-radius: 1vw;
-  font-size: 5vw;
+  font-size: 7vh;
 }
 
 .translation {
@@ -56,7 +55,7 @@ input[type=text] {
   width: 100vw;
   vertical-align: center;
   text-align: center;
-  font-size: 5vw;
+  font-size: 7vh;
 }
 
 .answer {
@@ -67,10 +66,11 @@ input[type=text] {
   background-color: gray;
   border: none;
   color: white;
-  text-align: center;
-  height: 6vh;
+  height: 12vh;
   width: 32vw;
-  font-size: 3vw;
+  text-align: center;
+  vertical-align: top;
+  font-size: 4.5vh;
 }
 
 .minibutton {
@@ -81,11 +81,11 @@ input[type=text] {
   background-color: gray;
   border: none;
   color: white;
-  height: 6vh;
+  height: 9vh;
   width: 12vw;
   text-align: center;
-  vertical-align: top;
-  font-size: 2vw;
+  vertical-align: center;
+  font-size: 4.5vh;
 }
 
 .minibutton button:disabled {
@@ -98,5 +98,5 @@ input[type=text] {
   vertical-align: center;
   text-align: center;
   display: inline-block;
-  font-size: 3vw;
+  font-size: 4vh;
 }
