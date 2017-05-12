@@ -91,7 +91,7 @@ var hira3 = {'ka':'か', 'ki':'き', 'ku':'く', 'ke':'け', 'ko':'こ', 'ga':'�
 var hira4 = {'a':'あ', 'i':'い', 'u':'う', 'e':'え', 'o':'お', 'n ':'ん', 'nk':'んk', 'ng':'んg', 'ns':'んs', 'nz':'んz', 'nj':'んj', 'nt':'んt', 'nd':'んd', 'nc':'んc', 'nh':'んh', 'nf':'んf', 'nb':'んb', 'np':'んp', 'nm':'んm', 'nr':'んr', 'nw':'んw'};
 
 function toHiragana (romaji) {
- var translation = romaji;
+ var translation = romaji.toLowerCase();
  for (word in hira1) {
   translation = translation.replace (word, hira1[word])
  }
