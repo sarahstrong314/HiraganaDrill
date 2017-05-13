@@ -8,15 +8,17 @@ body {
 }
 
 .select {
-  text-align: center;
+  display: flex;
+  justify-content: center;
 }
 
 .select select {
   background-color: lightgray;
   border: none;
   color: grey;
-  width: 48vw;
   font-size: 4vh;
+  flex-grow: 1;
+  margin: 0 5px;
 }
 
 .instructions {
@@ -54,42 +56,45 @@ input[type=text] {
   font-size: 10vh;
 }
 
-.answer {
+.answers {
   text-align: center;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 2vw;
 }
 
-.answer button {
+.answers button {
   background-color: gray;
   border: none;
   color: white;
-  width: 32vw;
-  text-align: center;
+  width: 30vw;
   vertical-align: top;
   font-size: 5vh;
 }
 
-.minibutton {
-  text-align: center;
+.minibuttons {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 25vw;
 }
 
-.minibutton button {
+.minibuttons button {
   background-color: gray;
   border: none;
   color: white;
-  width: 20vw;
-  text-align: center;
-  vertical-align: top;
+  flex-grow: 1;
   font-size: 5vh;
+  margin: 0 5px;
 }
 
-.minibutton button:disabled {
+.minibuttons button:disabled {
   background-color: lightgray;
 }
 
-.score {
+.scores {
   width: 100vw;
   vertical-align: center;
   text-align: center;
   display: inline-block;
-  font-size: 5vh;
+  font-size: 3.5vh;
 }
