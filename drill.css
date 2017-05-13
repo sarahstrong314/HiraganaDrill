@@ -75,7 +75,7 @@ input[type=text] {
 .minibuttons {
   display: flex;
   justify-content: space-between;
-  margin: 0 25vw;
+  margin: 0 5vw;
 }
 
 .minibuttons button {
