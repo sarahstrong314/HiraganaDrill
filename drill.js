@@ -28,7 +28,8 @@ function setLesson() {
 
   var lang = document.getElementById('LangMenu').selectedIndex;
  
-  document.getElementById('ViewMenu').style.display = 'inline-block';
+  document.getElementById('ViewMenu').style.display = 'flex';
+   document.getElementById('LangMenu').style.display = 'flex'
   document.getElementById('Form').style.display = 'none';
   document.getElementById('Translation').style.display = 'none';
   document.getElementById('GiveUp').style.display = 'none';
@@ -45,6 +46,7 @@ function setLesson() {
     document.getElementById('Instructions').innerHTML = 'Select the correct translation of this word.';
   } else if (lesson == 17 || lesson == 21 || lesson == 23 || lesson == 25) {
     document.getElementById('ViewMenu').style.display = 'none';
+    document.getElementById('LangMenu').style.display = 'none';
     document.getElementById('Form').style.display = 'initial';
     document.getElementById('Translation').style.display = 'inline-block';
     document.getElementById('GiveUp').style.display = 'initial';
