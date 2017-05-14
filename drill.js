@@ -169,6 +169,20 @@ function displayAnswers(answer) {
 
   answers.sort();
 
+  // plays the audio, if:
+  // 1. Jap-to-Eng mode and in Lesson 1 or Higher
+  // 2. Eng-to-Jap and in Hiragana/Katakana/Extra
+
+  if (document.getElementById('LangMenu').selectedIndex == 0 && lesson > 2) playAudioNow = true;
+  else if (document.getElementById('LangMenu').selectedIndex == 1 && lesson < 3) playAudioNow = true;
+
+  if (playAudioNow) {
+    audio = new Audio('Audio/' + toRomaji(answer) + '.mp3');
+    audio.play()
+  }
+
+  playAudioNow = false;
+
   // displays the answers, in order, on the option buttons
 
   if (document.getElementById('ViewMenu').selectedIndex == 0) {
@@ -195,6 +209,7 @@ var stopScore = false;
 var audio;
 var audioExists = true;
 var updateNext = true;
+var playAudioNow = false;
 
 function checkAnswer(correct, answer, option) {
   document.getElementById('AmIRight').innerHTML = ((correct == answer) ? 'Correct!' : 'Incorrect.');
@@ -209,16 +224,30 @@ function checkAnswer(correct, answer, option) {
     disableOptions(true);
     document.getElementById(option).style.backgroundColor = 'green';
     document.getElementById('Score').innerHTML = 'Score: ' + score.toString() + ' out of ' + numQuestions.toString() + ' (' + numLeft.toString() +' Remaining)';
-    audio = new Audio('Audio/' + toRomaji(correct) + '.mp3');
-    audio.play()
-    audio.onerror = function() {
-      audioExists = false;
-      if (updateNext) enableNext();
-      audioExists = true;
-    }
-    if (updateNext) {
-      enableNext();
-    }
+    
+    // plays the audio, if:
+    // 1. Eng-to-Jap mode and in Lesson 1 or Higher
+    // 2. Jap-to-Eng and in Hiragana/Katakana/Extra
+
+    if (document.getElementById('LangMenu').selectedIndex == 1 && lesson > 2) playAudioNow = true;
+    else if (document.getElementById('LangMenu').selectedIndex == 0 && lesson < 3) playAudioNow = true;
+
+    if (playAudioNow) {
+      audio = new Audio('Audio/' + toRomaji(correct) + '.mp3');
+      audio.play()
+      audio.onerror = function() {
+        audioExists = false;
+        if (updateNext) enableNext();
+        audioExists = true;
+      }
+      if (updateNext) {
+        enableNext();
+      }
+    } else document.getElementById('Next').disabled = false;
+
+    playAudioNow = false;
+
+
     if (lastOne) {
       document.getElementById('AmIRight').innerHTML = 'Correct! Lesson finished.'
       document.getElementById('Next').disabled = true;
