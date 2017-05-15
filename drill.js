@@ -29,7 +29,10 @@ function setLesson() {
   var lang = document.getElementById('LangMenu').selectedIndex;
  
   document.getElementById('ViewMenu').style.display = 'flex';
-   document.getElementById('LangMenu').style.display = 'flex'
+  document.getElementById('LangMenu').style.display = 'flex';
+  //document.getElementById('MasuMenu').style.display = 'none';
+  //document.getElementById('FormConvert').style.display = 'none';
+  //document.getElementById('FormConvertText').style.display = 'none';
   document.getElementById('Form').style.display = 'none';
   document.getElementById('Translation').style.display = 'none';
   document.getElementById('GiveUp').style.display = 'none';
@@ -44,8 +47,10 @@ function setLesson() {
     document.getElementById('ViewMenu').selectedIndex = 1;
     document.getElementById('Instructions').innerHTML = 'Select the correct translation of this word.';
   } else if (lesson == 17 || lesson == 21 || lesson == 23 || lesson == 25) {
-    document.getElementById('ViewMenu').style.display = 'none';
     document.getElementById('LangMenu').style.display = 'none';
+    //document.getElementById('MasuMenu').style.display = 'flex';
+    //document.getElementById('FormConvert').style.display = 'inline-block';
+    //document.getElementById('FormConvertText').style.display = 'initial';
     document.getElementById('Form').style.display = 'initial';
     document.getElementById('Translation').style.display = 'inline-block';
     document.getElementById('GiveUp').style.display = 'initial';
@@ -120,7 +125,6 @@ function pickQuestion() {
   }
   
   if (document.getElementById('ViewMenu').selectedIndex == 0) document.getElementById('Question').innerHTML = newQuestion;
-  else if (lesson == 17 || lesson == 21 || lesson == 23 || lesson == 25) document.getElementById('Question').innerHTML = newQuestion;
   else document.getElementById('Question').innerHTML = toRomaji(newQuestion);
   
   if (lesson == 17 || lesson == 21 || lesson == 23 || lesson == 25) {
@@ -270,13 +274,18 @@ var katakanaWord1 = 'アルバイト';
 
 function checkSoFar() {
   var inputSoFar = document.getElementById('Input').value;
-  document.getElementById('Input').value = toHiragana(inputSoFar);
+  //if (document.getElementById('FormConvert').checked) document.getElementById('Input').value = toHiragana(inputSoFar);
   inputSoFar = document.getElementById('Input').value;
   if (inputSoFar.includes('あるばいと')) {
     console.log('yes')
     document.getElementById('Input').value = inputSoFar.replace('あるばいと','アルバイト');
   }
-  if (newAnswer == document.getElementById('Input').value) {
+  var isCorrect = false;
+
+  if (newAnswer == inputSoFar) isCorrect = true;
+  else if (toRomaji(newAnswer) == inputSoFar) isCorrect = true;
+  if (isCorrect) {
+    if (newAnswer != inputSoFar) document.getElementById('Input').value = inputSoFar + " / " +newAnswer;
     document.getElementById('Input').style.color = 'green';
     document.getElementById('Input').disabled = true;
     document.getElementById('AmIRight').innerHTML = 'Correct!';
@@ -331,12 +340,12 @@ function restart() {
 $(document).keypress(function (e) {
     var code = e.keyCode || e.which;
     if (code == 13) {
-      if (document.getElementById('Next').disabled == false) pickQuestion();
+      if (!document.getElementById('Next').disabled) pickQuestion();
     } else if (code === 49) {
-      if (document.getElementById('Option1').disabled == false) checkAnswer(newAnswer, answers[0], 'Option1');
+      if (!document.getElementById('Option1').disabled) checkAnswer(newAnswer, answers[0], 'Option1');
     } else if (code === 50) {
-      if (document.getElementById('Option2').disabled == false) checkAnswer(newAnswer, answers[1], 'Option2');
+      if (!document.getElementById('Option2').disabled) checkAnswer(newAnswer, answers[1], 'Option2');
     } else if (code === 51) {
-      if (document.getElementById('Option3').disabled == false) checkAnswer(newAnswer, answers[2], 'Option3');
+      if (!document.getElementById('Option3').disabled) checkAnswer(newAnswer, answers[2], 'Option3');
     }
 });

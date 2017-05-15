@@ -12,7 +12,7 @@
 
   <body>
  
-    <div class = 'select'>
+    <div class='select'>
       <select onchange='setLesson()' id='LessonMenu'>
         <option id='Hiragana'>Hiragana</option>
         <option id='Katakana'>Katakana</option>
@@ -52,6 +52,11 @@
         <option id='EngToJap'>Eng. To Jap.</option>
       </select>
 
+      <!-- <select onchange='setLesson()' id='MasuMenu'> -->
+        <!-- <option id='FromMasu'>From Masu Form</option> -->
+        <!-- <option id='IntoMasu'>Into Masu Form</option> -->
+      <!-- </select> -->
+
       <!-- <select onchange='setRead()' id='ReadMenu'> -->
         <!-- <option id='ReadInEng'>Read in Eng. </option> -->
         <!-- <option id='ReadInJap'>Read in Jap.</option> -->
@@ -76,6 +81,12 @@
     </form>
     
     <div id='Translation' class='translation'></div>
+
+    <!-- <label> -->
+      <!-- <input id="FormConvert" type="checkbox"> -->
+        <!-- <p id='FormConvertText' class='checkboxtext'>Convert Into Kana</p> -->
+      <!-- </input> -->
+    <!-- </label> -->
 
     <div class='answers'>
       <button type='button' id='Option1'></button>
@@ -107,9 +118,7 @@
         document.getElementById('Option3')
       ];
       setLesson();
-      // setView();
       pickQuestion();
-      document.getElementById('Score').innerHTML= 'Score: 0 out of 0 (102 Remaining)';
     </script>
   </body>
 </html>
