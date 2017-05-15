@@ -91,6 +91,7 @@ function hideOptions(bool) {
 }
 
 var lastOne = false;
+var newAnswer;
 
 function pickQuestion() {
   stopScore = false;
@@ -108,7 +109,6 @@ function pickQuestion() {
   var n = Math.floor(Math.random() * questions.length);
 
   var newQuestion;
-  var newAnswer;
 
   if (document.getElementById('LangMenu').selectedIndex == 0) {
     newQuestion = questions[n];
@@ -129,16 +129,17 @@ function pickQuestion() {
     document.getElementById('Input').value = '';
     document.getElementById('Input').style.color = 'black';
     document.getElementById('Translation').innerHTML = '(' + allDicts[lesson][questions[n]][1] + ')';
-  } else displayAnswers(newAnswer);
+  } else displayAnswers();
   questions.splice(n, 1);
   document.getElementById('AmIRight').innerHTML = '';
 }
 
-function displayAnswers(answer) {
-  var dictionaryLength = Object.keys(allDicts[lesson]).length;
+var randomAnswer;
+var randomAnswer2;
+var answers;
 
-  var randomAnswer;
-  var randomAnswer2;
+function displayAnswers() {
+  var dictionaryLength = Object.keys(allDicts[lesson]).length;
 
   // picks two different random indices that don't match answer's index
   
@@ -146,26 +147,26 @@ function displayAnswers(answer) {
     randomAnswer = allDicts[lesson][allQuestions[Math.floor(Math.random() * dictionaryLength)]];
     randomAnswer2 = allDicts[lesson][allQuestions[Math.floor(Math.random() * dictionaryLength)]];
 
-    while (answer == randomAnswer)
+    while (newAnswer == randomAnswer)
       randomAnswer = allDicts[lesson][allQuestions[Math.floor(Math.random() * dictionaryLength)]];
 
-    while (randomAnswer2 == answer || randomAnswer2 == randomAnswer)
+    while (randomAnswer2 == newAnswer || randomAnswer2 == randomAnswer)
       randomAnswer2 = allDicts[lesson][allQuestions[Math.floor(Math.random() * dictionaryLength)]];
   
   } else {    
     randomAnswer = allQuestions[Math.floor(Math.random() * dictionaryLength)];
     randomAnswer2 = allQuestions[Math.floor(Math.random() * dictionaryLength)];
 
-    while (answer == randomAnswer)
+    while (newAnswer == randomAnswer)
       randomAnswer = allQuestions[Math.floor(Math.random() * dictionaryLength)];
 
-    while (randomAnswer2 == answer || randomAnswer2 == randomAnswer)
+    while (randomAnswer2 == newAnswer || randomAnswer2 == randomAnswer)
       randomAnswer2 = allQuestions[Math.floor(Math.random() * dictionaryLength)];
   }
 
   // puts the answers in order based on index
 
-  var answers = [answer, randomAnswer, randomAnswer2];
+  answers = [newAnswer, randomAnswer, randomAnswer2];
 
   answers.sort();
 
@@ -197,9 +198,9 @@ function displayAnswers(answer) {
 
   // once an option is clicked, displays whether it is correct or incorrect
 
-  options[0].onclick = function() { checkAnswer(answer, answers[0], 'Option1') };
-  options[1].onclick = function() { checkAnswer(answer, answers[1], 'Option2') };
-  options[2].onclick = function() { checkAnswer(answer, answers[2], 'Option3') };
+  options[0].onclick = function() { checkAnswer(newAnswer, answers[0], 'Option1') };
+  options[1].onclick = function() { checkAnswer(newAnswer, answers[1], 'Option2') };
+  options[2].onclick = function() { checkAnswer(newAnswer, answers[2], 'Option3') };
 }
 
 var score = 0;
@@ -234,12 +235,12 @@ function checkAnswer(correct, answer, option) {
 
     if (playAudioNow) {
       audio = new Audio('Audio/' + toRomaji(correct) + '.mp3');
-      audio.play()
       audio.onerror = function() {
         audioExists = false;
         if (updateNext) enableNext();
         audioExists = true;
       }
+      audio.play()
       if (updateNext) {
         enableNext();
       }
@@ -324,3 +325,16 @@ function restart() {
   setLesson(lesson);
   document.getElementById('Score').innerHTML = 'Score: 0 out of 0' + ' (' + numLeft.toString() +' Remaining)';
 }
+
+$(document).keypress(function (e) {
+    var code = e.keyCode || e.which;
+    if (code === 13) {
+      if (document.getElementById('Next').disabled == false) pickQuestion();
+    } else if (code === 49) {
+      if (document.getElementById('Option1').disabled == false) checkAnswer(newAnswer, answers[0], 'Option1');
+    } else if (code === 50) {
+      if (document.getElementById('Option2').disabled == false) checkAnswer(newAnswer, answers[1], 'Option2');
+    } else if (code === 51) {
+      if (document.getElementById('Option3').disabled == false) checkAnswer(newAnswer, answers[2], 'Option3');
+    }
+});
