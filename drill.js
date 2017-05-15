@@ -282,10 +282,10 @@ function checkSoFar() {
   }
   var isCorrect = false;
 
-  if (newAnswer == inputSoFar) isCorrect = true;
-  else if (toRomaji(newAnswer) == inputSoFar) isCorrect = true;
+  if (newAnswer.replace(/\s/g, '') == inputSoFar.replace(/\s/g, '')) isCorrect = true;
+  else if (toRomaji(newAnswer).replace(/\s/g, '') == inputSoFar.replace(/\s/g, '')) isCorrect = true;
   if (isCorrect) {
-    if (newAnswer != inputSoFar) document.getElementById('Input').value = inputSoFar + " / " +newAnswer;
+    if (inputSoFar == toKana(inputSoFar)) document.getElementById('Input').value = toRomaji(newAnswer) + " / " +newAnswer;
     document.getElementById('Input').style.color = 'green';
     document.getElementById('Input').disabled = true;
     document.getElementById('AmIRight').innerHTML = 'Correct!';
