@@ -37,12 +37,11 @@ function setLesson() {
   
   if (lesson < 3) {
     document.getElementById('ViewMenu').selectedIndex = 0;
-    document.getElementById('Romaji').disabled = true;
+    document.getElementById('ViewMenu').style.display = 'none';
     if (lang == 0) document.getElementById('Instructions').innerHTML = 'Select the correct pronunciation of this character.';
     else document.getElementById('Instructions').innerHTML = 'Select the correct character.';
   } else if (lesson < 8) {
     document.getElementById('ViewMenu').selectedIndex = 1;
-    document.getElementById('Romaji').disabled = false;
     document.getElementById('Instructions').innerHTML = 'Select the correct translation of this word.';
   } else if (lesson == 17 || lesson == 21 || lesson == 23 || lesson == 25) {
     document.getElementById('ViewMenu').style.display = 'none';
@@ -92,7 +91,6 @@ function hideOptions(bool) {
 
 var lastOne = false;
 var newAnswer;
-var answer;
 
 function pickQuestion() {
   stopScore = false;
@@ -110,6 +108,7 @@ function pickQuestion() {
   var n = Math.floor(Math.random() * questions.length);
 
   var newQuestion;
+  newAnswer;
 
   if (document.getElementById('LangMenu').selectedIndex == 0) {
     newQuestion = questions[n];
@@ -130,18 +129,19 @@ function pickQuestion() {
     document.getElementById('Input').value = '';
     document.getElementById('Input').style.color = 'black';
     document.getElementById('Translation').innerHTML = '(' + allDicts[lesson][questions[n]][1] + ')';
-    answer = allDicts[lesson][questions[n]][0];
+    newAnswer = allDicts[lesson][questions[n]][0];
   } else displayAnswers();
   questions.splice(n, 1);
   document.getElementById('AmIRight').innerHTML = '';
 }
 
-var randomAnswer;
-var randomAnswer2;
 var answers;
 
 function displayAnswers() {
   var dictionaryLength = Object.keys(allDicts[lesson]).length;
+
+  var randomAnswer;
+  var randomAnswer2;
 
   // picks two different random indices that don't match answer's index
   
@@ -180,7 +180,7 @@ function displayAnswers() {
   else if (document.getElementById('LangMenu').selectedIndex == 1 && lesson < 3) playAudioNow = true;
 
   if (playAudioNow) {
-    audio = new Audio('Audio/' + toRomaji(answer) + '.mp3');
+    audio = new Audio('Audio/' + toRomaji(newAnswer) + '.mp3');
     audio.play()
   }
 
@@ -237,12 +237,12 @@ function checkAnswer(correct, answer, option) {
 
     if (playAudioNow) {
       audio = new Audio('Audio/' + toRomaji(correct) + '.mp3');
+      audio.play()
       audio.onerror = function() {
         audioExists = false;
         if (updateNext) enableNext();
         audioExists = true;
       }
-      audio.play()
       if (updateNext) {
         enableNext();
       }
@@ -276,7 +276,7 @@ function checkSoFar() {
     console.log('yes')
     document.getElementById('Input').value = inputSoFar.replace('あるばいと','アルバイト');
   }
-  if (answer == document.getElementById('Input').value) {
+  if (newAnswer == document.getElementById('Input').value) {
     document.getElementById('Input').style.color = 'green';
     document.getElementById('Input').disabled = true;
     document.getElementById('AmIRight').innerHTML = 'Correct!';
@@ -298,7 +298,7 @@ function checkSoFar() {
 
 function stopQuestion() {
   document.getElementById('Input').style.color = 'blue';
-  document.getElementById('Input').value = answer;
+  document.getElementById('Input').value = newAnswer;
   document.getElementById('Input').disabled = true;
   document.getElementById('AmIRight').innerHTML = 'You gave up on this one.';
   numLeft--;
@@ -324,7 +324,7 @@ function enableNext() {
 function restart() {
   score = 0;
   numQuestions = 0;
-  setLesson(lesson);
+  setLesson();
   document.getElementById('Score').innerHTML = 'Score: 0 out of 0' + ' (' + numLeft.toString() +' Remaining)';
 }
 
