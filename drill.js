@@ -92,6 +92,7 @@ function hideOptions(bool) {
 
 var lastOne = false;
 var newAnswer;
+var answer;
 
 function pickQuestion() {
   stopScore = false;
@@ -129,6 +130,7 @@ function pickQuestion() {
     document.getElementById('Input').value = '';
     document.getElementById('Input').style.color = 'black';
     document.getElementById('Translation').innerHTML = '(' + allDicts[lesson][questions[n]][1] + ')';
+    answer = allDicts[lesson][questions[n]][0];
   } else displayAnswers();
   questions.splice(n, 1);
   document.getElementById('AmIRight').innerHTML = '';
@@ -328,7 +330,7 @@ function restart() {
 
 $(document).keypress(function (e) {
     var code = e.keyCode || e.which;
-    if (code === 13) {
+    if (code == 13) {
       if (document.getElementById('Next').disabled == false) pickQuestion();
     } else if (code === 49) {
       if (document.getElementById('Option1').disabled == false) checkAnswer(newAnswer, answers[0], 'Option1');
