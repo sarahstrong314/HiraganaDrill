@@ -8,6 +8,7 @@
     <script src='dictionaries.js' charset='utf-8'></script>
     <script src='drill.js' charset='utf-8'></script>
     <link rel='stylesheet' type='text/css' href='drill.css'>
+    <link rel='shortcut icon' href=''>
   </head>
 
   <body>
@@ -119,7 +120,9 @@
         document.getElementById('Option2'),
         document.getElementById('Option3')
       ];
-      //document.getElementById('LessonMenu').selectedIndex = 1;
+      // for all lesson menu values
+      // if URL ends with (document.getElementById('LessonMenu').value.toLowerCase().replace(' ','_')))
+      // document.getElementById('LessonMenu').selectedIndex = index of lesson menu value;
       setLesson(); // fills up arrays and displays correct interface
       pickQuestion(); // displays the first question
     </script>
