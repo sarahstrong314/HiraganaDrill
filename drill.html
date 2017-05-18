@@ -82,12 +82,6 @@
     
     <div id='Translation' class='translation'></div>
 
-    <!-- <label> -->
-      <!-- <input id="FormConvert" type="checkbox"> -->
-        <!-- <p id='FormConvertText' class='checkboxtext'>Convert Into Kana</p> -->
-      <!-- </input> -->
-    <!-- </label> -->
-
     <div class='answers'>
       <button type='button' id='Option1'></button>
       <button type='button' id='Option2'></button>
@@ -104,6 +98,14 @@
     
     </br>
 
+    <!-- <label> -->
+      <!-- <input id="FormConvert" type="checkbox"> -->
+        <!-- <p id='FormConvertText' class='checkboxtext'>Convert Into Kana</p> -->
+      <!-- </input> -->
+    <!-- </label> -->
+
+    </br>
+
     <div class='scores' id='Score'></div>
     
     </br>
@@ -117,8 +119,9 @@
         document.getElementById('Option2'),
         document.getElementById('Option3')
       ];
-      setLesson();
-      pickQuestion();
+      //document.getElementById('LessonMenu').selectedIndex = 1;
+      setLesson(); // fills up arrays and displays correct interface
+      pickQuestion(); // displays the first question
     </script>
   </body>
 </html>
