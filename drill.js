@@ -22,6 +22,16 @@ var numLeft = Object.keys(hiraganaDict).length;
 var review = false;
 
 function setLesson() { 
+  var urlViewMenu = false;
+  if (window.location.href.includes('#viewinkana')) {
+    urlViewMenu = true;
+    document.getElementById('ViewMenu').selectedIndex = 0;
+  }
+  else if (window.location.href.includes('#viewinromaji')) {
+    urlViewMenu = true;
+    document.getElementById('ViewMenu').selectedIndex = 1;
+  }
+
   window.history.pushState({}, '',  'drill.html?' + document.getElementById('LessonMenu').value.toLowerCase().replace(' ',''));
 
   lesson = document.getElementById('LessonMenu').selectedIndex;
@@ -30,7 +40,7 @@ function setLesson() {
     questions = wrongQuestions;
     review = false;
   } else fillArray(allDicts[lesson], questions);
-  
+
   numLeft = questions.length;
   fillArray(allDicts[lesson], allQuestions);
   wrongQuestions = [];
@@ -48,13 +58,14 @@ function setLesson() {
   document.getElementById('Review').style.display = 'none';
   hideOptions(false);
   
+
   if (lesson < 3) {
     document.getElementById('ViewMenu').selectedIndex = 0;
     document.getElementById('ViewMenu').style.display = 'none';
     if (lang == 0) document.getElementById('Instructions').innerHTML = 'Select the correct pronunciation of this character.';
     else document.getElementById('Instructions').innerHTML = 'Select the correct character.';
   } else if (lesson < 8) {
-    document.getElementById('ViewMenu').selectedIndex = 1;
+    if (!urlViewMenu) document.getElementById('ViewMenu').selectedIndex = 1;
     document.getElementById('Instructions').innerHTML = 'Select the correct translation of this word.';
   } else if (lesson == 17 || lesson == 21 || lesson == 23 || lesson == 25) {
     document.getElementById('LangMenu').style.display = 'none';
@@ -71,10 +82,12 @@ function setLesson() {
     else if (lesson == 23) document.getElementById('Instructions').innerHTML = 'Type the correct dictionary form of the verb.';
     else document.getElementById('Instructions').innerHTML = 'Type the correct ta form of the verb.';
   } else {
-    document.getElementById('ViewMenu').selectedIndex = 0;
+    if (!urlViewMenu) document.getElementById('ViewMenu').selectedIndex = 0;
     document.getElementById('Romaji').disabled = false;
     document.getElementById('Instructions').innerHTML = 'Select the correct translation of this word.';
   }
+
+  urlViewMenu = false;
 
   setView();
 
