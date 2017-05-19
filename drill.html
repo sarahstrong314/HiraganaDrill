@@ -121,10 +121,10 @@
         document.getElementById('Option3')
       ];
 
-      var lessonMenuOptions = document.body.children[0].children[0].children
-      for (var i=0; i < lessonMenuOptions.length; i++) {
-        if (window.location.href.endsWith('drill.html?' + lessonMenuOptions[i].value.toLowerCase().replace(' ','')))
-          document.getElementById('LessonMenu').selectedIndex = i;
+      var lessonMenu = document.getElementById("LessonMenu");
+      for (var i=0; i < lessonMenu.length; i++) {
+        if (window.location.href.endsWith('drill.html?' + lessonMenu[i].value.toLowerCase().replace(' ','')))
+          lessonMenu.selectedIndex = i;
       }
       
       setLesson(); // fills up arrays and displays correct interface
