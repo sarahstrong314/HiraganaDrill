@@ -120,9 +120,13 @@
         document.getElementById('Option2'),
         document.getElementById('Option3')
       ];
-      // for all lesson menu values
-      // if URL ends with (document.getElementById('LessonMenu').value.toLowerCase().replace(' ','_')))
-      // document.getElementById('LessonMenu').selectedIndex = index of lesson menu value;
+
+      var lessonMenuOptions = document.body.children[0].children[0].children
+      for (var i=0; i < lessonMenuOptions.length; i++) {
+        if (window.location.href.endsWith(lessonMenuOptions[i].value.toLowerCase().replace(' ','')))
+          document.getElementById('LessonMenu').selectedIndex = i;
+      }
+      
       setLesson(); // fills up arrays and displays correct interface
       pickQuestion(); // displays the first question
     </script>
