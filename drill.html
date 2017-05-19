@@ -121,11 +121,16 @@
         document.getElementById('Option2'),
         document.getElementById('Option3')
       ];
-      var lessonMenu = document.getElementById("LessonMenu");
+      var lessonMenu = document.getElementById('LessonMenu');
       for (var i=0; i < lessonMenu.length; i++) {
-        if (window.location.href.endsWith('drill.html?' + lessonMenu[i].value.toLowerCase().replace(' ','')))
+        if (window.location.href.includes('drill.html?' + lessonMenu[i].value.toLowerCase().replace(' ','')))
           lessonMenu.selectedIndex = i; // pre-selects lesson menu option using the URL
-      }      
+      }
+      if (window.location.href.includes('#viewinkana')) document.getElementById('ViewMenu').selectedIndex = 0;
+      if (window.location.href.includes('#viewinromaji')) document.getElementById('ViewMenu').selectedIndex = 1;
+      if (window.location.href.includes('#japtoeng')) document.getElementById('LangMenu').selectedIndex = 0;
+      if (window.location.href.includes('#engtojap')) document.getElementById('LangMenu').selectedIndex = 1;
+
       setLesson(); // fills up arrays and displays correct interface
     </script>
   </body>
