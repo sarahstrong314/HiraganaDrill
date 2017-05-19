@@ -94,7 +94,8 @@
     <div class='minibuttons'>
       <button type='button' onclick='stopQuestion()' id='GiveUp'>Give Up</button>
       <button type='button' onclick='pickQuestion()' id='Next'>Next</button>
-      <button type='button' onclick='restart()' id ='Restart'>Restart</button>
+      <button type='button' onclick='setLesson()' id ='Restart'>Restart</button>
+      <button type='button' onclick='reviewQuestions()' id ='Review'>Review</button>
     </div>
     
     </br>
@@ -120,14 +121,12 @@
         document.getElementById('Option2'),
         document.getElementById('Option3')
       ];
-
       var lessonMenu = document.getElementById("LessonMenu");
       for (var i=0; i < lessonMenu.length; i++) {
         if (window.location.href.endsWith('drill.html?' + lessonMenu[i].value.toLowerCase().replace(' ','')))
           lessonMenu.selectedIndex = i; // pre-selects lesson menu option using the URL
       }      
       setLesson(); // fills up arrays and displays correct interface
-      pickQuestion(); // displays the first question
     </script>
   </body>
 </html>

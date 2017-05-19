@@ -1,6 +1,3 @@
-// var instructions = ['Select the correct pronunciation of the character above.', 'Select the correct translation of the word above.']
-
-
 function setView() {
   var view = document.getElementById('ViewMenu').selectedIndex;
   if (view == 0) document.getElementById('Question').innerHTML = toKana(document.getElementById('Question').innerHTML);
@@ -19,14 +16,24 @@ function setView() {
 
 var lesson;
 var allDicts = [hiraganaDict, katakanaDict, extraKatakanaDict, dict1, dict2, dict3, dict4, dict5, dict6, dict7, dict8, dict9, dict10, dict11, dict12, dict13, dict14, dict14_te, dict15, dict16, dict17, dict17_nai, dict18, dict18_dict, dict19, dict19_ta];
+var score = 0;
+var numQuestions = 0;
+var numLeft = Object.keys(hiraganaDict).length;
+var review = false;
 
 function setLesson() { 
   window.history.pushState({}, '',  'drill.html?' + document.getElementById('LessonMenu').value.toLowerCase().replace(' ',''));
 
   lesson = document.getElementById('LessonMenu').selectedIndex;
-  numLeft = Object.keys(allDicts[lesson]).length;
-  fillArray(allDicts[lesson], questions);
+  
+  if (review) {
+    questions = wrongQuestions;
+    review = false;
+  } else fillArray(allDicts[lesson], questions);
+  
+  numLeft = questions.length;
   fillArray(allDicts[lesson], allQuestions);
+  wrongQuestions = [];
 
   var lang = document.getElementById('LangMenu').selectedIndex;
  
@@ -38,6 +45,7 @@ function setLesson() {
   document.getElementById('Form').style.display = 'none';
   document.getElementById('Translation').style.display = 'none';
   document.getElementById('GiveUp').style.display = 'none';
+  document.getElementById('Review').style.display = 'none';
   hideOptions(false);
   
   if (lesson < 3) {
@@ -80,6 +88,7 @@ function setLesson() {
 
   score = 0;
   numQuestions = 0;
+
   document.getElementById('Score').innerHTML = 'Score: 0 out of 0' + ' (' + numLeft.toString() +' Remaining)';
 }
 
@@ -98,6 +107,7 @@ function hideOptions(bool) {
 
 var lastOne = false;
 var newAnswer;
+var newQuestion;
 
 function pickQuestion() {
   stopScore = false;
@@ -114,9 +124,6 @@ function pickQuestion() {
 
   var n = Math.floor(Math.random() * questions.length);
 
-  var newQuestion;
-  newAnswer;
-
   if (document.getElementById('LangMenu').selectedIndex == 0) {
     newQuestion = questions[n];
     newAnswer = allDicts[lesson][questions[n]];
@@ -125,7 +132,7 @@ function pickQuestion() {
     newAnswer = questions[n];
     newQuestion = allDicts[lesson][questions[n]];
   }
-  
+
   if (document.getElementById('ViewMenu').selectedIndex == 0) document.getElementById('Question').innerHTML = newQuestion;
   else document.getElementById('Question').innerHTML = toRomaji(newQuestion);
   
@@ -211,9 +218,6 @@ function displayAnswers() {
   options[2].onclick = function() { checkAnswer(newAnswer, answers[2], 'Option3') };
 }
 
-var score = 0;
-var numQuestions = 0;
-var numLeft = Object.keys(hiraganaDict).length;
 var stopScore = false;
 var audio;
 var audioExists = true;
@@ -260,10 +264,12 @@ function checkAnswer(correct, answer, option) {
     if (lastOne) {
       document.getElementById('AmIRight').innerHTML = 'Correct! Lesson finished.'
       document.getElementById('Next').disabled = true;
+      if (wrongQuestions.length != 0) document.getElementById('Review').style.display = 'initial';
       updateNext = false;
       lastOne = false;
     }
   } else {
+    if (wrongQuestions.indexOf(newQuestion) == -1) wrongQuestions.push(newQuestion);
     if (stopScore == false) numQuestions++;
     stopScore = true;
     document.getElementById(option).style.backgroundColor = 'red';
@@ -332,11 +338,9 @@ function enableNext() {
   audioExists = true;
 }
 
-function restart() {
-  score = 0;
-  numQuestions = 0;
+function reviewQuestions() {
+  review = true;
   setLesson();
-  document.getElementById('Score').innerHTML = 'Score: 0 out of 0' + ' (' + numLeft.toString() +' Remaining)';
 }
 
 $(document).keypress(function (e) {
