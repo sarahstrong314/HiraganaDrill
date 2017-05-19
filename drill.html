@@ -124,9 +124,8 @@
       var lessonMenu = document.getElementById("LessonMenu");
       for (var i=0; i < lessonMenu.length; i++) {
         if (window.location.href.endsWith('drill.html?' + lessonMenu[i].value.toLowerCase().replace(' ','')))
-          lessonMenu.selectedIndex = i;
-      }
-      
+          lessonMenu.selectedIndex = i; // pre-selects lesson menu option using the URL
+      }      
       setLesson(); // fills up arrays and displays correct interface
       pickQuestion(); // displays the first question
     </script>
