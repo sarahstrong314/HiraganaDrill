@@ -287,21 +287,27 @@ function stopAudio() {
 }
 
 
-var autoChanges = [['あるばいと','アルバイト'],['すぽーつ','スポーツ'],['-','ー']]
-
 function checkSoFar() {
   var inputSoFar = document.getElementById('Input').value;
   //if (document.getElementById('FormConvert').checked) document.getElementById('Input').value = toHiragana(inputSoFar);
   inputSoFar = document.getElementById('Input').value;
 
+  var autoChanges = [['あるばいと','アルバイト'],['すぽーつ','スポーツ'],['-','ー']]
+  //if (document.getElementById('FormConvert').checked) {
   for (var i = 0; i < autoChanges.length; i++) {
     if (inputSoFar.includes(autoChanges[i][0])) document.getElementById('Input').value = inputSoFar.replace(autoChanges[i][0],autoChanges[i][1]);
   }
+  //}
+
+  var isCorrect = false;
 
   var noSpaceAnswer = newAnswer.replace(/\s/g, '');
   var possibleAnswers = [noSpaceAnswer, noSpaceAnswer.replace('ー',''), toRomaji(noSpaceAnswer), toRomaji(noSpaceAnswer.replace('ー',''))];
 
-  if (possibleAnswers.indexOf(inputSoFar.replace(/\s/g, '')) != -1) {
+  if (possibleAnswers.indexOf(inputSoFar.replace(/\s/g, '')) != -1) isCorrect = true;
+  else if (possibleAnswers.indexOf(toRomaji(inputSoFar).replace(/\s/g, '')) != -1) isCorrect = true;
+
+  if (isCorrect) {
     if (inputSoFar == toKana(inputSoFar)) document.getElementById('Input').value = toRomaji(newAnswer) + " / " + newAnswer;
     document.getElementById('Input').style.color = 'green';
     document.getElementById('Input').disabled = true;
@@ -318,12 +324,16 @@ function checkSoFar() {
     if (lastOne) {
       document.getElementById('AmIRight').innerHTML = 'Correct! Lesson finished.'
       document.getElementById('Next').disabled = true;
+      if (wrongQuestions.length != 0) document.getElementById('Review').style.display = 'initial';
     }
   } 
 }
 
 function stopQuestion() {
   document.getElementById('Input').style.color = 'blue';
+  //if (from masu mode)
+  wrongQuestions.push(newQuestion);
+  //if (into masu mode) wrongQuestions.push(...);
   document.getElementById('Input').value = newAnswer;
   document.getElementById('Input').disabled = true;
   document.getElementById('AmIRight').innerHTML = 'You gave up on this one.';
@@ -335,6 +345,7 @@ function stopQuestion() {
   if (lastOne) {
     document.getElementById('AmIRight').innerHTML = 'Correct! Lesson finished.'
     document.getElementById('Next').disabled = true;
+    if (wrongQuestions.length != 0) document.getElementById('Review').style.display = 'initial';
   }
 }
 
