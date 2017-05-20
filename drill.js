@@ -41,15 +41,15 @@ function setLesson() {
     review = false;
   } else fillArray(allDicts[lesson], questions);
 
-  numLeft = questions.length;
-  fillArray(allDicts[lesson], allQuestions);
   wrongQuestions = [];
+  fillArray(allDicts[lesson], allQuestions);
+  numLeft = questions.length;
 
   var lang = document.getElementById('LangMenu').selectedIndex;
  
   document.getElementById('ViewMenu').style.display = 'flex';
   document.getElementById('LangMenu').style.display = 'flex';
-  //document.getElementById('MasuMenu').style.display = 'none';
+  document.getElementById('MasuMenu').style.display = 'none';
   //document.getElementById('FormConvert').style.display = 'none';
   //document.getElementById('FormConvertText').style.display = 'none';
   document.getElementById('Form').style.display = 'none';
@@ -68,7 +68,7 @@ function setLesson() {
     document.getElementById('Instructions').innerHTML = 'Select the correct translation of this word.';
   } else if (lesson == 17 || lesson == 21 || lesson == 23 || lesson == 25) {
     document.getElementById('LangMenu').style.display = 'none';
-    //document.getElementById('MasuMenu').style.display = 'flex';
+    document.getElementById('MasuMenu').style.display = 'flex';
     //document.getElementById('FormConvert').style.display = 'inline-block';
     //document.getElementById('FormConvertText').style.display = 'initial';
     document.getElementById('Form').style.display = 'initial';
@@ -134,28 +134,41 @@ function pickQuestion() {
 
   if (questions.length == 1) lastOne = true;
 
+  var verbLesson = false;
+  if (lesson == 17 || lesson == 21 || lesson == 23 || lesson == 25) verbLesson = true;
+
   var n = Math.floor(Math.random() * questions.length);
 
-  if (document.getElementById('LangMenu').selectedIndex == 0) {
-    newQuestion = questions[n];
-    newAnswer = allDicts[lesson][questions[n]];
-  }
-  else {
-    newAnswer = questions[n];
-    newQuestion = allDicts[lesson][questions[n]];
+  if (!verbLesson) {
+    if (document.getElementById('LangMenu').selectedIndex == 0) {
+      newQuestion = questions[n];
+      newAnswer = allDicts[lesson][questions[n]];
+    } else {
+      newQuestion = allDicts[lesson][questions[n]];
+      newAnswer = questions[n];
+    }
+  } else {
+    if (document.getElementById('MasuMenu').selectedIndex == 0) {
+      newQuestion = questions[n];
+      newAnswer = allDicts[lesson][questions[n]][0];
+      document.getElementById('Translation').innerHTML = '(' + allDicts[lesson][questions[n]][1] + ')cinso';
+    } else {
+      newQuestion = allDicts[lesson][questions[n]][0] + ' (' + allDicts[lesson][questions[n]][1] + ')';
+      newAnswer = questions[n].substring(0, questions[n].indexOf(' ('));
+      document.getElementById('Translation').innerHTML = questions[n].substring(questions[n].indexOf('('));
+    }
   }
 
   if (document.getElementById('ViewMenu').selectedIndex == 0) document.getElementById('Question').innerHTML = newQuestion;
   else document.getElementById('Question').innerHTML = toRomaji(newQuestion);
   
-  if (lesson == 17 || lesson == 21 || lesson == 23 || lesson == 25) {
+  if (verbLesson) {
     document.getElementById('GiveUp').disabled = false;
     document.getElementById('Input').disabled = false;
     document.getElementById('Input').value = '';
     document.getElementById('Input').style.color = 'black';
-    document.getElementById('Translation').innerHTML = '(' + allDicts[lesson][questions[n]][1] + ')';
-    newAnswer = allDicts[lesson][questions[n]][0];
   } else displayAnswers();
+
   questions.splice(n, 1);
   document.getElementById('AmIRight').innerHTML = '';
 }
@@ -209,7 +222,6 @@ function displayAnswers() {
     audio.play();
     playAudioNow = false;
   }
-
 
   // displays the answers, in order, on the option buttons
 
@@ -307,8 +319,10 @@ function checkSoFar() {
   if (possibleAnswers.indexOf(inputSoFar.replace(/\s/g, '')) != -1) isCorrect = true;
   else if (possibleAnswers.indexOf(toRomaji(inputSoFar).replace(/\s/g, '')) != -1) isCorrect = true;
 
+  console.log(newAnswer);
+
   if (isCorrect) {
-    if (inputSoFar == toKana(inputSoFar)) document.getElementById('Input').value = toRomaji(newAnswer) + " / " + newAnswer;
+    document.getElementById('Input').value = toRomaji(newAnswer) + " / " + newAnswer;
     document.getElementById('Input').style.color = 'green';
     document.getElementById('Input').disabled = true;
     document.getElementById('AmIRight').innerHTML = 'Correct!';
@@ -331,9 +345,8 @@ function checkSoFar() {
 
 function stopQuestion() {
   document.getElementById('Input').style.color = 'blue';
-  //if (from masu mode)
-  wrongQuestions.push(newQuestion);
-  //if (into masu mode) wrongQuestions.push(...);
+  if (document.getElementById('MasuMenu').selectedIndex == 0) wrongQuestions.push(newQuestion);
+  else wrongQuestions.push(newAnswer + ' ' + document.getElementById('Translation').innerHTML);
   document.getElementById('Input').value = newAnswer;
   document.getElementById('Input').disabled = true;
   document.getElementById('AmIRight').innerHTML = 'You gave up on this one.';
