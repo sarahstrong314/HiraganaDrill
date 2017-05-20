@@ -288,6 +288,7 @@ function stopAudio() {
 
 
 var katakanaWord1 = 'アルバイト';
+var katakanaWord2 = 'スポーツ';
 
 function checkSoFar() {
   var inputSoFar = document.getElementById('Input').value;
@@ -295,6 +296,9 @@ function checkSoFar() {
   inputSoFar = document.getElementById('Input').value;
   if (inputSoFar.includes('あるばいと')) {
     document.getElementById('Input').value = inputSoFar.replace('あるばいと','アルバイト');
+  }
+  if (inputSoFar.includes('すぽーつ')) {
+    document.getElementById('Input').value = inputSoFar.replace('すぽーつ','スポーツ');
   }
   var isCorrect = false;
 
