@@ -57,7 +57,6 @@ function setLesson() {
   document.getElementById('GiveUp').style.display = 'none';
   document.getElementById('Review').style.display = 'none';
   hideOptions(false);
-  
 
   if (lesson < 3) {
     document.getElementById('ViewMenu').selectedIndex = 0;
@@ -206,11 +205,11 @@ function displayAnswers() {
   else if (document.getElementById('LangMenu').selectedIndex == 1 && lesson < 3) playAudioNow = true;
 
   if (playAudioNow) {
-    audio = new Audio('Audio/' + toRomaji(newAnswer) + '.mp3');
-    audio.play()
+    audio = new Audio('Audio/' + toRomaji(newQuestion) + '.mp3');
+    audio.play();
+    playAudioNow = false;
   }
 
-  playAudioNow = false;
 
   // displays the answers, in order, on the option buttons
 
@@ -271,7 +270,10 @@ function checkAnswer(correct, answer, option) {
       lastOne = false;
     }
   } else {
-    if (wrongQuestions.indexOf(newQuestion) == -1) wrongQuestions.push(newQuestion);
+    if (wrongQuestions.indexOf(newQuestion) == -1) {
+      if (document.getElementById('LangMenu').selectedIndex == 0) wrongQuestions.push(newQuestion);
+      else wrongQuestions.push(newAnswer);
+    }
     if (stopScore == false) numQuestions++;
     stopScore = true;
     document.getElementById(option).style.backgroundColor = 'red';
