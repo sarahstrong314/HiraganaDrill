@@ -92,10 +92,10 @@
     </br>
 
     <div class='minibuttons'>
-      <button type='button' onclick='stopQuestion()' id='GiveUp'>Give Up</button>
-      <button type='button' onclick='pickQuestion()' id='Next'>Next</button>
-      <button type='button' onclick='setLesson()' id ='Restart'>Restart</button>
-      <button type='button' onclick='reviewQuestions()' id ='Review'>Review</button>
+      <button type='button' onclick='stopQuestion();' id='GiveUp'>Give Up</button>
+      <button type='button' onclick='pickQuestion();' id='Next'>Next</button>
+      <button type='button' onclick='stopAudio(); setLesson();' id ='Restart'>Restart</button>
+      <button type='button' onclick='review = true; setLesson();' id ='Review'>Review</button>
     </div>
     
     </br>

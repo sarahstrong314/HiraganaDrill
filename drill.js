@@ -233,8 +233,6 @@ function displayAnswers() {
 
 var stopScore = false;
 var audio;
-var audioExists = true;
-var updateNext = true;
 var playAudioNow = false;
 
 function checkAnswer(correct, answer, option) {
@@ -260,23 +258,14 @@ function checkAnswer(correct, answer, option) {
 
     if (playAudioNow) {
       audio = new Audio('Audio/' + toRomaji(correct) + '.mp3');
-      audio.play()
-      audio.onerror = function() {
-        audioExists = false;
-        if (updateNext) enableNext();
-        audioExists = true;
-      }
-      if (updateNext) {
-        enableNext();
-      }
-    } else document.getElementById('Next').disabled = false;
+      audio.play();
+      playAudioNow = false;
+    } 
 
-    playAudioNow = false;
-
+    if (!lastOne) document.getElementById('Next').disabled = false;
 
     if (lastOne) {
       document.getElementById('AmIRight').innerHTML = 'Correct! Lesson finished.'
-      document.getElementById('Next').disabled = true;
       if (wrongQuestions.length != 0) document.getElementById('Review').style.display = 'initial';
       updateNext = false;
       lastOne = false;
@@ -290,6 +279,11 @@ function checkAnswer(correct, answer, option) {
   }
 }
 
+function stopAudio() {
+  audio.pause();
+  audio.currentTime = 0;
+}
+
 
 var katakanaWord1 = 'アルバイト';
 
@@ -298,7 +292,6 @@ function checkSoFar() {
   //if (document.getElementById('FormConvert').checked) document.getElementById('Input').value = toHiragana(inputSoFar);
   inputSoFar = document.getElementById('Input').value;
   if (inputSoFar.includes('あるばいと')) {
-    console.log('yes')
     document.getElementById('Input').value = inputSoFar.replace('あるばいと','アルバイト');
   }
   var isCorrect = false;
@@ -340,20 +333,6 @@ function stopQuestion() {
     document.getElementById('AmIRight').innerHTML = 'Correct! Lesson finished.'
     document.getElementById('Next').disabled = true;
   }
-}
-
-function enableNext() {
-  if (audioExists) {
-    audio.onended = function() {
-      document.getElementById('Next').disabled = false;
-    }
-  } else document.getElementById('Next').disabled = false;
-  audioExists = true;
-}
-
-function reviewQuestions() {
-  review = true;
-  setLesson();
 }
 
 $(document).keypress(function (e) {
