@@ -287,25 +287,22 @@ function stopAudio() {
 }
 
 
-var katakanaWord1 = 'アルバイト';
-var katakanaWord2 = 'スポーツ';
+var autoChanges = [['あるばいと','アルバイト'],['すぽーつ','スポーツ'],['-','ー']]
 
 function checkSoFar() {
   var inputSoFar = document.getElementById('Input').value;
   //if (document.getElementById('FormConvert').checked) document.getElementById('Input').value = toHiragana(inputSoFar);
   inputSoFar = document.getElementById('Input').value;
-  if (inputSoFar.includes('あるばいと')) {
-    document.getElementById('Input').value = inputSoFar.replace('あるばいと','アルバイト');
-  }
-  if (inputSoFar.includes('すぽーつ')) {
-    document.getElementById('Input').value = inputSoFar.replace('すぽーつ','スポーツ');
-  }
-  var isCorrect = false;
 
-  if (newAnswer.replace(/\s/g, '') == inputSoFar.replace(/\s/g, '')) isCorrect = true;
-  else if (toRomaji(newAnswer).replace(/\s/g, '') == inputSoFar.replace(/\s/g, '')) isCorrect = true;
-  if (isCorrect) {
-    if (inputSoFar == toKana(inputSoFar)) document.getElementById('Input').value = toRomaji(newAnswer) + " / " +newAnswer;
+  for (var i = 0; i < autoChanges.length; i++) {
+    if (inputSoFar.includes(autoChanges[i][0])) document.getElementById('Input').value = inputSoFar.replace(autoChanges[i][0],autoChanges[i][1]);
+  }
+
+  var noSpaceAnswer = newAnswer.replace(/\s/g, '');
+  var possibleAnswers = [noSpaceAnswer, noSpaceAnswer.replace('ー',''), toRomaji(noSpaceAnswer), toRomaji(noSpaceAnswer.replace('ー',''))];
+
+  if (possibleAnswers.indexOf(inputSoFar.replace(/\s/g, '')) != -1) {
+    if (inputSoFar == toKana(inputSoFar)) document.getElementById('Input').value = toRomaji(newAnswer) + " / " + newAnswer;
     document.getElementById('Input').style.color = 'green';
     document.getElementById('Input').disabled = true;
     document.getElementById('AmIRight').innerHTML = 'Correct!';
