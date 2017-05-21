@@ -57,16 +57,21 @@ input[type=text] {
   font-size: 10vh;
 }
 
+.checkboxes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
 /*
 input[type=checkbox] {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-}
+}*/
 
 .checkboxtext {
-  font-size: 3.5vh;
-}*/
+  font-size: 2.5vh;
+}
 
 .answers {
   text-align: center;

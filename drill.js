@@ -50,8 +50,8 @@ function setLesson() {
   document.getElementById('ViewMenu').style.display = 'flex';
   document.getElementById('LangMenu').style.display = 'flex';
   document.getElementById('MasuMenu').style.display = 'none';
-  //document.getElementById('FormConvert').style.display = 'none';
-  //document.getElementById('FormConvertText').style.display = 'none';
+  document.getElementById('FormConvert').style.display = 'none';
+  document.getElementById('FormConvertText').style.display = 'none';
   document.getElementById('Form').style.display = 'none';
   document.getElementById('Translation').style.display = 'none';
   document.getElementById('GiveUp').style.display = 'none';
@@ -69,8 +69,8 @@ function setLesson() {
   } else if (lesson == 17 || lesson == 21 || lesson == 23 || lesson == 25) {
     document.getElementById('LangMenu').style.display = 'none';
     document.getElementById('MasuMenu').style.display = 'flex';
-    //document.getElementById('FormConvert').style.display = 'inline-block';
-    //document.getElementById('FormConvertText').style.display = 'initial';
+    document.getElementById('FormConvert').style.display = 'inline-block';
+    document.getElementById('FormConvertText').style.display = 'initial';
     document.getElementById('Form').style.display = 'initial';
     document.getElementById('Translation').style.display = 'inline-block';
     document.getElementById('GiveUp').style.display = 'initial';
@@ -151,7 +151,7 @@ function pickQuestion() {
     if (document.getElementById('MasuMenu').selectedIndex == 0) {
       newQuestion = questions[n];
       newAnswer = allDicts[lesson][questions[n]][0];
-      document.getElementById('Translation').innerHTML = '(' + allDicts[lesson][questions[n]][1] + ')cinso';
+      document.getElementById('Translation').innerHTML = '(' + allDicts[lesson][questions[n]][1] + ')';
     } else {
       newQuestion = allDicts[lesson][questions[n]][0] + ' (' + allDicts[lesson][questions[n]][1] + ')';
       newAnswer = questions[n].substring(0, questions[n].indexOf(' ('));
@@ -301,15 +301,15 @@ function stopAudio() {
 
 function checkSoFar() {
   var inputSoFar = document.getElementById('Input').value;
-  //if (document.getElementById('FormConvert').checked) document.getElementById('Input').value = toHiragana(inputSoFar);
-  inputSoFar = document.getElementById('Input').value;
+  var autoChanges = [['あるばいと','アルバイト'],['すぽーつ','スポーツ'],['-','ー']];
 
-  var autoChanges = [['あるばいと','アルバイト'],['すぽーつ','スポーツ'],['-','ー']]
-  //if (document.getElementById('FormConvert').checked) {
-  for (var i = 0; i < autoChanges.length; i++) {
-    if (inputSoFar.includes(autoChanges[i][0])) document.getElementById('Input').value = inputSoFar.replace(autoChanges[i][0],autoChanges[i][1]);
+  if (document.getElementById('FormConvert').checked) {
+    document.getElementById('Input').value = toHiragana(inputSoFar);
+    inputSoFar = document.getElementById('Input').value;
+    for (var i = 0; i < autoChanges.length; i++) {
+      if (inputSoFar.includes(autoChanges[i][0])) document.getElementById('Input').value = inputSoFar.replace(autoChanges[i][0],autoChanges[i][1]);
+    }
   }
-  //}
 
   var isCorrect = false;
 
@@ -318,8 +318,6 @@ function checkSoFar() {
 
   if (possibleAnswers.indexOf(inputSoFar.replace(/\s/g, '')) != -1) isCorrect = true;
   else if (possibleAnswers.indexOf(toRomaji(inputSoFar).replace(/\s/g, '')) != -1) isCorrect = true;
-
-  console.log(newAnswer);
 
   if (isCorrect) {
     document.getElementById('Input').value = toRomaji(newAnswer) + " / " + newAnswer;

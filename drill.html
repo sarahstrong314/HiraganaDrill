@@ -93,18 +93,18 @@
 
     <div class='minibuttons'>
       <button type='button' onclick='stopQuestion();' id='GiveUp'>Give Up</button>
-      <button type='button' onclick='pickQuestion();' id='Next'>Next</button>
-      <button type='button' onclick='stopAudio(); setLesson();' id ='Restart'>Restart</button>
+      <button type='button' onclick='stopAudio(); pickQuestion();' id='Next'>Next</button>
+      <button type='button' onclick='setLesson();' id ='Restart'>Restart</button>
       <button type='button' onclick='review = true; setLesson();' id ='Review'>Review</button>
     </div>
     
     </br>
 
-    <!-- <label> -->
-      <!-- <input id="FormConvert" type="checkbox"> -->
-        <!-- <p id='FormConvertText' class='checkboxtext'>Convert Into Kana</p> -->
-      <!-- </input> -->
-    <!-- </label> -->
+    <label class='checkboxes'>
+      <input id="FormConvert" type="checkbox">
+        <p id='FormConvertText' class='checkboxtext'>Convert Into Kana</p>
+      </input>
+    </label>
 
     </br>
 
