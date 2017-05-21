@@ -62,15 +62,15 @@ input[type=text] {
   flex-wrap: wrap;
   justify-content: center;
 }
-/*
-input[type=checkbox] {
+
+.checkbox {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}*/
+  align-items: center;
+  margin: 0 5px;
+}
 
 .checkboxtext {
-  font-size: 2.5vh;
+  font-size: 3vh;
 }
 
 .answers {

@@ -79,6 +79,7 @@ function setLesson() {
     document.getElementById('Translation').style.display = 'inline-block';
     document.getElementById('GiveUp').style.display = 'initial';
     document.getElementById('Input').value = '';
+
     hideOptions(true);
     if (lesson == 17) document.getElementById('Instructions').innerHTML = 'Type the correct te form of the verb.';
     else if (lesson == 21) document.getElementById('Instructions').innerHTML = 'Type the correct nai form of the verb.';
@@ -171,6 +172,7 @@ function pickQuestion() {
     document.getElementById('Input').disabled = false;
     document.getElementById('Input').value = '';
     document.getElementById('Input').style.color = 'black';
+    document.getElementById('Input').focus();
   } else displayAnswers();
 
   questions.splice(n, 1);
