@@ -102,7 +102,10 @@
 
     <label class='checkboxes'>
       <input id="FormConvert" type="checkbox">
-        <p id='FormConvertText' class='checkboxtext'>Convert Into Kana</p>
+        <p id='FormConvertText' class='checkboxtext'>Convert Input Into Kana</p>
+      </input>
+      <input id="RomajiAnswer" type="checkbox">
+        <p id='RomajiAnswerText' class='checkboxtext'>Show Answers In Romaji Too</p>
       </input>
     </label>
 
@@ -128,6 +131,7 @@
       }
       if (window.location.href.includes('#japtoeng')) document.getElementById('LangMenu').selectedIndex = 0;
       else if (window.location.href.includes('#engtojap')) document.getElementById('LangMenu').selectedIndex = 1;
+      document.getElementById('FormConvert').checked = true;
       setLesson(); // fills up arrays and displays correct interface
     </script>
   </body>

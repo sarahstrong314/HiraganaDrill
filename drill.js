@@ -52,6 +52,8 @@ function setLesson() {
   document.getElementById('MasuMenu').style.display = 'none';
   document.getElementById('FormConvert').style.display = 'none';
   document.getElementById('FormConvertText').style.display = 'none';
+  document.getElementById('RomajiAnswer').style.display = 'none';
+  document.getElementById('RomajiAnswerText').style.display = 'none';
   document.getElementById('Form').style.display = 'none';
   document.getElementById('Translation').style.display = 'none';
   document.getElementById('GiveUp').style.display = 'none';
@@ -69,8 +71,10 @@ function setLesson() {
   } else if (lesson == 17 || lesson == 21 || lesson == 23 || lesson == 25) {
     document.getElementById('LangMenu').style.display = 'none';
     document.getElementById('MasuMenu').style.display = 'flex';
-    document.getElementById('FormConvert').style.display = 'inline-block';
+    document.getElementById('FormConvert').style.display = 'inline';
     document.getElementById('FormConvertText').style.display = 'initial';
+    document.getElementById('RomajiAnswer').style.display = 'initial';
+    document.getElementById('RomajiAnswerText').style.display = 'initial';
     document.getElementById('Form').style.display = 'initial';
     document.getElementById('Translation').style.display = 'inline-block';
     document.getElementById('GiveUp').style.display = 'initial';
@@ -294,8 +298,10 @@ function checkAnswer(correct, answer, option) {
 }
 
 function stopAudio() {
-  audio.pause();
-  audio.currentTime = 0;
+  if (typeof audio !== 'undefined') {
+    audio.pause();
+    audio.currentTime = 0;
+  }
 }
 
 
@@ -320,7 +326,8 @@ function checkSoFar() {
   else if (possibleAnswers.indexOf(toRomaji(inputSoFar).replace(/\s/g, '')) != -1) isCorrect = true;
 
   if (isCorrect) {
-    document.getElementById('Input').value = toRomaji(newAnswer) + " / " + newAnswer;
+    if (document.getElementById('RomajiAnswer').checked) document.getElementById('Input').value = toRomaji(newAnswer) + " / " + newAnswer;
+    else document.getElementById('Input').value = newAnswer;
     document.getElementById('Input').style.color = 'green';
     document.getElementById('Input').disabled = true;
     document.getElementById('AmIRight').innerHTML = 'Correct!';

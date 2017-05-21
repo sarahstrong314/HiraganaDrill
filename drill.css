@@ -38,14 +38,14 @@ body {
 }
 
 .form {
-  margin-left: 10vw;
-  margin-right: 10vw;
+  margin-left: 7.5vw;
+  margin-right: 7.5vw;
 }
 
 input[type=text] {
   text-align: center;
   border: 1vh solid grey;
-  width: 80vw;
+  width: 85vw;
   border-radius: 1vw;
   font-size: 7vh;
 }
