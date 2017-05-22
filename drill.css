@@ -32,7 +32,7 @@ br {
   vertical-align: bottom;
   text-align: center;
   display: inline-block;
-  font-size: 20px;
+  font-size: 18px;
 }
 
 .question {
@@ -50,7 +50,7 @@ br {
 input[type=text] {
   text-align: center;
   border: 1vh solid grey;
-  width: 85vw;
+  width: 83vw;
   border-radius: 1vw;
   font-size: 24px;
 }
