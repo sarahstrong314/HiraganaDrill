@@ -75,7 +75,7 @@ function setLesson() {
     document.getElementById('FormConvertText').style.display = 'initial';
     document.getElementById('RomajiAnswer').style.display = 'initial';
     document.getElementById('RomajiAnswerText').style.display = 'initial';
-    document.getElementById('Form').style.display = 'initial';
+    document.getElementById('Form').style.display = 'flex';
     document.getElementById('Translation').style.display = 'inline-block';
     document.getElementById('GiveUp').style.display = 'initial';
     document.getElementById('Input').value = '';
