@@ -375,7 +375,8 @@ $(document).keypress(function (e) {
     var code = e.keyCode || e.which;
     if (code == 13) {
       if (!document.getElementById('Next').disabled) pickQuestion();
-      else if (document.getElementById('Next').style.display === 'none') setLesson();
+      else if (document.getElementById('Review').style.display !== 'none') review = true;
+      if (document.getElementById('Next').style.display === 'none') setLesson();
     } else if (code === 49) {
       if (!document.getElementById('Option1').disabled) checkAnswer(newAnswer, answers[0], 'Option1');
     } else if (code === 50) {
