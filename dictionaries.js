@@ -80,7 +80,9 @@ var dicts = [dict1, dict2, dict3, dict4, dict5, dict6, dict7, dict8, dict9, dict
 function toKana (romaji) {
   for (var i = 0; i < dicts.length; i++) {
     for (d in dicts[i]) {
-        if (toRomaji (d) == romaji) return d;
+        if (toRomaji(d) == romaji) return d;
+        else if (toRomaji(dicts[i][d][0]) == romaji) return dicts[i][d][0];
+        else if (toRomaji(dicts[i][d][0]) + ' (' + dicts[i][d][1] + ')'  == romaji) return dicts[i][d][0] + ' (' + dicts[i][d][1] + ')';
     }
   }
   return romaji; 

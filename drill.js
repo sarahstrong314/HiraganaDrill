@@ -1,8 +1,17 @@
 function setView() {
   var view = document.getElementById('ViewMenu').selectedIndex;
-  if (view == 0) document.getElementById('Question').innerHTML = toKana(document.getElementById('Question').innerHTML);
-  else document.getElementById('Question').innerHTML = toRomaji(document.getElementById('Question').innerHTML);
-  
+  if (view == 0) {
+    document.getElementById('Question').innerHTML = toKana(document.getElementById('Question').innerHTML);
+    //document.getElementById('Input').value = toKana(document.getElementById('Input').value);
+    document.getElementById('Translation').innerHTML = toKana(document.getElementById('Translation').innerHTML);
+    document.getElementById('FormConvert').checked = true;
+  }
+  else {
+    document.getElementById('Question').innerHTML = toRomaji(document.getElementById('Question').innerHTML);
+    //document.getElementById('Input').value = toRomaji(document.getElementById('Input').value);
+    document.getElementById('Translation').innerHTML = toRomaji(document.getElementById('Translation').innerHTML);
+    document.getElementById('FormConvert').checked = false;
+  }
   if (document.getElementById('ViewMenu').selectedIndex == 0) {
     for (var i = 0; i < options.length; i++) {
      options[i].innerHTML = toKana(options[i].innerHTML);
@@ -52,8 +61,6 @@ function setLesson() {
   document.getElementById('MasuMenu').style.display = 'none';
   document.getElementById('FormConvert').style.display = 'none';
   document.getElementById('FormConvertText').style.display = 'none';
-  document.getElementById('RomajiAnswer').style.display = 'none';
-  document.getElementById('RomajiAnswerText').style.display = 'none';
   document.getElementById('Form').style.display = 'none';
   document.getElementById('Translation').style.display = 'none';
   document.getElementById('GiveUp').style.display = 'none';
@@ -74,18 +81,18 @@ function setLesson() {
     document.getElementById('MasuMenu').style.display = 'flex';
     document.getElementById('FormConvert').style.display = 'inline';
     document.getElementById('FormConvertText').style.display = 'initial';
-    document.getElementById('RomajiAnswer').style.display = 'initial';
-    document.getElementById('RomajiAnswerText').style.display = 'initial';
     document.getElementById('Form').style.display = 'flex';
     document.getElementById('Translation').style.display = 'inline-block';
     document.getElementById('GiveUp').style.display = 'initial';
     document.getElementById('Input').value = '';
 
     hideOptions(true);
-    if (lesson == 17) document.getElementById('Instructions').innerHTML = 'Type the correct te form of the verb.';
-    else if (lesson == 21) document.getElementById('Instructions').innerHTML = 'Type the correct nai form of the verb.';
-    else if (lesson == 23) document.getElementById('Instructions').innerHTML = 'Type the correct dictionary form of the verb.';
-    else document.getElementById('Instructions').innerHTML = 'Type the correct ta form of the verb.';
+    if (document.getElementById('MasuMenu').selectedIndex == 0) {
+      if (lesson == 17) document.getElementById('Instructions').innerHTML = 'Type the correct te form of the verb.';
+      else if (lesson == 21) document.getElementById('Instructions').innerHTML = 'Type the correct nai form of the verb.';
+      else if (lesson == 23) document.getElementById('Instructions').innerHTML = 'Type the correct dictionary form of the verb.';
+      else document.getElementById('Instructions').innerHTML = 'Type the correct ta form of the verb.';
+    } else document.getElementById('Instructions').innerHTML = 'Type the correct masu form of the verb.';
   } else {
     if (!urlViewMenu) document.getElementById('ViewMenu').selectedIndex = 0;
     document.getElementById('Romaji').disabled = false;
@@ -126,6 +133,7 @@ function hideOptions(bool) {
 var lastOne = false;
 var newAnswer;
 var newQuestion;
+var translationBracket;
 
 function pickQuestion() {
   stopScore = false;
@@ -157,11 +165,13 @@ function pickQuestion() {
     if (document.getElementById('MasuMenu').selectedIndex == 0) {
       newQuestion = questions[n];
       newAnswer = allDicts[lesson][questions[n]][0];
-      document.getElementById('Translation').innerHTML = '(' + allDicts[lesson][questions[n]][1] + ')';
+      translationBracket = '(' + allDicts[lesson][questions[n]][1] + ')';
+      document.getElementById('Translation').innerHTML = '_'.repeat(newAnswer.length) + ' ' + translationBracket;
     } else {
       newQuestion = allDicts[lesson][questions[n]][0] + ' (' + allDicts[lesson][questions[n]][1] + ')';
       newAnswer = questions[n].substring(0, questions[n].indexOf(' ('));
-      document.getElementById('Translation').innerHTML = questions[n].substring(questions[n].indexOf('('));
+      translationBracket = questions[n].substring(questions[n].indexOf('('));
+      document.getElementById('Translation').innerHTML = '_'.repeat(newAnswer.length) + ' ' + translationBracket;
     }
   }
 
@@ -330,9 +340,9 @@ function checkSoFar() {
   else if (possibleAnswers.indexOf(toRomaji(inputSoFar).replace(/\s/g, '')) != -1) isCorrect = true;
 
   if (isCorrect) {
-    if (document.getElementById('RomajiAnswer').checked) document.getElementById('Input').value = toRomaji(newAnswer) + " / " + newAnswer;
-    else document.getElementById('Input').value = newAnswer;
     document.getElementById('Input').style.color = 'green';
+    if (document.getElementById('ViewMenu').selectedIndex == 0) document.getElementById('Translation').innerHTML = newAnswer + ' ' + translationBracket;
+    else document.getElementById('Translation').innerHTML = toRomaji(newAnswer) + ' ' + translationBracket;
     document.getElementById('Input').disabled = true;
     document.getElementById('AmIRight').innerHTML = 'Correct!';
     document.getElementById('GiveUp').disabled = true;
@@ -347,6 +357,7 @@ function checkSoFar() {
     if (lastOne) {
       document.getElementById('AmIRight').innerHTML = 'Correct! Lesson finished.';
       document.getElementById('Next').style.display = 'none';
+      document.getElementById('GiveUp').style.display = 'none';
       if (wrongQuestions.length != 0) document.getElementById('Review').style.display = 'initial';
     }
   } 
@@ -356,8 +367,15 @@ function stopQuestion() {
   document.getElementById('Input').style.color = 'blue';
   if (document.getElementById('MasuMenu').selectedIndex == 0) wrongQuestions.push(newQuestion);
   else wrongQuestions.push(newAnswer + ' ' + document.getElementById('Translation').innerHTML);
-  document.getElementById('Input').value = newAnswer;
-  document.getElementById('Input').disabled = true;
+  if (document.getElementById('ViewMenu').selectedIndex == 0) {
+    document.getElementById('Input').value = newAnswer;
+    document.getElementById('Translation').innerHTML = newAnswer + ' ' + translationBracket;
+  }
+  else {
+    document.getElementById('Input').value = toRomaji(newAnswer);
+    document.getElementById('Translation').innerHTML = toRomaji(newAnswer) + ' ' + translationBracket;
+  }
+  document.getElementById('Input').disabled = true;  
   document.getElementById('AmIRight').innerHTML = 'You gave up on this one.';
   numLeft--;
   numQuestions++;
@@ -367,6 +385,7 @@ function stopQuestion() {
   if (lastOne) {
     document.getElementById('AmIRight').innerHTML = 'Correct! Lesson finished.';
     document.getElementById('Next').style.display = 'none';
+    document.getElementById('GiveUp').style.display = 'none';
     if (wrongQuestions.length != 0) document.getElementById('Review').style.display = 'initial';
   }
 }
