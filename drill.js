@@ -58,6 +58,7 @@ function setLesson() {
   document.getElementById('Translation').style.display = 'none';
   document.getElementById('GiveUp').style.display = 'none';
   document.getElementById('Review').style.display = 'none';
+  document.getElementById('Next').style.display = 'initial';
   hideOptions(false);
 
   if (lesson < 3) {
@@ -282,7 +283,8 @@ function checkAnswer(correct, answer, option) {
     if (!lastOne) document.getElementById('Next').disabled = false;
 
     if (lastOne) {
-      document.getElementById('AmIRight').innerHTML = 'Correct! Lesson finished.'
+      document.getElementById('AmIRight').innerHTML = 'Correct! Lesson finished.';      
+      document.getElementById('Next').style.display = 'none';
       if (wrongQuestions.length != 0) document.getElementById('Review').style.display = 'initial';
       updateNext = false;
       lastOne = false;
@@ -343,8 +345,8 @@ function checkSoFar() {
     document.getElementById('Score').innerHTML = 'Score: ' + score.toString() + ' out of ' + numQuestions.toString() + ' (' + numLeft.toString() +' Remaining)';
     if (!lastOne) document.getElementById('Next').disabled = false;
     if (lastOne) {
-      document.getElementById('AmIRight').innerHTML = 'Correct! Lesson finished.'
-      document.getElementById('Next').disabled = true;
+      document.getElementById('AmIRight').innerHTML = 'Correct! Lesson finished.';
+      document.getElementById('Next').style.display = 'none';
       if (wrongQuestions.length != 0) document.getElementById('Review').style.display = 'initial';
     }
   } 
@@ -363,8 +365,8 @@ function stopQuestion() {
   document.getElementById('GiveUp').disabled = true;
   if (!lastOne) document.getElementById('Next').disabled = false;
   if (lastOne) {
-    document.getElementById('AmIRight').innerHTML = 'Correct! Lesson finished.'
-    document.getElementById('Next').disabled = true;
+    document.getElementById('AmIRight').innerHTML = 'Correct! Lesson finished.';
+    document.getElementById('Next').style.display = 'none';
     if (wrongQuestions.length != 0) document.getElementById('Review').style.display = 'initial';
   }
 }
@@ -373,6 +375,7 @@ $(document).keypress(function (e) {
     var code = e.keyCode || e.which;
     if (code == 13) {
       if (!document.getElementById('Next').disabled) pickQuestion();
+      if (document.getElementById('Next').style.display === 'none') setLesson();
     } else if (code === 49) {
       if (!document.getElementById('Option1').disabled) checkAnswer(newAnswer, answers[0], 'Option1');
     } else if (code === 50) {
