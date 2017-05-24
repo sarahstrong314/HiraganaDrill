@@ -22,7 +22,6 @@ function setLesson() {
   var lang = document.getElementById('LangMenu').selectedIndex;
  
   document.getElementById('Review').style.display = 'none';
-  hideOptions(false);
 
   if (lang == 0) document.getElementById('Instructions').innerHTML = 'Select the correct pronunciation of this character.';
   else document.getElementById('Instructions').innerHTML = 'Select the correct character.';
