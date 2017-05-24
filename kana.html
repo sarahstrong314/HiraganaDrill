@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang='en'>
+  <head>
+    <title>Hiragana Drill</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script src='https://code.jquery.com/jquery-1.12.4.js'></script>
+    <script src='https://code.jquery.com/ui/1.12.1/jquery-ui.js'></script>
+    <script src='dictionaries.js' charset='utf-8'></script>
+    <script src='kana.js' charset='utf-8'></script>
+    <link rel='stylesheet' type='text/css' href='drill.css'>
+    <link rel='shortcut icon' href=''>
+  </head>
+
+  <body>
+ 
+    <div class='select'>
+      <select onchange='setLesson()' id='LessonMenu'>
+        <option id='Hiragana'>Hiragana</option>
+        <option id='Katakana'>Katakana</option>
+        <option id='ExtraKatakana'>Extra Katakana</option>
+      </select>
+
+      <select onchange='setLesson()' id='LangMenu'>
+        <option id='JapToEng'>Jap. To Eng.</option>
+        <option id='EngToJap'>Eng. To Jap.</option>
+      </select>
+
+      <!-- <select onchange='setRead()' id='ReadMenu'> -->
+        <!-- <option id='ReadInEng'>Read in Eng. </option> -->
+        <!-- <option id='ReadInJap'>Read in Jap.</option> -->
+      <!-- </select> -->
+    </div>
+
+    </br>
+
+    <div class='instructions' id='Instructions'>Select the correct pronunciation of the character below.</div>
+
+    </br>
+    </br>
+
+    <div id='Question' class='question'></div>
+
+    </br>
+    </br>
+
+    <div class='answers'>
+      <button type='button' id='Option1'></button>
+      <button type='button' id='Option2'></button>
+      <button type='button' id='Option3'></button>
+    </div>
+
+    </br>
+
+    <div class='scores' id='AmIRight'></div>
+
+    <div class='scores' id='Score'></div>
+
+    </br>
+
+    <div class='minibuttons'>
+      <button type='button' onclick='stopAudio(); pickQuestion();' id='Next'>Next</button>
+      <button type='button' onclick='setLesson();' id ='Restart'>Restart</button>
+      <button type='button' onclick='review = true; setLesson();' id ='Review'>Review</button>
+    </div>
+    
+    </br>
+
+    <script>
+      var options = [
+        document.getElementById('Option1'),
+        document.getElementById('Option2'),
+        document.getElementById('Option3')
+      ];
+      var lessonMenu = document.getElementById('LessonMenu');
+      for (var i=0; i < lessonMenu.length; i++) {
+        if (window.location.href.includes('kana.html?' + lessonMenu[i].value.toLowerCase().replace(' ','')))
+          lessonMenu.selectedIndex = i; // pre-selects lesson menu option using the URL
+      }
+      if (window.location.href.includes('#japtoeng')) document.getElementById('LangMenu').selectedIndex = 0;
+      else if (window.location.href.includes('#engtojap')) document.getElementById('LangMenu').selectedIndex = 1;
+      setLesson(); // fills up arrays and displays correct interface
+    </script>
+  </body>
+</html>
