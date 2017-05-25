@@ -15,6 +15,9 @@
  
     <div class='select'>
       <select onchange='setLesson()' id='LessonMenu'>
+        <option id='Lesson12Neg'>Present Negative</option>
+        <option id='Lesson12PastPos'>Past Positive</option>
+        <option id='Lesson12PastNeg'>Past Negative</option>
         <option id='Lesson14Te'>Te Form</option>
         <option id='Lesson17Nai'>Nai Form</option>
         <option id='Lesson18Dict'>Dictionary Form</option>
@@ -26,9 +29,9 @@
         <option id='Romaji'>View in Romaji</option>
       </select>
 
-      <select onchange='setLesson()' id='MasuMenu'>
-        <option id='FromMasu'>From Masu Form</option>
-        <option id='IntoMasu'>Into Masu Form</option>
+      <select onchange='setLesson()' id='VerbMenu'>
+        <option id='From'></option>
+        <option id='Into'></option>
       </select>
 
       <!-- <select onchange='setRead()' id='ReadMenu'> -->
@@ -75,9 +78,9 @@
     
     </br>
 
-    <div class="checkboxes">
-        <div class="checkbox">
-          <input id="FormConvert" type="checkbox">
+    <div class='checkboxes'>
+        <div class='checkbox'>
+          <input id='FormConvert' type='checkbox'>
           <label id='FormConvertText' class='checkboxtext' for='FormConvert'>Convert Input Into Kana</label>
         </div>
     </div>
@@ -85,9 +88,11 @@
     </br>
     </br>
 
-    <a href='kana.html' target='_blank' class='link'>Part 1: Hiragana and Katakana</a>
+    <div class='bottomtext', id='Requirements'></div>
+
+    <a href='kana.html' class='bottomtext'>Part 1: Hiragana and Katakana</a>
     </br>
-    <a href='vocab.html' target='_blank' class='link'>Part 2: Vocabulary</a>
+    <a href='vocab.html' class='bottomtext'>Part 2: Vocabulary</a>
 
     <script>
       var lessonMenu = document.getElementById('LessonMenu');

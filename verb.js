@@ -15,11 +15,13 @@ function setView() {
 }
 
 var lesson;
-var allDicts = [dict14_te, dict17_nai, dict18_dict, dict19_ta];
+var allDicts = [dict12_neg, dict12_past_pos, dict12_past_neg, dict14_te, dict17_nai, dict18_dict, dict19_ta];
 var score = 0;
 var numQuestions = 0;
 var numLeft;
 var review = false;
+var desu = false;
+var masu = false;
 
 function setLesson() { 
   var urlViewMenu = false;
@@ -46,21 +48,44 @@ function setLesson() {
   numLeft = questions.length; 
 
   document.getElementById('Review').style.display = 'none';
-  document.getElementById('Next').style.display = 'initial';
-  document.getElementById('MasuMenu').style.display = 'flex';
-  document.getElementById('FormConvert').style.display = 'inline';
-  document.getElementById('FormConvertText').style.display = 'initial';
-  document.getElementById('Form').style.display = 'flex';
-  document.getElementById('Translation').style.display = 'inline-block';
-  document.getElementById('GiveUp').style.display = 'initial';
   document.getElementById('Input').value = '';
 
-  if (document.getElementById('MasuMenu').selectedIndex == 0) {
-    if (lesson == 0) document.getElementById('Instructions').innerHTML = 'Type the correct te form of the verb.';
-    else if (lesson == 1) document.getElementById('Instructions').innerHTML = 'Type the correct nai form of the verb.';
-    else if (lesson == 2) document.getElementById('Instructions').innerHTML = 'Type the correct dictionary form of the verb.';
-    else document.getElementById('Instructions').innerHTML = 'Type the correct ta form of the verb.';
-  } else document.getElementById('Instructions').innerHTML = 'Type the correct masu form of the verb.';
+  if (lesson < 3) {
+    desu = true;
+    document.getElementById('From').innerHTML = 'From Present Positive';
+    document.getElementById('Into').innerHTML = 'Into Present Positive';
+  }
+  else if (lesson < 8) {
+    masu = true;
+    document.getElementById('From').innerHTML = 'From Masu Form';
+    document.getElementById('Into').innerHTML = 'Into Masu Form';
+  }
+
+  // Displays the correct instructions based on the Lesson Menu and Verb Menu.
+
+  if (desu) {    
+    if (document.getElementById('VerbMenu').selectedIndex == 0) {
+      if (lesson == 0) document.getElementById('Instructions').innerHTML = 'Type the correct present negative form of the phrase.';
+      else if (lesson == 1) document.getElementById('Instructions').innerHTML = 'Type the correct past positive form of the phrase.';
+      else if (lesson == 2) document.getElementById('Instructions').innerHTML = 'Type the correct past negative form of the phrase.';
+    } else document.getElementById('Instructions').innerHTML = 'Type the correct present positive form of the phrase.';
+
+  } else if (masu) {
+    if (document.getElementById('VerbMenu').selectedIndex == 0) {
+      if (lesson == 3) document.getElementById('Instructions').innerHTML = 'Type the correct te form of the verb.';
+      else if (lesson == 4) document.getElementById('Instructions').innerHTML = 'Type the correct nai form of the verb.';
+      else if (lesson == 5) document.getElementById('Instructions').innerHTML = 'Type the correct dictionary form of the verb.';
+      else if (lesson == 6)document.getElementById('Instructions').innerHTML = 'Type the correct ta form of the verb.';
+    } else document.getElementById('Instructions').innerHTML = 'Type the correct masu form of the verb.';
+  }
+  
+  // Displays the correct lesson requirements based on the Lesson Menu.
+
+  if (lesson < 3) document.getElementById('Requirements').innerHTML = 'This verb lesson requires the vocabulary up to Lesson 12.';
+  else if (lesson == 3) document.getElementById('Requirements').innerHTML = 'This verb lesson requires the vocabulary up to Lesson 14.';
+  else if (lesson == 4) document.getElementById('Requirements').innerHTML = 'This verb lesson requires the vocabulary up to Lesson 17.';
+  else if (lesson == 5) document.getElementById('Requirements').innerHTML = 'This verb lesson requires the vocabulary up to Lesson 18.';
+  else if (lesson == 6)document.getElementById('Requirements').innerHTML = 'This verb lesson requires the vocabulary up to Lesson 19.';
 
   urlViewMenu = false;
 
@@ -90,7 +115,7 @@ function pickQuestion() {
 
   var n = Math.floor(Math.random() * questions.length);
 
-  if (document.getElementById('MasuMenu').selectedIndex == 0) {
+  if (document.getElementById('VerbMenu').selectedIndex == 0) {
     newQuestion = questions[n];
     newAnswer = allDicts[lesson][questions[n]][0];
     translationBracket = '(' + allDicts[lesson][questions[n]][1] + ')';
@@ -161,7 +186,7 @@ function checkSoFar() {
 
 function stopQuestion() {
   document.getElementById('Input').style.color = 'blue';
-  if (document.getElementById('MasuMenu').selectedIndex == 0) wrongQuestions.push(newQuestion);
+  if (case0) wrongQuestions.push(newQuestion);
   else wrongQuestions.push(newAnswer + ' ' + document.getElementById('Translation').innerHTML);
   if (document.getElementById('ViewMenu').selectedIndex == 0) {
     document.getElementById('Input').value = newAnswer;
@@ -192,11 +217,5 @@ $(document).keypress(function (e) {
       if (!document.getElementById('Next').disabled) pickQuestion();
       else if (document.getElementById('Review').style.display !== 'none') review = true;
       if (document.getElementById('Next').style.display === 'none') setLesson();
-    } else if (code === 49) {
-      if (!document.getElementById('Option1').disabled) checkAnswer(newAnswer, answers[0], 'Option1');
-    } else if (code === 50) {
-      if (!document.getElementById('Option2').disabled) checkAnswer(newAnswer, answers[1], 'Option2');
-    } else if (code === 51) {
-      if (!document.getElementById('Option3').disabled) checkAnswer(newAnswer, answers[2], 'Option3');
     }
 });
