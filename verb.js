@@ -186,7 +186,7 @@ function checkSoFar() {
 
 function stopQuestion() {
   document.getElementById('Input').style.color = 'blue';
-  if (case0) wrongQuestions.push(newQuestion);
+  if (document.getElementById('ViewMenu').selectedIndex == 0) wrongQuestions.push(newQuestion);
   else wrongQuestions.push(newAnswer + ' ' + document.getElementById('Translation').innerHTML);
   if (document.getElementById('ViewMenu').selectedIndex == 0) {
     document.getElementById('Input').value = newAnswer;
