@@ -60,15 +60,17 @@
     <div class='minibuttons'>
       <button type='button' onclick='stopAudio(); pickQuestion();' id='Next'>Next</button>
       <button type='button' onclick='setLesson();' id ='Restart'>Restart</button>
-      <button type='button' onclick='review = true; setLesson();' id ='Review'>Review</button>
+      <button type='button' onclick='doReview = true; setLesson();' id ='Review'>Review</button>
     </div>
     
     </br>
     </br>
 
-    <a href='vocab.html' class='link'>Part 2: Vocabulary</a>
+    <a href='vocab.html' class='bottomtext'>Part 2: Vocabulary</a>
     </br>
-    <a href='verb.html' class='link'>Part 3: Verb Conjugation</a>
+    <a href='desuverb.html' class='bottomtext'>Part 3: Conjugations of Desu</a>
+    </br>
+    <a href='masuverb.html' class='bottomtext'>Part 4: Conjugations of Masu Verbs</a>
 
     <script>
       var options = [
@@ -76,13 +78,26 @@
         document.getElementById('Option2'),
         document.getElementById('Option3')
       ];
+
       var lessonMenu = document.getElementById('LessonMenu');
+      var langMenu = document.getElementById('LangMenu');
+      var question = document.getElementById('Question');
+      var instructions = document.getElementById('Instructions');
+      var next = document.getElementById('Next');
+      var review = document.getElementById('Review');
+      var restart = document.getElementById('Restart');
+      var amIRight = document.getElementById('AmIRight');
+      var score = document.getElementById('Score');
+      var option1 = document.getElementById('Option1');
+      var option2 = document.getElementById('Option2');
+      var option3 = document.getElementById('Option3');
+
       for (var i=0; i < lessonMenu.length; i++) {
         if (window.location.href.includes('kana.html?' + lessonMenu[i].value.toLowerCase().replace(' ','')))
           lessonMenu.selectedIndex = i; // pre-selects lesson menu option using the URL
       }
-      if (window.location.href.includes('#japtoeng')) document.getElementById('LangMenu').selectedIndex = 0;
-      else if (window.location.href.includes('#engtojap')) document.getElementById('LangMenu').selectedIndex = 1;
+      if (window.location.href.includes('#japtoeng')) langMenu.selectedIndex = 0;
+      else if (window.location.href.includes('#engtojap')) langMenu.selectedIndex = 1;
       setLesson(); // fills up arrays and displays correct interface
     </script>
   </body>

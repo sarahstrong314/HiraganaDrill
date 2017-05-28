@@ -38,7 +38,9 @@ br {
   width: 100vw;
   vertical-align: center;
   text-align: center;
-  font-size: 24px;
+  font-size: 1.5em;
+  min-height: 1.5em;
+  line-height: 1.5;
 }
 
 .form {
@@ -54,13 +56,6 @@ input[type=text] {
   flex-grow: 1;
   text-align: center;
   margin: 0 5px;
-}
-
-.translation {
-  width: 100vw;
-  vertical-align: center;
-  text-align: center;
-  font-size: 24px;
 }
 
 .checkboxes {

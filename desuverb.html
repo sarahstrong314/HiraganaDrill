@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang='en'>
+  <head>
+    <title>Hiragana Drill</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script src='https://code.jquery.com/jquery-1.12.4.js'></script>
+    <script src='https://code.jquery.com/ui/1.12.1/jquery-ui.js'></script>
+    <script src='dictionaries.js' charset='utf-8'></script>
+    <script src='desuverb.js' charset='utf-8'></script>
+    <link rel='stylesheet' type='text/css' href='style.css'>
+    <link rel='shortcut icon' href=''>
+  </head>
+
+  <body>
+ 
+    <div class='select'>
+      <select onchange='setLesson()' id='FromMenu'>
+        <option id='From0'>From Polite Present Positive</option>
+        <option id='From1'>From Polite Present Negative</option>
+        <option id='From2'>From Polite Past Positive</option>
+        <option id='From3'>From Polite Past Negative</option>
+        <!-- <option id='From5'>From Plain Present Positive</option> -->
+        <!-- <option id='From6'>From Plain Present Negative</option> -->
+        <!-- <option id='From7'>From Plain Past Positive</option> -->
+        <!-- <option id='From8'>From Plain Past Negative</option> -->
+      </select>
+
+      <select onchange='setLesson()' id='IntoMenu'>
+        <option id='Into0'>Into Polite Present Positive</option>
+        <option id='Into1'>Into Polite Present Negative</option>
+        <option id='Into2'>Into Polite Past Positive</option>
+        <option id='Into3'>Into Polite Past Negative</option>
+        <!-- /<option id='Into5'>Into Plain Present Positive</option> -->
+        <!-- <option id='Into6'>Into Plain Present Negative</option> -->
+        <!-- <option id='Into7'>Into Plain Past Positive</option> -->
+        <!-- <option id='Into8'>Into Plain Past Negative</option> -->
+      </select>
+
+      <select onchange='setView()' id='ViewMenu'>
+        <option id='Kana'>View in Kana</option>
+        <option id='Romaji'>View in Romaji</option>
+      </select>
+
+      </select>
+
+      <!-- <select onchange='setRead()' id='ReadMenu'> -->
+        <!-- <option id='ReadInEng'>Read in Eng. </option> -->
+        <!-- <option id='ReadInJap'>Read in Jap.</option> -->
+      <!-- </select> -->
+    </div>
+
+    </br>
+
+    <div class='instructions' id='Instructions'>Select the correct pronunciation of the character below.</div>
+
+    </br>
+    </br>
+
+    <div id='Question' class='question'></div>
+
+    </br>
+
+    <form id='Form' class='form' onsubmit='return false'>
+      <input id='Input' type='text' oninput='checkSoFar()'/>
+    </form>
+
+    </br>
+
+
+    <div id='Translation' class='question'></div>
+
+    </br>
+    </br>
+
+    <div class='scores' id='AmIRight'></div>
+
+    <div class='scores' id='Score'></div>
+
+    </br>
+
+    <div class='minibuttons'>
+      <button type='button' onclick='stopQuestion();' id='GiveUp'>Give Up</button>
+      <button type='button' onclick='pickQuestion();' id='Next'>Next</button>
+      <button type='button' onclick='setLesson();' id ='Restart'>Restart</button>
+      <button type='button' onclick='doReview = true; setLesson();' id ='Review'>Review</button>
+    </div>
+    
+    </br>
+
+    <div class='checkboxes'>
+        <div class='checkbox'>
+          <input id='FormConvert' type='checkbox'>
+          <label id='FormConvertText' class='checkboxtext' for='FormConvert'>Convert Input Into Kana</label>
+        </div>
+    </div>
+
+    </br>
+    </br>
+
+    <div class='bottomtext', id='Requirements'></div>
+
+    </br>
+
+    <a href='kana.html' class='bottomtext'>Part 1: Hiragana and Katakana</a>
+    </br>
+    <a href='vocab.html' class='bottomtext'>Part 2: Vocabulary</a>
+    </br>
+    <a href='masuverb.html' class='bottomtext'>Part 4: Conjugations of Masu Verbs</a>
+
+    <script>
+      var viewMenu = document.getElementById('ViewMenu');
+      var question = document.getElementById('Question');
+      var translation = document.getElementById('Translation');
+      var formConvert = document.getElementById('FormConvert');
+      var instructions = document.getElementById('Instructions');
+      var review = document.getElementById('Review');
+      var giveUp = document.getElementById('GiveUp');
+      var next = document.getElementById('Next');
+      var amIRight = document.getElementById('AmIRight');
+      var input = document.getElementById('Input');
+      var score = document.getElementById('Score');
+      var fromMenu = document.getElementById('FromMenu');
+      var intoMenu = document.getElementById('IntoMenu');
+      var requirements = document.getElementById('Requirements');
+
+      for (var i=0; i < fromMenu.length; i++) {
+        if (window.location.href.includes('desuverb.html?' + fromMenu[i].value.toLowerCase().replace(' ','')))
+          fromMenu.selectedIndex = i; // pre-selects lesson menu option using the URL
+      }
+      if (fromMenu.selectedIndex != 1) intoMenu.selectedIndex = 1; // 
+      formConvert.checked = true;
+      setLesson(); // fills up arrays and displays correct interface
+    </script>
+  </body>
+</html>
