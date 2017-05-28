@@ -176,7 +176,7 @@ function stopQuestion() {
   amIRight.innerHTML = 'You gave up on this one.';
   numLeft--;
   numQuestions++;
-  scpre.innerHTML = 'Score: ' + currScore.toString() + ' out of ' + numQuestions.toString() + ' (' + numLeft.toString() +' Remaining)';
+  score.innerHTML = 'Score: ' + currScore.toString() + ' out of ' + numQuestions.toString() + ' (' + numLeft.toString() +' Remaining)';
   giveUp.disabled = true;
   if (!lastOne) next.disabled = false;
   if (lastOne) {
