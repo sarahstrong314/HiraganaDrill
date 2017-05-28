@@ -210,7 +210,7 @@ function checkAnswer(correct, answer, option) {
     if (lastOne) {
       amIRight.innerHTML = 'Correct! Lesson finished.';      
       next.style.display = 'none';
-      if (wrongQuestions.length != 0) review.style.display = 'initial';
+      if (wrongQuestions.length != 0) review.style.display = 'inline-block';
       updateNext = false;
       lastOne = false;
     }
