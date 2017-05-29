@@ -50,7 +50,7 @@ function setLesson() {
   next.style.display = 'initial';
   review.style.display = 'none';
 
-  if (lesson < 8 && !urlViewMenu) viewMenu.selectedIndex = 1;
+  if (lesson < 5 && !urlViewMenu) viewMenu.selectedIndex = 1;
   else if (!urlViewMenu) viewMenu.selectedIndex = 0;
   urlViewMenu = false;
   
