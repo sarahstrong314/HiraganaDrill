@@ -143,10 +143,10 @@ function checkSoFar() {
     }
   }
 
-  var isCorrect = false;
-
   var noSpaceAnswer = newAnswer.replace(/\s/g, '');
   var possibleAnswers = [noSpaceAnswer, noSpaceAnswer.replace('ー',''), toRomaji(noSpaceAnswer), toRomaji(noSpaceAnswer.replace('ー',''))];
+
+  var isCorrect = false;
 
   if (possibleAnswers.indexOf(input.value.replace(/\s/g, '')) != -1) isCorrect = true;
   else if (possibleAnswers.indexOf(toRomaji(input.value).replace(/\s/g, '')) != -1) isCorrect = true;

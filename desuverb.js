@@ -128,24 +128,28 @@ function checkSoFar() {
 
   input.style.color = 'black';
 
-  /*
-  var autoChanges = [['あるばいと','アルバイト'],['すぽーつ','スポーツ'],['-','ー']];
+  // var autoChanges = [['あるばいと','アルバイト'],['すぽーつ','スポーツ'],['-','ー']];
 
-  if (formConvert.checked) {
+  if (formConvert.checked) //{
     input.value = toHiragana(input.value);
-    for (var i = 0; i < autoChanges.length; i++) {
+    /*for (var i = 0; i < autoChanges.length; i++) {
       if (input.value.includes(autoChanges[i][0])) input.value = input.value.replace(autoChanges[i][0],autoChanges[i][1]);
     }
-  }
-  */
-
-  var isCorrect = false;
+  }*/
 
   var noSpaceAnswer = newAnswer.replace(/\s/g, '');
   var possibleAnswers = [noSpaceAnswer, noSpaceAnswer.replace('ー',''), toRomaji(noSpaceAnswer), toRomaji(noSpaceAnswer.replace('ー',''))];
+  var interchangeables = [['くありません', 'くないです'], ['じゃありません', 'じゃないです'], ['ではないです', 'じゃないです'], ['ではありません', 'じゃないです']];
+
+  var isCorrect = false;
 
   if (possibleAnswers.indexOf(input.value) != -1) isCorrect = true;
   else if (possibleAnswers.indexOf(toRomaji(input.value)) != -1) isCorrect = true;
+
+  for (var i=0; i < interchangeables.length; i++) {
+    if (possibleAnswers.indexOf(input.value.replace(interchangeables[i][0], interchangeables[i][1])) != -1) isCorrect = true;
+    else if (possibleAnswers.indexOf(toRomaji(input.value).replace(toRomaji(interchangeables[i][0]), toRomaji(interchangeables[i][1]))) != -1) isCorrect = true;
+  }
 
   if (isCorrect) {
     if (formConvert.checked) input.value = input.value.replace('n','ん');
