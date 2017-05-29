@@ -12,7 +12,6 @@
   </head>
 
   <body>
- 
     <div class='select'>
       <select onchange='setLesson()' id='LessonMenu'>
         <option id='Hiragana'>Hiragana</option>
@@ -92,12 +91,13 @@
       var option2 = document.getElementById('Option2');
       var option3 = document.getElementById('Option3');
 
-      for (var i=0; i < lessonMenu.length; i++) {
-        if (window.location.href.includes('kana.html?' + lessonMenu[i].value.toLowerCase().replace(' ','')))
-          lessonMenu.selectedIndex = i; // pre-selects lesson menu option using the URL
+      var menus = [lessonMenu, langMenu];
+      for (var i = 0; i < menus.length; i++) {
+        for (var j = 0; j < menus[i].length; j++) {
+          if (window.location.href.includes(menus[i][j].id.toLowerCase())) menus[i].selectedIndex = j;
+        }
       }
-      if (window.location.href.includes('#japtoeng')) langMenu.selectedIndex = 0;
-      else if (window.location.href.includes('#engtojap')) langMenu.selectedIndex = 1;
+
       setLesson(); // fills up arrays and displays correct interface
     </script>
   </body>

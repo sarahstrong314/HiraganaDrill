@@ -12,13 +12,12 @@
   </head>
 
   <body>
- 
     <div class='select'>
       <select onchange='setLesson()' id='FromMenu'>
-        <option id='From0'>From Polite Present Positive</option>
-        <option id='From1'>From Polite Present Negative</option>
-        <option id='From2'>From Polite Past Positive</option>
-        <option id='From3'>From Polite Past Negative</option>
+        <option id='FromPolPresPos'>From Polite Present Positive</option>
+        <option id='FromPolPresNeg'>From Polite Present Negative</option>
+        <option id='FromPolPastPos'>From Polite Past Positive</option>
+        <option id='FromPolPastNeg'>From Polite Past Negative</option>
         <!-- <option id='From5'>From Plain Present Positive</option> -->
         <!-- <option id='From6'>From Plain Present Negative</option> -->
         <!-- <option id='From7'>From Plain Past Positive</option> -->
@@ -26,10 +25,10 @@
       </select>
 
       <select onchange='setLesson()' id='IntoMenu'>
-        <option id='Into0'>Into Polite Present Positive</option>
-        <option id='Into1'>Into Polite Present Negative</option>
-        <option id='Into2'>Into Polite Past Positive</option>
-        <option id='Into3'>Into Polite Past Negative</option>
+        <option id='IntoPolPresPos'>Into Polite Present Positive</option>
+        <option id='IntoPolPresNeg'>Into Polite Present Negative</option>
+        <option id='IntoPolPastPos'>Into Polite Past Positive</option>
+        <option id='IntoPolPastNeg'>Into Polite Past Negative</option>
         <!-- /<option id='Into5'>Into Plain Present Positive</option> -->
         <!-- <option id='Into6'>Into Plain Present Negative</option> -->
         <!-- <option id='Into7'>Into Plain Past Positive</option> -->
@@ -37,8 +36,8 @@
       </select>
 
       <select onchange='setView()' id='ViewMenu'>
-        <option id='Kana'>View in Kana</option>
-        <option id='Romaji'>View in Romaji</option>
+        <option id='ViewInKana'>View in Kana</option>
+        <option id='ViewInRomaji'>View in Romaji</option>
       </select>
 
       </select>
@@ -123,11 +122,14 @@
       var intoMenu = document.getElementById('IntoMenu');
       var requirements = document.getElementById('Requirements');
 
-      for (var i=0; i < fromMenu.length; i++) {
-        if (window.location.href.includes('desuverb.html?' + fromMenu[i].value.toLowerCase().replace(' ','')))
-          fromMenu.selectedIndex = i; // pre-selects lesson menu option using the URL
+      var menus = [viewMenu, fromMenu, intoMenu];
+      for (var i = 0; i < menus.length; i++) {
+        for (var j = 0; j < menus[i].length; j++) {
+          if (window.location.href.includes(menus[i][j].id.toLowerCase())) menus[i].selectedIndex = j;
+        }
       }
-      if (fromMenu.selectedIndex != 1) intoMenu.selectedIndex = 1; // 
+
+      intoMenu.selectedIndex = 1;
       formConvert.checked = true;
       setLesson(); // fills up arrays and displays correct interface
     </script>

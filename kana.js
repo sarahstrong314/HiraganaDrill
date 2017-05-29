@@ -6,7 +6,7 @@ var numLeft;
 var doReview = false;
 
 function setLesson() { 
-  window.history.pushState({}, '',  'kana.html?' + lessonMenu.value.toLowerCase().replace(' ',''));
+  window.history.pushState({}, '',  'kana.html?' + lessonMenu[lessonMenu.selectedIndex].id.toLowerCase());
 
   lesson = lessonMenu.selectedIndex;
   

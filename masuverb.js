@@ -11,7 +11,7 @@ function setView() {
   }
 }
 
-var lesson;
+var lesson; 
 var allArrs = [arr14, arr17, arr18, arr19];
 var currScore = 0;
 var numQuestions = 0;
@@ -19,17 +19,7 @@ var numLeft;
 var doReview = false;
 
 function setLesson() { 
-  var urlViewMenu = false;
-  if (window.location.href.includes('#viewinkana')) {
-    urlViewMenu = true;
-    viewMenu.selectedIndex = 0;
-  }
-  else if (window.location.href.includes('#viewinromaji')) {
-    urlViewMenu = true;
-    viewMenu.selectedIndex = 1;
-  }
-
-  window.history.pushState({}, '',  'masuverb.html?' + lessonMenu.value.toLowerCase().replace(' ',''));
+  window.history.pushState({}, '',  'masuverb.html?' + lessonMenu[lessonMenu.selectedIndex].id.toLowerCase());
 
   lesson = lessonMenu.selectedIndex;
   
@@ -62,8 +52,6 @@ function setLesson() {
   else if (lesson == 1) requirements.innerHTML = 'This verb lesson requires the vocabulary up to Lesson 17.';
   else if (lesson == 2) requirements.innerHTML = 'This verb lesson requires the vocabulary up to Lesson 18.';
   else if (lesson == 3)requirements.innerHTML = 'This verb lesson requires the vocabulary up to Lesson 19.';
-
-  urlViewMenu = false;
 
   setView();
 
@@ -125,7 +113,7 @@ function checkSoFar() {
   var s = 'Type Your Answer Here';
 
   if (input.style.color == 'lightgrey') {
-    for (var i=0; i < s.length; i++) {
+    for (var i = 0; i < s.length; i++) {
       if (input.value.startsWith(s.substring(0, i)) && input.value.endsWith(s.substring(i + 1))) input.value = input.value.charAt(i + 1);
     }
   }

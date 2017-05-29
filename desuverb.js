@@ -18,20 +18,10 @@ var doReview = false;
 var questions;
 
 function setLesson() {
-  var urlViewMenu = false;
-  if (window.location.href.includes('#viewinkana')) {
-    urlViewMenu = true;
-    viewMenu.selectedIndex = 0;
-  }
-  else if (window.location.href.includes('#viewinromaji')) {
-    urlViewMenu = true;
-    viewMenu.selectedIndex = 1;
-  }
-  
-  for (var i=0; i < fromMenu.length; i++) {
+  for (var i = 0; i < fromMenu.length; i++) {
     if (i == fromMenu.selectedIndex) {
-      document.getElementById('Into' + i).disabled = true;
-    } else document.getElementById('Into' + i).disabled = false;
+      intoMenu[i].disabled = true;
+    } else intoMenu[i].disabled = false;
   }
 
   if (intoMenu.selectedIndex == fromMenu.selectedIndex) {
@@ -39,7 +29,7 @@ function setLesson() {
     else intoMenu.selectedIndex = 0;
   }
 
-  window.history.pushState({}, '',  'desuverb.html?' + fromMenu.value.toLowerCase().replace(' ','') + '#' + intoMenu.value.toLowerCase().replace(' ',''));
+  window.history.pushState({}, '',  'desuverb.html?' + fromMenu[fromMenu.selectedIndex].id.toLowerCase() + '#' + intoMenu[intoMenu.selectedIndex].id.toLowerCase());
 
   //Todo: If all menus' values are <4, use arr12, otherwise use arr20
 
@@ -64,8 +54,6 @@ function setLesson() {
   // Displays the correct lesson requirements based on the Menus.
 
   requirements.innerHTML = 'This verb lesson requires the vocabulary up to Lesson 12.';
-
-  urlViewMenu = false;
 
   setView();
 
@@ -119,7 +107,7 @@ function checkSoFar() {
   var s = 'Type Your Answer Here';
 
   if (input.style.color == 'lightgrey') {
-    for (var i=0; i < s.length; i++) {
+    for (var i = 0; i < s.length; i++) {
       if (input.value.startsWith(s.substring(0, i)) && input.value.endsWith(s.substring(i + 1))) input.value = input.value.charAt(i + 1);
     }
   }
@@ -144,7 +132,7 @@ function checkSoFar() {
   if (possibleAnswers.indexOf(input.value) != -1) isCorrect = true;
   else if (possibleAnswers.indexOf(toRomaji(input.value)) != -1) isCorrect = true;
 
-  for (var i=0; i < interchangeables.length; i++) {
+  for (var i = 0; i < interchangeables.length; i++) {
     if (possibleAnswers.indexOf(input.value.replace(interchangeables[i][0], interchangeables[i][1])) != -1) isCorrect = true;
     else if (possibleAnswers.indexOf(toRomaji(input.value).replace(toRomaji(interchangeables[i][0]), toRomaji(interchangeables[i][1]))) != -1) isCorrect = true;
   }

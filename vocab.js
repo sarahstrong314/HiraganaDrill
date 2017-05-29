@@ -20,17 +20,7 @@ var numLeft;
 var doReview = false;
 
 function setLesson() { 
-  var urlViewMenu = false;
-  if (window.location.href.includes('#viewinkana')) {
-    urlViewMenu = true;
-    viewMenu.selectedIndex = 0;
-  }
-  else if (window.location.href.includes('#viewinromaji')) {
-    urlViewMenu = true;
-    viewMenu.selectedIndex = 1;
-  }
-
-  window.history.pushState({}, '',  'vocab.html?' + lessonMenu.value.toLowerCase().replace(' ',''));
+  window.history.pushState({}, '',  'vocab.html?' + lessonMenu[lessonMenu.selectedIndex].id.toLowerCase());
 
   lesson = lessonMenu.selectedIndex;
   
@@ -50,9 +40,8 @@ function setLesson() {
   next.style.display = 'initial';
   review.style.display = 'none';
 
-  if (lesson < 5 && !urlViewMenu) viewMenu.selectedIndex = 1;
-  else if (!urlViewMenu) viewMenu.selectedIndex = 0;
-  urlViewMenu = false;
+  if (lesson < 5) viewMenu.selectedIndex = 1;
+  else viewMenu.selectedIndex = 0;
   
   instructions.innerHTML = 'Select the correct translation of this word.';
 

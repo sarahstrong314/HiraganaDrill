@@ -12,7 +12,6 @@
   </head>
 
   <body>
- 
     <div class='select'>
       <select onchange='setLesson()' id='LessonMenu'>
         <option id='Lesson1'>Lesson 1</option>
@@ -37,8 +36,8 @@
       </select>
 
       <select onchange='setView()' id='ViewMenu'>
-        <option id='Kana'>View in Kana</option>
-        <option id='Romaji'>View in Romaji</option>
+        <option id='ViewInKana'>View in Kana</option>
+        <option id='ViewInRomaji'>View in Romaji</option>
       </select>
 
       <select onchange='setLesson()' id='LangMenu'>
@@ -114,12 +113,13 @@
       var option2 = document.getElementById('Option2');
       var option3 = document.getElementById('Option3');
 
-      for (var i=0; i < lessonMenu.length; i++) {
-        if (window.location.href.includes('vocab.html?' + lessonMenu[i].value.toLowerCase().replace(' ','')))
-          lessonMenu.selectedIndex = i; // pre-selects lesson menu option using the URL
+      var menus = [lessonMenu, viewMenu, langMenu];
+      for (var i = 0; i < menus.length; i++) {
+        for (var j = 0; j < menus[i].length; j++) {
+          if (window.location.href.includes(menus[i][j].id.toLowerCase())) menus[i].selectedIndex = j;
+        }
       }
-      if (window.location.href.includes('#japtoeng')) document.getElementById('LangMenu').selectedIndex = 0;
-      else if (window.location.href.includes('#engtojap')) document.getElementById('LangMenu').selectedIndex = 1;
+
       setLesson(); // fills up arrays and displays correct interface
     </script>
   </body>
