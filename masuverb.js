@@ -14,7 +14,7 @@ function setView() {
 }
 
 var lesson;
-var allDicts = [dict14_te, dict17_nai, dict18_dict, dict19_ta];
+var allArrs = [arr14, arr17, arr18, arr19];
 var currScore = 0;
 var numQuestions = 0;
 var numLeft;
@@ -38,10 +38,10 @@ function setLesson() {
   if (doReview) {
     copyArray(wrongQuestions, questions);
     doReview = false;
-  } else fillArray(allDicts[lesson], questions);
+  } else copyArray(allArrs[lesson], questions);
 
   wrongQuestions = [];
-  fillArray(allDicts[lesson], allQuestions);
+  copyArray(allArrs[lesson], allQuestions);
   numLeft = questions.length; 
 
   review.style.display = 'none';
@@ -85,6 +85,7 @@ var lastOne = false;
 var newAnswer;
 var newQuestion;
 var translationBracket;
+var newGroup;
 
 function pickQuestion() {
   stopScore = false;
@@ -97,16 +98,18 @@ function pickQuestion() {
   var n = Math.floor(Math.random() * questions.length);
 
   if (verbMenu.selectedIndex == 0) {
-    newQuestion = questions[n];
-    newAnswer = allDicts[lesson][questions[n]][0];
-    translationBracket = '(' + allDicts[lesson][questions[n]][1] + ')';
+    newQuestion = questions[n][0] + '(' + questions[n][1] + ')';
+    newAnswer = questions[n][2];
+    translationBracket = '(' + questions[n][3] + ')';
     translation.innerHTML = '_'.repeat(newAnswer.length) + ' ' + translationBracket;
   } else {
-    newQuestion = allDicts[lesson][questions[n]][0] + ' (' + allDicts[lesson][questions[n]][1] + ')';
-    newAnswer = questions[n].substring(0, questions[n].indexOf(' ('));
-    translationBracket = questions[n].substring(questions[n].indexOf('('));
+    newQuestion = questions[n][2] + '(' + questions[n][3] + ')';
+    newAnswer = questions[n][0];
+    translationBracket = '(' + questions[n][1] + ')';
     translation.innerHTML = '_'.repeat(newAnswer.length) + ' ' + translationBracket;
   }
+
+  newGroup = questions[n];
 
   if (viewMenu.selectedIndex == 0) question.innerHTML = newQuestion;
   else question.innerHTML = toRomaji(newQuestion);
@@ -121,8 +124,15 @@ function pickQuestion() {
 }
 
 function checkSoFar() {
+  var s = 'Type Your Answer Here';
+
+  if (input.style.color == 'lightgrey') {
+    for (var i=0; i < s.length; i++) {
+      if (input.value.startsWith(s.substring(0, i)) && input.value.endsWith(s.substring(i + 1))) input.value = input.value.charAt(i + 1);
+    }
+  }
+
   input.style.color = 'black';
-  if (input.value.startsWith('Type Your Answer Here')) input.value = input.value.charAt(input.value.length - 1);
 
   var autoChanges = [['あるばいと','アルバイト'],['すぽーつ','スポーツ'],['-','ー']];
 
@@ -167,8 +177,7 @@ function checkSoFar() {
 
 function stopQuestion() {
   input.style.color = 'blue';
-  if (viewMenu.selectedIndex == 0) wrongQuestions.push(newQuestion);
-  else wrongQuestions.push(newAnswer + ' ' + translation.innerHTML);
+  wrongQuestions.push(newGroup);
   if (viewMenu.selectedIndex == 0) {
     input.value = newAnswer;
     translation.innerHTML = newAnswer + ' ' + translationBracket;
@@ -191,6 +200,7 @@ function stopQuestion() {
     if (wrongQuestions.length != 0) review.style.display = 'initial';
   }
 }
+
 
 $(document).keypress(function (e) {
   var code = e.keyCode || e.which;

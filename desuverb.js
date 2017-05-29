@@ -118,9 +118,17 @@ function pickQuestion() {
 }
 
 function checkSoFar() {
-  input.style.color = 'black';
-  if (input.value.startsWith('Type Your Answer Here')) input.value = input.value.charAt(input.value.length - 1);
+  var s = 'Type Your Answer Here';
 
+  if (input.style.color == 'lightgrey') {
+    for (var i=0; i < s.length; i++) {
+      if (input.value.startsWith(s.substring(0, i)) && input.value.endsWith(s.substring(i + 1))) input.value = input.value.charAt(i + 1);
+    }
+  }
+
+  input.style.color = 'black';
+
+  /*
   var autoChanges = [['あるばいと','アルバイト'],['すぽーつ','スポーツ'],['-','ー']];
 
   if (formConvert.checked) {
@@ -129,6 +137,7 @@ function checkSoFar() {
       if (input.value.includes(autoChanges[i][0])) input.value = input.value.replace(autoChanges[i][0],autoChanges[i][1]);
     }
   }
+  */
 
   var isCorrect = false;
 
