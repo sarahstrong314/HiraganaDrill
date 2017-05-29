@@ -1,13 +1,11 @@
 function setView() {
   if (viewMenu.selectedIndex == 0) {
     question.innerHTML = toKana(question.innerHTML);
-    //input.value = toKana(input.value);
     translation.innerHTML = toKana(translation.innerHTML);
     formConvert.checked = true;
   }
   else {
     question.innerHTML = toRomaji(question.innerHTML);
-    //input.value = toRomaji(input.value);
     translation.innerHTML = toRomaji(translation.innerHTML);
     formConvert.checked = false;
   }

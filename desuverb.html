@@ -89,7 +89,7 @@
 
     <div class='checkboxes'>
         <div class='checkbox'>
-          <input id='FormConvert' type='checkbox'>
+          <input id='FormConvert' type='checkbox' onclick='if (input.value != "Type Your Answer Here") input.value= toHiragana(input.value)'>
           <label id='FormConvertText' class='checkboxtext' for='FormConvert'>Convert Input Into Kana</label>
         </div>
     </div>

@@ -89,6 +89,8 @@ function toRomaji (kana) {
 
 
 var dicts = [dict1, dict2, dict3, dict4, dict5, dict6, dict7, dict8, dict9, dict10, dict11, dict12, dict13, dict14, dict15, dict16, dict17, dict18, dict19];
+var arrays1 = [arr12];
+var arrays2 = [arr14, arr17, arr18, arr19];
 
 function toKana (romaji) {
   for (var i = 0; i < dicts.length; i++) {
@@ -98,6 +100,22 @@ function toKana (romaji) {
         else if (toRomaji(dicts[i][d][0]) + ' (' + dicts[i][d][1] + ')'  == romaji) return dicts[i][d][0] + ' (' + dicts[i][d][1] + ')';
     }
   }
+
+  for (var i = 0; i < arrays1.length; i++) {
+  	for (var j = 0; j < arrays1[i].length; j++) {
+  	  for (var k = 0; k < arrays1[i][j].length; k++) {
+  	    if (toRomaji(arrays1[i][j][k][0]) + ' (' + toRomaji(arrays1[i][j][k][1]) + ')' == romaji) return arrays1[i][j][k][0] + ' (' + arrays1[i][j][k][1] + ')';
+  	  }
+  	}
+  }
+
+  for (var i = 0; i < arrays2.length; i++) {
+  	for (var j = 0; j < arrays2[i].length; j++) {
+  	  if (toRomaji(arrays2[i][j][0]) + ' (' + toRomaji(arrays2[i][j][1]) + ')' == romaji) return arrays2[i][j][0] + ' (' + arrays2[i][j][1] + ')';
+  	  
+  	}
+  }
+
   return romaji; 
 }		
 

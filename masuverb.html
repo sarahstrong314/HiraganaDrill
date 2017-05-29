@@ -21,14 +21,14 @@
         <option id='Lesson19Ta'>Ta Form</option>
       </select>
 
-      <select onchange='setView()' id='ViewMenu'>
-        <option id='Kana'>View in Kana</option>
-        <option id='Romaji'>View in Romaji</option>
-      </select>
-
       <select onchange='setLesson()' id='VerbMenu'>
         <option id='From'>From Masu Form</option>
         <option id='Into'>Into Masu Form</option>
+      </select>
+
+      <select onchange='setView()' id='ViewMenu'>
+        <option id='Kana'>View in Kana</option>
+        <option id='Romaji'>View in Romaji</option>
       </select>
 
       <!-- <select onchange='setRead()' id='ReadMenu'> -->
@@ -77,7 +77,7 @@
 
     <div class='checkboxes'>
         <div class='checkbox'>
-          <input id='FormConvert' type='checkbox'>
+          <input id='FormConvert' type='checkbox' onclick='if (input.value != "Type Your Answer Here") input.value= toHiragana(input.value)'>
           <label id='FormConvertText' class='checkboxtext' for='FormConvert'>Convert Input Into Kana</label>
         </div>
     </div>

@@ -1,13 +1,11 @@
 function setView() {
   if (viewMenu.selectedIndex == 0) {
     question.innerHTML = toKana(question.innerHTML);
-    //input.value = toKana(input.value);
     translation.innerHTML = toKana(translation.innerHTML);
     formConvert.checked = true;
   }
   else {
     question.innerHTML = toRomaji(question.innerHTML);
-    //input.value = toRomaji(input.value);
     translation.innerHTML = toRomaji(translation.innerHTML);
     formConvert.checked = false;
   }
@@ -98,12 +96,12 @@ function pickQuestion() {
   var n = Math.floor(Math.random() * questions.length);
 
   if (verbMenu.selectedIndex == 0) {
-    newQuestion = questions[n][0] + '(' + questions[n][1] + ')';
+    newQuestion = questions[n][0] + ' (' + questions[n][1] + ')';
     newAnswer = questions[n][2];
     translationBracket = '(' + questions[n][3] + ')';
     translation.innerHTML = '_'.repeat(newAnswer.length) + ' ' + translationBracket;
   } else {
-    newQuestion = questions[n][2] + '(' + questions[n][3] + ')';
+    newQuestion = questions[n][2] + ' (' + questions[n][3] + ')';
     newAnswer = questions[n][0];
     translationBracket = '(' + questions[n][1] + ')';
     translation.innerHTML = '_'.repeat(newAnswer.length) + ' ' + translationBracket;
