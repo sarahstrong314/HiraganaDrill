@@ -71,8 +71,8 @@ function setLesson() {
 
   setView();
 
+  input.style.color = 'lightgrey';
   input.value = 'Type Your Answer Here';
-  input.style.color = 'grey';
 
   next.disabled = false;
   amIRight.innerHTML = '';
@@ -110,7 +110,7 @@ function pickQuestion() {
 
   giveUp.disabled = false;
   input.disabled = false;
-  if (input.style.color != 'grey') input.value = '';
+  if (input.style.color != 'lightgrey') input.value = '';
   input.focus();
 
   questions.splice(n, 1);
@@ -120,7 +120,7 @@ function pickQuestion() {
 function checkSoFar() {
   input.style.color = 'black';
   if (input.value.startsWith('Type Your Answer Here')) input.value = input.value.charAt(input.value.length - 1);
-  
+
   var autoChanges = [['あるばいと','アルバイト'],['すぽーつ','スポーツ'],['-','ー']];
 
   if (formConvert.checked) {
@@ -135,8 +135,8 @@ function checkSoFar() {
   var noSpaceAnswer = newAnswer.replace(/\s/g, '');
   var possibleAnswers = [noSpaceAnswer, noSpaceAnswer.replace('ー',''), toRomaji(noSpaceAnswer), toRomaji(noSpaceAnswer.replace('ー',''))];
 
-  if (possibleAnswers.indexOf(input.value.replace(/\s/g, '')) != -1) isCorrect = true;
-  else if (possibleAnswers.indexOf(toRomaji(input.value).replace(/\s/g, '')) != -1) isCorrect = true;
+  if (possibleAnswers.indexOf(input.value) != -1) isCorrect = true;
+  else if (possibleAnswers.indexOf(toRomaji(input.value)) != -1) isCorrect = true;
 
   if (isCorrect) {
     if (formConvert.checked) input.value = input.value.replace('n','ん');

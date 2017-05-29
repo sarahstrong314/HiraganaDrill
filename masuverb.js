@@ -69,8 +69,8 @@ function setLesson() {
 
   setView();
 
+  input.style.color = 'lightgrey';
   input.value = 'Type Your Answer Here';
-  input.style.color = 'grey';
 
   next.disabled = false;
   amIRight.innerHTML = '';
@@ -113,7 +113,7 @@ function pickQuestion() {
   
   giveUp.disabled = false;
   input.disabled = false;
-  if (input.style.color != 'grey') input.value = '';
+  if (input.style.color != 'lightgrey') input.value = '';
   input.focus();
 
   questions.splice(n, 1);
