@@ -57,7 +57,6 @@ function setLesson() {
   review.style.display = 'none';
   giveUp.style.display = 'initial';
   next.style.display = 'initial';
-  input.value = '';
 
   if (intoMenu.selectedIndex == 0) instructions.innerHTML = 'Type the correct present positive polite form of the phrase.';
   else if (intoMenu.selectedIndex == 1) instructions.innerHTML = 'Type the correct present negative polite form of the phrase.';
@@ -71,6 +70,9 @@ function setLesson() {
   urlViewMenu = false;
 
   setView();
+
+  input.value = 'Type Your Answer Here';
+  input.style.color = 'grey';
 
   next.disabled = false;
   amIRight.innerHTML = '';
@@ -108,8 +110,7 @@ function pickQuestion() {
 
   giveUp.disabled = false;
   input.disabled = false;
-  input.value = '';
-  input.style.color = 'black';
+  if (input.style.color != 'grey') input.value = '';
   input.focus();
 
   questions.splice(n, 1);
@@ -117,6 +118,9 @@ function pickQuestion() {
 }
 
 function checkSoFar() {
+  input.style.color = 'black';
+  if (input.value.startsWith('Type Your Answer Here')) input.value = input.value.charAt(input.value.length - 1);
+  
   var autoChanges = [['あるばいと','アルバイト'],['すぽーつ','スポーツ'],['-','ー']];
 
   if (formConvert.checked) {

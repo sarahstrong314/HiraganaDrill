@@ -69,6 +69,9 @@ function setLesson() {
 
   setView();
 
+  input.value = 'Type Your Answer Here';
+  input.style.color = 'grey';
+
   next.disabled = false;
   amIRight.innerHTML = '';
   score.innerHTML = 'Score: 0 out of 0' + ' (' + numLeft.toString() +' Remaining)';
@@ -110,8 +113,7 @@ function pickQuestion() {
   
   giveUp.disabled = false;
   input.disabled = false;
-  input.value = '';
-  input.style.color = 'black';
+  if (input.style.color != 'grey') input.value = '';
   input.focus();
 
   questions.splice(n, 1);
@@ -119,6 +121,9 @@ function pickQuestion() {
 }
 
 function checkSoFar() {
+  input.style.color = 'black';
+  if (input.value.startsWith('Type Your Answer Here')) input.value = input.value.charAt(input.value.length - 1);
+
   var autoChanges = [['あるばいと','アルバイト'],['すぽーつ','スポーツ'],['-','ー']];
 
   if (formConvert.checked) {
