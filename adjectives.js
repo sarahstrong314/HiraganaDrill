@@ -29,7 +29,7 @@ function setLesson() {
     else intoMenu.selectedIndex = 0;
   }
 
-  window.history.pushState({}, '',  'desuverb.html?' + fromMenu[fromMenu.selectedIndex].id.toLowerCase() + '#' + intoMenu[intoMenu.selectedIndex].id.toLowerCase());
+  window.history.pushState({}, '',  'adjectives.html?' + fromMenu[fromMenu.selectedIndex].id.toLowerCase() + '#' + intoMenu[intoMenu.selectedIndex].id.toLowerCase());
 
   //Todo: If all menus' values are <4, use arr12, otherwise use arr20
 
