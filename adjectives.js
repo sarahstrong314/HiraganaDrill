@@ -18,28 +18,53 @@ var doReview = false;
 var questions;
 
 function setLesson() {
-  for (var i = 0; i < fromMenu.length; i++) {
-    if (i == fromMenu.selectedIndex) {
-      intoMenu[i].disabled = true;
-    } else intoMenu[i].disabled = false;
-  }
-
   if (intoMenu.selectedIndex == fromMenu.selectedIndex) {
     if (fromMenu.selectedIndex == 0) intoMenu.selectedIndex = 1;
     else intoMenu.selectedIndex = 0;
   }
 
-  window.history.pushState({}, '',  'adjectives.html?' + fromMenu[fromMenu.selectedIndex].id.toLowerCase() + '#' + intoMenu[intoMenu.selectedIndex].id.toLowerCase());
+  for (var i = 0; i < fromMenu.length; i++) {
+    if (i == fromMenu.selectedIndex) intoMenu[i].disabled = true;
+    else intoMenu[i].disabled = false;
+  }
 
-  //Todo: If all menus' values are <4, use arr12, otherwise use arr20
+  if (0 < fromMenu.selectedIndex && fromMenu.selectedIndex < 4) {
+    for (var i = 0; i < fromMenu.length; i++) {
+      if (i < 4 && i != fromMenu.selectedIndex) intoMenu[i].disabled = false;
+      else intoMenu[i].disabled = true;
+    }
+  }
+
+  if (fromMenu.selectedIndex > 3) {
+    for (var i = 0; i < fromMenu.length; i++) {
+      if (i > 3 && i != fromMenu.selectedIndex) intoMenu[i].disabled = false;
+      else intoMenu[i].disabled = true;
+    }
+  }
+
+  if (0 < intoMenu.selectedIndex && intoMenu.selectedIndex < 4 && 3 < fromMenu.selectedIndex) intoMenu.selectedIndex = 0;
+  if (3 < intoMenu.selectedIndex && 0 < fromMenu.selectedIndex && fromMenu.selectedIndex < 4) intoMenu.selectedIndex = 0;
+
+  window.history.pushState({}, '',  'adjectives.html?' + fromMenu[fromMenu.selectedIndex].id.toLowerCase() + '#' + intoMenu[intoMenu.selectedIndex].id.toLowerCase());
 
   if (doReview) {
     copyArray(wrongQuestions, questions);
     doReview = false;
-  } else copyArray(arr12, questions);
+  } else {
+    if (fromMenu.selectedIndex < 4 && intoMenu.selectedIndex < 4) copyArray(arr12, questions);
+    else copyArray(arr20_2, questions);
+  }
 
   wrongQuestions = [];
-  copyArray(arr12, allQuestions);
+
+  if (intoMenu.selectedIndex < 4) {
+    copyArray(arr12, allQuestions);
+    requirements.innerHTML = 'This verb lesson requires the vocabulary up to Lesson 12.';
+  } else {
+    copyArray(arr20_2, allQuestions);
+    requirements.innerHTML = 'This verb lesson requires the vocabulary up to Lesson 20.';
+  }
+
   numLeft = questions.length;
 
   review.style.display = 'none';
