@@ -13,7 +13,7 @@ function setView() {
 }
 
 var lesson;
-var allDicts = [dict1, dict2, dict3, dict4, dict5, dict6, dict7, dict8, dict9, dict10, dict11, dict12, dict13, dict14, dict15, dict16, dict17, dict18, dict19, dict20, dict21, dict22, dict23, dict24, dict25];
+var allDicts = [dict1, dict2, dict3, dict4, dict5, dict6, dict7, dict8, dict9, dict10, dict11, dict12, dict13, dict14, dict15, dict16, dict17, dict18, dict19, dict20, dict21, dict22, dict23, dict24, dict25, dict26, dict27, dict28];
 var currScore = 0;
 var numQuestions = 0;
 var numLeft;
@@ -22,10 +22,7 @@ var doReview = false;
 function setLesson() {
   // Delete this part later when dict20 - dict24 are filled
   document.getElementById('Lesson20').disabled = true;
-  document.getElementById('Lesson21').disabled = true;
   document.getElementById('Lesson22').disabled = true;
-  document.getElementById('Lesson23').disabled = true;
-  document.getElementById('Lesson24').disabled = true;
 
   window.history.pushState({}, '',  'vocab.html?' + lessonMenu[lessonMenu.selectedIndex].id.toLowerCase());
 
