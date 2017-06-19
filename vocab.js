@@ -20,9 +20,8 @@ var numLeft;
 var doReview = false;
 
 function setLesson() {
-  // Delete this part later when dict20 - dict24 are filled
-  document.getElementById('Lesson20').disabled = true;
-  document.getElementById('Lesson22').disabled = true;
+  //document.getElementById('Lesson20').disabled = true;
+  //document.getElementById('Lesson22').disabled = true;
 
   window.history.pushState({}, '',  'vocab.html?' + lessonMenu[lessonMenu.selectedIndex].id.toLowerCase());
 
